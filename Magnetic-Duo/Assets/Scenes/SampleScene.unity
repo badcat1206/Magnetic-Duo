@@ -549,6 +549,8 @@ MonoBehaviour:
   sBotInput: {fileID: 1808356405}
   nBotAnimation: {fileID: 2079676711}
   sBotAnimation: {fileID: 1808356410}
+  nBotRb: {fileID: 2079676708}
+  sBotRb: {fileID: 1808356406}
 --- !u!4 &1523826503
 Transform:
   m_ObjectHideFlags: 0
@@ -578,7 +580,7 @@ GameObject:
   - component: {fileID: 1808356406}
   - component: {fileID: 1808356409}
   - component: {fileID: 1808356410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player_SBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -642,7 +644,7 @@ MonoBehaviour:
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
 --- !u!4 &1808356408
 Transform:
   m_ObjectHideFlags: 0
@@ -652,7 +654,7 @@ Transform:
   m_GameObject: {fileID: 1808356404}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.1, y: -2.88, z: 0}
+  m_LocalPosition: {x: 6.1, y: -2.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -694,7 +696,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.04214883, y: 0.8654464}
+  m_Offset: {x: 0.06836891, y: 0.8654464}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -704,7 +706,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.2190499, y: 1.6910299}
+  m_Size: {x: 1.3239298, y: 1.6910299}
   m_EdgeRadius: 0
 --- !u!114 &1808356410
 MonoBehaviour:
@@ -1124,7 +1126,7 @@ GameObject:
   - component: {fileID: 2079676711}
   - component: {fileID: 2079676708}
   - component: {fileID: 2079676710}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player_NBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1140,7 +1142,7 @@ Transform:
   m_GameObject: {fileID: 2079676705}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.9, y: -1.81, z: 0}
+  m_LocalPosition: {x: -5.9, y: -2.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1205,7 +1207,7 @@ MonoBehaviour:
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
 --- !u!61 &2079676710
 BoxCollider2D:
   m_ObjectHideFlags: 0

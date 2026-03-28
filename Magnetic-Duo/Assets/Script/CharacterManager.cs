@@ -9,6 +9,9 @@ public class CharacterManager : MonoBehaviour
     [Header("캐릭터 애니메이션 연결")]
     [SerializeField] private PlayerAnimation nBotAnimation;
     [SerializeField] private PlayerAnimation sBotAnimation;
+    [Header("물리 엔진 연결")]
+    [SerializeField] private Rigidbody2D nBotRb;
+    [SerializeField] private Rigidbody2D sBotRb;
 
     private bool isNBotActive = true;
 
@@ -32,6 +35,8 @@ public class CharacterManager : MonoBehaviour
         sBotAnimation.SetPowerState(!isNBotActive);
 
         sBotAnimation.Anim.Play("ani_nBot_powerOff", 0, 1.0f);
+        nBotRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        sBotRb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
     }
 
     void Update()
@@ -50,6 +55,16 @@ public class CharacterManager : MonoBehaviour
         nBotAnimation.SetPowerState(isNBotActive);
         sBotAnimation.SetPowerState(!isNBotActive);
 
+        if(isNBotActive)
+        {
+            nBotRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            sBotRb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+        }
+        else
+        {
+            nBotRb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+            sBotRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
         Debug.Log("조작중인 캐릭터: " + (isNBotActive ? "N-Bot" : "S-Bot"));
     }
 }
