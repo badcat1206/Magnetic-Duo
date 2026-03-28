@@ -6,6 +6,9 @@ public class CharacterManager : MonoBehaviour
     [Header("Input 연결")]
     [SerializeField] private PlayerInput nBotInput;
     [SerializeField] private PlayerInput sBotInput;
+    [Header("캐릭터 애니메이션 연결")]
+    [SerializeField] private PlayerAnimation nBotAnimation;
+    [SerializeField] private PlayerAnimation sBotAnimation;
 
     private bool isNBotActive = true;
 
@@ -25,6 +28,10 @@ public class CharacterManager : MonoBehaviour
     {
         nBotInput.enabled = isNBotActive;
         sBotInput.enabled = !isNBotActive;
+        nBotAnimation.SetPowerState(isNBotActive);
+        sBotAnimation.SetPowerState(!isNBotActive);
+
+        sBotAnimation.Anim.Play("ani_nBot_powerOff", 0, 1.0f);
     }
 
     void Update()
@@ -39,6 +46,9 @@ public class CharacterManager : MonoBehaviour
         isNBotActive = !isNBotActive;
         nBotInput.enabled = isNBotActive;
         sBotInput.enabled = !isNBotActive;
+
+        nBotAnimation.SetPowerState(isNBotActive);
+        sBotAnimation.SetPowerState(!isNBotActive);
 
         Debug.Log("조작중인 캐릭터: " + (isNBotActive ? "N-Bot" : "S-Bot"));
     }
