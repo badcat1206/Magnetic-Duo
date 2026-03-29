@@ -10,21 +10,64 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;    // 바닥 감지 반경
     [SerializeField] private LayerMask groundLayer;    // 바닥 레이어
     private Rigidbody2D rb;     
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private float currentMoveInput = 0f; // 현재 입력 저장
     public bool IsGrounded { get; private set; }    // 바닥 감지 여부
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (rb != null)
+        {
+            // 질량을 정상으로 복구 (박스를 뚫고 내려가지 않게 함)
+            rb.mass = 1f; 
+            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     void Update()
     {
         IsGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        
+        // 애니메이터 파라미터 업데이트
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+            animator.SetBool("IsGrounded", IsGrounded);
+            animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (currentMoveInput != 0)
+        {
+            // 이동 중일 때는 X축 잠금을 풀고 속도 적용
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            rb.linearVelocity = new Vector2(currentMoveInput * moveSpeed, rb.linearVelocity.y);
+        }
+        else
+        {
+            // 가만히 있을 때는 X축을 완전히 잠가서 어떤 충돌에도 밀리지 않게 함
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
     }
 
     // 이동
     public void Move(float direction)
     {
-        rb.linearVelocity = new Vector2(direction * moveSpeed, rb.linearVelocity.y);
+        currentMoveInput = direction;
+
+        // 캐릭터 방향 전환 (Flip)
+        if (direction > 0)
+            spriteRenderer.flipX = false;
+        else if (direction < 0)
+            spriteRenderer.flipX = true;
     }
 
     // 점프 

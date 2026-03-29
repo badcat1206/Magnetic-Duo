@@ -8,6 +8,10 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private PlayerInput sBotInput;
 
     private bool isNBotActive = true;
+    private MagneticAbility nBotMagnetic;
+    private MagneticAbility sBotMagnetic;
+    private Animator nBotAnimator;
+    private Animator sBotAnimator;
 
     void Awake()
     {
@@ -19,12 +23,21 @@ public class CharacterManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        nBotMagnetic = nBotInput.GetComponent<MagneticAbility>();
+        sBotMagnetic = sBotInput.GetComponent<MagneticAbility>();
+        nBotAnimator = nBotInput.GetComponent<Animator>();
+        sBotAnimator = sBotInput.GetComponent<Animator>();
     }
 
     void Start()
     {
         nBotInput.enabled = isNBotActive;
         sBotInput.enabled = !isNBotActive;
+        
+        // 시작 시 현재 상태에 맞춰 애니메이션 설정
+        if (nBotAnimator != null) nBotAnimator.SetTrigger(isNBotActive ? "PowerOn" : "PowerOff");
+        if (sBotAnimator != null) sBotAnimator.SetTrigger(!isNBotActive ? "PowerOn" : "PowerOff");
     }
 
     void Update()
@@ -40,6 +53,22 @@ public class CharacterManager : MonoBehaviour
         nBotInput.enabled = isNBotActive;
         sBotInput.enabled = !isNBotActive;
 
-        Debug.Log("조작중인 캐릭터: " + (isNBotActive ? "N-Bot" : "S-Bot"));
+        if (nBotMagnetic != null) nBotMagnetic.DeactivateMagnetic();
+        if (sBotMagnetic != null) sBotMagnetic.DeactivateMagnetic();
+
+        // 전원 온/오프 애니메이션 트리거
+        if (nBotAnimator != null && sBotAnimator != null)
+        {
+            if (isNBotActive)
+            {
+                nBotAnimator.SetTrigger("PowerOn");
+                sBotAnimator.SetTrigger("PowerOff");
+            }
+            else
+            {
+                nBotAnimator.SetTrigger("PowerOff");
+                sBotAnimator.SetTrigger("PowerOn");
+            }
+        }
     }
 }
