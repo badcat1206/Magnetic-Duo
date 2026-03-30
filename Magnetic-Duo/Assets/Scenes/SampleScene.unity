@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 150021596}
   - component: {fileID: 150021595}
   - component: {fileID: 150021597}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 215011646}
   - component: {fileID: 215011645}
   - component: {fileID: 215011644}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NBox (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1090,7 +1090,7 @@ GameObject:
   - component: {fileID: 1100193981}
   - component: {fileID: 1100193980}
   - component: {fileID: 1100193979}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SBox (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1272,7 +1272,7 @@ GameObject:
   - component: {fileID: 1362241185}
   - component: {fileID: 1362241184}
   - component: {fileID: 1362241186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1725,7 +1725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1625675483}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1767,7 +1767,7 @@ GameObject:
   - component: {fileID: 1808356410}
   - component: {fileID: 1808356412}
   - component: {fileID: 1808356411}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player_SBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1831,7 +1831,7 @@ MonoBehaviour:
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 448
 --- !u!4 &1808356408
 Transform:
   m_ObjectHideFlags: 0
@@ -2236,7 +2236,7 @@ GameObject:
   - component: {fileID: 2079676711}
   - component: {fileID: 2079676712}
   - component: {fileID: 2079676713}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player_NBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2317,7 +2317,7 @@ MonoBehaviour:
   groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 704
 --- !u!61 &2079676710
 BoxCollider2D:
   m_ObjectHideFlags: 0
