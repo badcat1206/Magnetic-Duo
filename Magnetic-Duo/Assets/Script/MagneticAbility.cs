@@ -15,10 +15,17 @@ public class MagneticAbility : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    public bool IsActive => isActive;
+
     public void ToggleMagnetic()
     {
         isActive = !isActive;
         //Debug.Log(gameObject.name + " Magnetic Power: " + (isActive ? "ON" : "OFF"));
+    }
+
+    public void SetMagneticActive(bool active)
+    {
+        isActive = active;
     }
 
     public void DeactivateMagnetic()

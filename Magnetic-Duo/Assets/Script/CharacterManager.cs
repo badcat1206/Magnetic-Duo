@@ -53,9 +53,6 @@ public class CharacterManager : MonoBehaviour
         nBotInput.enabled = isNBotActive;
         sBotInput.enabled = !isNBotActive;
 
-        if (nBotMagnetic != null) nBotMagnetic.DeactivateMagnetic();
-        if (sBotMagnetic != null) sBotMagnetic.DeactivateMagnetic();
-
         // 전원 온/오프 애니메이션 트리거
         if (nBotAnimator != null && sBotAnimator != null)
         {
