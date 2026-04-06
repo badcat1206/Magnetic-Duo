@@ -10,15 +10,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.2f;    // 바닥 감지 반경
     [SerializeField] private LayerMask groundLayer;    // 바닥 레이어
     private Rigidbody2D rb;     
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
     private float currentMoveInput = 0f; // 현재 입력 저장
     public bool IsGrounded { get; private set; }    // 바닥 감지 여부
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (rb != null)
         {
@@ -32,14 +28,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         IsGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        
-        // 애니메이터 파라미터 업데이트
-        if (animator != null)
-        {
-            animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
-            animator.SetBool("IsGrounded", IsGrounded);
-            animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
-        }
     }
 
     void FixedUpdate()
@@ -62,12 +50,6 @@ public class PlayerMovement : MonoBehaviour
     public void Move(float direction)
     {
         currentMoveInput = direction;
-
-        // 캐릭터 방향 전환 (Flip)
-        if (direction > 0)
-            spriteRenderer.flipX = false;
-        else if (direction < 0)
-            spriteRenderer.flipX = true;
     }
 
     // 점프 
