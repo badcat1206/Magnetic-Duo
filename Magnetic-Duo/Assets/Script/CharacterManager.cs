@@ -45,4 +45,7 @@ public class CharacterManager : MonoBehaviour
         nBotInput.enabled = isNBotActive;
         sBotInput.enabled = !isNBotActive;
     }
+
+    public PlayerInput NBotInput => nBotInput;
+    public PlayerInput SBotInput => sBotInput;
 }

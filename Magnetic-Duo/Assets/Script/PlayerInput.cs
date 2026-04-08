@@ -6,6 +6,8 @@ public class PlayerInput : MonoBehaviour
     private PlayerMovement movement;
     private MagneticAbility magnetic;
 
+    private bool isLocked = false;
+
     void Awake()
     {
         // 이동 스크립트 연결
@@ -15,6 +17,8 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
+        if(isLocked) return;
+        
         // 이동 입력 처리
         float moveInput = Input.GetAxisRaw("Horizontal");
         movement.Move(moveInput);
@@ -29,6 +33,15 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             magnetic.ToggleMagnetic();
+        }
+    }
+
+    public void SetLocked(bool locked)
+    {
+        isLocked = locked;
+        if(isLocked && movement != null)
+        {
+            movement.Move(0);
         }
     }
 }
