@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class Goal : MonoBehaviour
@@ -20,5 +21,6 @@ public class Goal : MonoBehaviour
         {
             IsReached = false;
         }
+        
     }
 }

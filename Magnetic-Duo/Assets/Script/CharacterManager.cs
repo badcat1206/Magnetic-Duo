@@ -44,8 +44,16 @@ public class CharacterManager : MonoBehaviour
         isNBotActive = !isNBotActive;
         nBotInput.enabled = isNBotActive;
         sBotInput.enabled = !isNBotActive;
+
+        // 비활성화된 캐릭터 즉시 정지
+        if (isNBotActive)
+            sBotInput.GetComponent<PlayerMovement>().StopMovement();
+        else
+            nBotInput.GetComponent<PlayerMovement>().StopMovement();
     }
 
     public PlayerInput NBotInput => nBotInput;
     public PlayerInput SBotInput => sBotInput;
+    public Transform ActiveCharacterTransform =>
+        isNBotActive ? nBotInput.transform : sBotInput.transform;
 }

@@ -52,6 +52,12 @@ public class PlayerMovement : MonoBehaviour
         currentMoveInput = direction;
     }
 
+    // 즉시 정지
+    public void StopMovement()
+    {
+        currentMoveInput = 0f;
+    }
+
     // 점프 
     public void Jump()
     {
