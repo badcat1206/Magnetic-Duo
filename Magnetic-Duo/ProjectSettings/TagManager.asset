@@ -6,6 +6,8 @@ TagManager:
   tags:
   - NBot
   - SBot
+  - NBox
+  - SBox
   layers:
   - Default
   - TransparentFX
