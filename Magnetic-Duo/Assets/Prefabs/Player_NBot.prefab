@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 5323697013093310912}
   - component: {fileID: 2895163451256111245}
   - component: {fileID: 7658416833606412404}
+  - component: {fileID: 5714461717789166372}
   m_Layer: 8
   m_Name: Player_NBot
   m_TagString: NBot
@@ -169,7 +170,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 12
   groundCheck: {fileID: 8866767478405183303}
-  groundCheckRadius: 0.2
+  groundCheckRadius: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 704
@@ -200,6 +201,7 @@ MonoBehaviour:
   botPolarity: 0
   range: 3
   forceStrength: 20
+  stopDistance: 1.8
 --- !u!50 &7759094307264964976
 Rigidbody2D:
   serializedVersion: 5
@@ -261,7 +263,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0129746795, y: -0.009730816}
+  m_Offset: {x: 0.027568132, y: -0.44444156}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -271,7 +273,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0648714, y: 1.6681695}
+  m_Size: {x: 0.6234037, y: 0.861814}
   m_EdgeRadius: 0
 --- !u!114 &2895163451256111245
 MonoBehaviour:
@@ -302,6 +304,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
   interactRange: 1.5
+--- !u!61 &5714461717789166372
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6886355780846790419}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.004504919, y: 0.42344892}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.216229, y: 0.86485696}
+  m_EdgeRadius: 0
 --- !u!1 &7572036878516774719
 GameObject:
   m_ObjectHideFlags: 0

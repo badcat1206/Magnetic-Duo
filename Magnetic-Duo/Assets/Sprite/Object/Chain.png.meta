@@ -48,10 +48,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,16 +103,24 @@ TextureImporter:
       name: Chain_0
       rect:
         serializedVersion: 2
-        x: 48
-        y: 0
-        width: 32
-        height: 512
+        x: 0
+        y: 384
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 44, y: 0, z: 44, w: 0}
       customData: 
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: 0, y: -64}
+        - {x: 64, y: 0}
+        - {x: 0, y: 64}
+        - {x: -64, y: 0}
+      physicsShape:
+      - - {x: 0, y: -64}
+        - {x: 64, y: 0}
+        - {x: 0, y: 64}
+        - {x: -64, y: 0}
       tessellationDetail: -1
       bones: []
       spriteID: ff59731318a5f1980800000000000000
@@ -121,11 +129,101 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Chain_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 44, y: 0, z: 44, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -64}
+        - {x: 64, y: 0}
+        - {x: 0, y: 64}
+        - {x: -64, y: 0}
+      physicsShape:
+      - - {x: 0, y: -64}
+        - {x: 64, y: 0}
+        - {x: 0, y: 64}
+        - {x: -64, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5e89281bce61a54bbc94b3c28866f2b
+      internalID: -489791963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chain_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 44, y: 0, z: 44, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -64}
+        - {x: 64, y: 0}
+        - {x: 0, y: 64}
+        - {x: -64, y: 0}
+      physicsShape:
+      - - {x: 0, y: -64}
+        - {x: 64, y: 0}
+        - {x: 0, y: 64}
+        - {x: -64, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 500f1285e457dd04aa4552029a3822b2
+      internalID: -31806852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chain_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 44, y: 0, z: 44, w: 0}
+      customData: 
+      outline:
+      - - {x: 0, y: -64}
+        - {x: 64, y: 0}
+        - {x: 0, y: 64}
+        - {x: -64, y: 0}
+      physicsShape:
+      - - {x: 0, y: -64}
+        - {x: 64, y: 0}
+        - {x: 0, y: 64}
+        - {x: -64, y: 0}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d5d2e9277efeaa4089ee771318ec618
+      internalID: 478467074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 075c1881a5de60045accd27f5e14e9f1
     internalID: 0
     vertices: []
     indices: 
@@ -133,9 +231,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":128.0,"y":128.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":3,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Chain_0: -8566028455312386561
+      Chain_1: -489791963
+      Chain_2: -31806852
+      Chain_3: 478467074
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
