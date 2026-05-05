@@ -36,15 +36,15 @@ public class PlayerAnimation : MonoBehaviour
     {
         if(animator != null && spriteRenderer != null && movement != null && rb != null)
         {
-            animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+            animator.SetFloat("Speed", Mathf.Abs(movement.CurrentMoveInput));
             animator.SetBool("IsGrounded", movement.IsGrounded);
             animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);
 
-            if(rb.linearVelocity.x > 0.1f)
+            if(movement.CurrentMoveInput > 0.1f)
             {
                 spriteRenderer.flipX = false;
             }
-            else if(rb.linearVelocity.x < -0.1f)
+            else if(movement.CurrentMoveInput < -0.1f)
             {
                 spriteRenderer.flipX = true;
             }

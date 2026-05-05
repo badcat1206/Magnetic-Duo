@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 7474707431533037490}
   - component: {fileID: 6389148818502890686}
   - component: {fileID: 8289418830826829061}
+  - component: {fileID: 7196472126775845294}
   m_Layer: 9
   m_Name: Player_SBot
   m_TagString: SBot
@@ -319,3 +320,16 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5446681420428120178}
   movement: {fileID: 7734131150661932789}
   playerInput: {fileID: 4508228185436638244}
+--- !u!114 &7196472126775845294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8182699402886553913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd268f363afe0e428fbba4269247528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
+  interactRange: 1.5

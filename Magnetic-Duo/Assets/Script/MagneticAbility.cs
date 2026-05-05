@@ -6,7 +6,9 @@ public class MagneticAbility : MonoBehaviour
     [SerializeField] private Polarity botPolarity;
     [SerializeField] private float range = 5f;
     [SerializeField] private float forceStrength = 10f;
-    
+
+    [SerializeField] private float stopDistance = 1.8f; // 당길 때 플레이어에게 다가올 거리
+
     private bool isActive = false;
     private Rigidbody2D rb;
 
@@ -66,7 +68,7 @@ public class MagneticAbility : MonoBehaviour
 
                 if (isSamePolarity)
                 {
-                    if (targetRb != null) 
+                    if (targetRb != null)
                     {
                         target.AddMagneticForce(direction.x * forceAmount); // X축 힘 전달
                         targetRb.AddForce(Vector2.up * direction.y * forceAmount); // Y축은 물리 법칙 적용
@@ -75,12 +77,16 @@ public class MagneticAbility : MonoBehaviour
                 }
                 else
                 {
-                    if (targetRb != null) 
+                    // stopDistance 보다 멀때만 당김
+                    if (distance > stopDistance)
                     {
-                        target.AddMagneticForce(-direction.x * forceAmount); // X축 힘 전달
-                        targetRb.AddForce(Vector2.up * -direction.y * forceAmount); // Y축은 물리 법칙 적용
+                        if (targetRb != null)
+                        {
+                            target.AddMagneticForce(-direction.x * forceAmount); // X축 힘 전달
+                            targetRb.AddForce(Vector2.up * -direction.y * forceAmount); // Y축은 물리 법칙 적용
+                        }
+                        // 플레이어에 가해지는 반작용 힘을 제거하여 끌려가지 않게 함
                     }
-                    // 플레이어에 가해지는 반작용 힘을 제거하여 끌려가지 않게 함
                 }
             }
         }

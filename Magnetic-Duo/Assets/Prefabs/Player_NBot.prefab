@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 7759094307264964976}
   - component: {fileID: 5323697013093310912}
   - component: {fileID: 2895163451256111245}
+  - component: {fileID: 7658416833606412404}
   m_Layer: 8
   m_Name: Player_NBot
   m_TagString: NBot
@@ -288,6 +289,19 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8507603633561793956}
   movement: {fileID: 5363301895983402185}
   playerInput: {fileID: 3262703911974606442}
+--- !u!114 &7658416833606412404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6886355780846790419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd268f363afe0e428fbba4269247528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
+  interactRange: 1.5
 --- !u!1 &7572036878516774719
 GameObject:
   m_ObjectHideFlags: 0

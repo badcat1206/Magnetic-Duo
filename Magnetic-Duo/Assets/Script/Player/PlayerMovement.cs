@@ -11,7 +11,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;    // 바닥 레이어
     private Rigidbody2D rb;     
     private float currentMoveInput = 0f; // 현재 입력 저장
+    public float CurrentMoveInput => currentMoveInput;
     public bool IsGrounded { get; private set; }    // 바닥 감지 여부
+
+    private int activeEffectorCount = 0;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,11 +35,17 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        bool isOnEffector  = (activeEffectorCount > 0);
         if (currentMoveInput != 0)
         {
             // 이동 중일 때는 X축 잠금을 풀고 속도 적용
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.linearVelocity = new Vector2(currentMoveInput * moveSpeed, rb.linearVelocity.y);
+        }
+        else if(isOnEffector)
+        {
+            // 컨베이어 벨트 위에 가만히 서 있을 때 움직이도록
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
         else
         {
@@ -64,6 +73,23 @@ public class PlayerMovement : MonoBehaviour
         if(IsGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        }
+    }
+
+    // --- [발바닥 센서: 이펙터 감지] ---
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.usedByEffector) 
+        {
+            activeEffectorCount++;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.usedByEffector) 
+        {
+            activeEffectorCount--;
         }
     }
 }

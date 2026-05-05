@@ -53,9 +53,10 @@ public class MagneticObject : MonoBehaviour
         }
         else
         {
+            // 컨베이어 벨트 위에서 움직이게 하기 위해 주석화
             // 자력이 없을 때는 X축을 완전히 고정
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            // rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            // rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
 
         // 초기화

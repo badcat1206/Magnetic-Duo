@@ -2,17 +2,21 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    // 이동 스크립트 연결
-    private PlayerMovement movement;
+
+    private PlayerMovement movement;        // 이동 스크립트 연결
+    private PlayerInteractor interactor;    // 상호작용 스크립트 연결
     private MagneticAbility magnetic;
 
     private bool isLocked = false;
+
+    
 
     void Awake()
     {
         // 이동 스크립트 연결
         movement = GetComponent<PlayerMovement>();
         magnetic = GetComponent<MagneticAbility>();
+        interactor = GetComponent<PlayerInteractor>();
     }
 
     void Update()
@@ -33,6 +37,11 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             magnetic.ToggleMagnetic();
+        }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            interactor.TrtInteract();
         }
     }
 
