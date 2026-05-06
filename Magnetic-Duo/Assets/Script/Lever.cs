@@ -4,6 +4,7 @@ public class Lever : MonoBehaviour
 {
     [Header("연결할 장치")]
     [SerializeField] private ConveyorBelt[] connectedBelts; // 레버 작동시 작동할 컨베이어 벨트
+    [SerializeField] private MagneticField[] connectedMagneticFields;
 
     // 임시로 색깔을 바꾸기 위해 추가
     private SpriteRenderer spriteRenderer;
@@ -38,6 +39,17 @@ public class Lever : MonoBehaviour
                 if(belt != null)
                 {
                     belt.ToggleGBelt();
+                }
+            }
+        }
+        // 자기장 작동
+        if(connectedMagneticFields != null)
+        {
+            foreach(MagneticField field in connectedMagneticFields)
+            {
+                if(field != null)
+                {
+                    field.ToggleField();
                 }
             }
         }

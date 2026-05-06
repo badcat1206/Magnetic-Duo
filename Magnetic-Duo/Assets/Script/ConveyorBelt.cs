@@ -7,19 +7,27 @@ public class ConveyorBelt : MonoBehaviour
     [Header("벨트 설정")]
     [SerializeField] private float activeSpeed = 5f;
 
-    private bool isRunning = false;
+    [SerializeField] private bool isRunning = false;
 
     void Start()
     {
         effector = GetComponent<SurfaceEffector2D>();
-        effector.speed = 0f;
+        if (isRunning)
+        {
+            effector.speed = activeSpeed;
+        }
+        else
+        {
+            effector.speed = 0f;
+        }
+
     }
 
     public void ToggleGBelt()
     {
         isRunning = !isRunning;
 
-        if(isRunning)
+        if (isRunning)
         {
             effector.speed = activeSpeed;
             Debug.Log($"벨트 작동 시작. 현재 속도 {effector.speed}");
