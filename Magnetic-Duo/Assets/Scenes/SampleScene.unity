@@ -296,17 +296,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &300844006 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7610617283584667734, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-  m_PrefabInstance: {fileID: 5228392388836284576}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a930ce4761c2ea64088e79207095abf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MagneticField
 --- !u!114 &416663837 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4053892747200361598, guid: ee5c5e26ee904dc409f41cf2ae5a526f, type: 3}
@@ -749,7 +738,7 @@ PrefabInstance:
     - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: 'connectedMagneticFields.Array.data[0]'
       value: 
-      objectReference: {fileID: 300844006}
+      objectReference: {fileID: 2382583653448444150}
     - target: {fileID: 8229467824904019254, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: m_Name
       value: Lever (1)
@@ -1335,63 +1324,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
---- !u!1001 &5228392388836284576
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3045310747825894477, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.048
-      objectReference: {fileID: 0}
-    - target: {fileID: 3045310747825894477, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.2509
-      objectReference: {fileID: 0}
-    - target: {fileID: 3045310747825894477, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3045310747825894477, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3045310747825894477, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3045310747825894477, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3045310747825894477, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3045310747825894477, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3045310747825894477, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3045310747825894477, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5909788791067630566, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
-      propertyPath: m_Name
-      value: MagneticField
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 488000156c26c0d4cbc3d3516d7be87d, type: 3}
+--- !u!114 &2382583653448444150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+  m_PrefabInstance: {fileID: 7233287871743903595}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a930ce4761c2ea64088e79207095abf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MagneticField
 --- !u!1001 &5235940807676752798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1583,6 +1526,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deb8da651606e5d49bb0bfe06439a054, type: 3}
+--- !u!1001 &7233287871743903595
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 859587004825737050, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 859587004825737050, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 859587004825737050, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 859587004825737050, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 859587004825737050, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 859587004825737050, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 859587004825737050, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 859587004825737050, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 859587004825737050, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 859587004825737050, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2551676847838591793, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: m_Name
+      value: MagneticField
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
 --- !u!1001 &7386182841579033265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1784,5 +1784,5 @@ SceneRoots:
   - {fileID: 701875876}
   - {fileID: 530697904}
   - {fileID: 527700057}
-  - {fileID: 5228392388836284576}
+  - {fileID: 7233287871743903595}
   - {fileID: 1503819248}

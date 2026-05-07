@@ -10,14 +10,27 @@ public class MagneticField : MonoBehaviour
    [SerializeField] private GameObject electricEffect;
    [SerializeField] Collider2D electricCollider;
 
+   private Animator animator;
+
+    void Awake()
+    {
+        if(animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+        
+    }
     void Start()
     {
+        animator.SetBool("IsOn", isOn);
         UpdateFieldState();
     }
 
     public void ToggleField()
     {
+        
         isOn = !isOn;
+        animator.SetBool("IsOn", isOn);
         UpdateFieldState();
     }
 
