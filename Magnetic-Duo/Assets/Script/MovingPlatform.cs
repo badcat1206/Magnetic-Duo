@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Collections.Generic;
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -12,12 +11,11 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
 
     [Header("체인 설정")]
-    [SerializeField] private Tilemap hideChainTilemap; // 비활성화된 HideChainTilemap
+    [SerializeField] private Tilemap hideChainTilemap;
 
     private Vector3 startPosition;
     private Vector3 targetPosition;
-    private Vector3Int[] chainTiles; // Y 내림차순 (높은 Y = 천장 근처부터 먼저 보임)
-    private int lastShownCount = 0;
+    private Transform chainMaskTransform;
 
     private void Start()
     {
@@ -27,26 +25,57 @@ public class MovingPlatform : MonoBehaviour
         if (hideChainTilemap != null)
         {
             hideChainTilemap.gameObject.SetActive(true);
-            InitChainTiles();
+            InitChain();
         }
     }
 
-    private void InitChainTiles()
+    private void InitChain()
     {
         hideChainTilemap.CompressBounds();
-        var positions = new List<Vector3Int>();
+
+        float cellW = hideChainTilemap.layoutGrid.cellSize.x;
+        float cellH = hideChainTilemap.layoutGrid.cellSize.y;
+
+        int maxTileY = int.MinValue;
+        float sumX = 0f;
+        int count = 0;
 
         foreach (Vector3Int pos in hideChainTilemap.cellBounds.allPositionsWithin)
         {
             if (!hideChainTilemap.HasTile(pos)) continue;
-            hideChainTilemap.SetTileFlags(pos, TileFlags.None);
-            hideChainTilemap.SetColor(pos, Color.clear);
-            positions.Add(pos);
+            if (pos.y > maxTileY) maxTileY = pos.y;
+            sumX += hideChainTilemap.GetCellCenterWorld(pos).x;
+            count++;
         }
 
-        // Y 내림차순: 높은 Y(천장 근처) 타일부터 먼저 보임
-        positions.Sort((a, b) => b.y.CompareTo(a.y));
-        chainTiles = positions.ToArray();
+        if (count == 0) return;
+
+        float centerX = sumX / count;
+        Vector3Int topCell = new Vector3Int(hideChainTilemap.cellBounds.xMin, maxTileY, 0);
+        float chainTopY = hideChainTilemap.GetCellCenterWorld(topCell).y + cellH * 0.5f;
+
+        // TilemapRenderer: 마스크 안쪽만 렌더링
+        hideChainTilemap.GetComponent<TilemapRenderer>().maskInteraction =
+            SpriteMaskInteraction.VisibleInsideMask;
+
+        // SpriteMask 오브젝트 생성
+        var maskObj = new GameObject("ChainMask");
+        maskObj.transform.SetParent(hideChainTilemap.transform.parent);
+        maskObj.transform.position = new Vector3(centerX, chainTopY, 0f);
+
+        float maskWidth = hideChainTilemap.cellBounds.size.x * cellW + cellW;
+        maskObj.transform.localScale = new Vector3(maskWidth, 0f, 1f);
+
+        var mask = maskObj.AddComponent<SpriteMask>();
+
+        // 1×1 흰색 텍스처로 직사각형 마스크 스프라이트 생성
+        var tex = new Texture2D(1, 1);
+        tex.SetPixel(0, 0, Color.white);
+        tex.Apply();
+        // 피벗을 상단 중앙(0.5, 1)으로 → scale.y가 아래쪽으로 성장
+        mask.sprite = Sprite.Create(tex, new Rect(0, 0, 1, 1), new Vector2(0.5f, 1f), 1f);
+
+        chainMaskTransform = maskObj.transform;
     }
 
     private void Update()
@@ -57,25 +86,13 @@ public class MovingPlatform : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (hideChainTilemap == null || chainTiles == null) return;
+        if (chainMaskTransform == null) return;
 
-        float movedDistance = startPosition.y - transform.position.y;
-        int movedCells = Mathf.Clamp(
-            Mathf.CeilToInt(movedDistance / hideChainTilemap.layoutGrid.cellSize.y),
-            0, chainTiles.Length
-        );
+        float movedDistance = Mathf.Max(0f, startPosition.y - transform.position.y);
 
-        if (movedCells == lastShownCount) return;
-
-        // 플랫폼이 내려갈 때: 새 타일 보이기
-        for (int i = lastShownCount; i < movedCells; i++)
-            hideChainTilemap.SetColor(chainTiles[i], Color.white);
-
-        // 플랫폼이 올라갈 때: 타일 다시 숨기기
-        for (int i = movedCells; i < lastShownCount; i++)
-            hideChainTilemap.SetColor(chainTiles[i], Color.clear);
-
-        lastShownCount = movedCells;
+        Vector3 scale = chainMaskTransform.localScale;
+        scale.y = movedDistance;
+        chainMaskTransform.localScale = scale;
     }
 
     private void OnDrawGizmosSelected()
