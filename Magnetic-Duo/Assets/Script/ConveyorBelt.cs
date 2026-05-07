@@ -9,9 +9,13 @@ public class ConveyorBelt : MonoBehaviour
 
     [SerializeField] private bool isRunning = false;
 
-    void Start()
+    void Awake()
     {
         effector = GetComponent<SurfaceEffector2D>();
+    }
+
+    void Start()
+    {
         if (isRunning)
         {
             effector.speed = activeSpeed;

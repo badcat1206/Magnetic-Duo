@@ -89,6 +89,31 @@ public class MagneticAbility : MonoBehaviour
                     }
                 }
             }
+
+            Lever lever = col.GetComponent<Lever>();
+            if (lever != null)
+            {
+                Vector2 direction = (Vector2)lever.transform.position - (Vector2)transform.position;
+                float distance = direction.magnitude;
+                if (distance == 0) continue;
+
+                direction.Normalize();
+
+                bool isSamePolarity = (botPolarity == lever.polarity);
+                float forceAmount = forceStrength / Mathf.Max(distance, 1.0f);
+
+                if (isSamePolarity)
+                {
+                    lever.AddMagneticForce(direction.x * forceAmount);
+                }
+                else
+                {
+                    if (distance > stopDistance)
+                    {
+                        lever.AddMagneticForce(-direction.x * forceAmount);
+                    }
+                }
+            }
         }
     }
 
