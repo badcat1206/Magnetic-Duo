@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Lever : MonoBehaviour
+public class Lever : MonoBehaviour, IInteractable
 {
     [Header("자력 상호작용 설정")]
     public Polarity polarity; // N, S 중 선택
@@ -14,12 +14,16 @@ public class Lever : MonoBehaviour
     [SerializeField] private ConveyorBelt[] connectedBelts;
     [SerializeField] private MagneticField[] connectedMagneticFields;
 
+    [Header("레버 스프라이트")]
+    [SerializeField] private Sprite offSprite;
+    [SerializeField] private Sprite onSprite;
+
     private SpriteRenderer spriteRenderer;
     private bool isOn = false;
 
     void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // 외부(캐릭터)에서 매 프레임 힘을 전달할 때 호출됨
@@ -45,6 +49,8 @@ public class Lever : MonoBehaviour
         isMagnetizedThisFrame = false;
     }
 
+    public void Interact() => ActivateLever();
+
     public void ActivateLever()
     {
         Debug.Log("레버 당겨짐");
@@ -52,7 +58,7 @@ public class Lever : MonoBehaviour
 
         if (spriteRenderer != null)
         {
-            spriteRenderer.color = isOn ? Color.green : Color.white;
+            spriteRenderer.sprite = isOn ? onSprite : offSprite;
         }
 
         if (connectedBelts != null)

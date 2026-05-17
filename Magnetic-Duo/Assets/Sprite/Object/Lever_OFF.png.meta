@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2fcec463fa81ad644b561b4cdc6e9f5f
+guid: 604d7382f58fdfd4eb3e971e90772584
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4519742850347100566
-    second: skeleton-idle_00_0
+      213: -2069954606663622103
+    second: Lever_OFF_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 250
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: skeleton-idle_00_0
+      name: Lever_OFF_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 0
-        width: 329
-        height: 431
+        x: 12
+        y: 1
+        width: 205
+        height: 194
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a6613f003d5a641c0800000000000000
-      internalID: -4519742850347100566
+      spriteID: 922a1a8904b0643e0800000000000000
+      internalID: -2069954606663622103
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: aa4c26fed32be8c43a0718bf3b8162dc
+    spriteID: c5157b874dac6c840bd02f4b9279188f
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      skeleton-idle_00_0: -4519742850347100566
+      Lever_OFF_0: -2069954606663622103
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
