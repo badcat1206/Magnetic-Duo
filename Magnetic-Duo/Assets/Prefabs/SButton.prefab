@@ -93,6 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PressureButton
   buttonType: 1
+  unpressedSprite: {fileID: -2545751750371316407, guid: f4d85248084e75241a11c748521f0e22, type: 3}
+  pressedSprite: {fileID: 8146932893539476403, guid: 5bab821cd96f86544b374bf7f7b3f366, type: 3}
 --- !u!1 &8836178558094009229
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +176,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2758448031277389751, guid: 897ff09cbcca65b44976bc45eacb62bb, type: 3}
+  m_Sprite: {fileID: -2545751750371316407, guid: f4d85248084e75241a11c748521f0e22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

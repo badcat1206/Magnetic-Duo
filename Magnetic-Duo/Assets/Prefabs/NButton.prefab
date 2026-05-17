@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7873744191865863499, guid: a685c86349d113647b57695481b9eeb2, type: 3}
+  m_Sprite: {fileID: 8793101477569535717, guid: 9c8835d11ee152a46a2d10b6e2df9837, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -184,3 +184,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PressureButton
   buttonType: 0
+  unpressedSprite: {fileID: 8793101477569535717, guid: 9c8835d11ee152a46a2d10b6e2df9837, type: 3}
+  pressedSprite: {fileID: -9116829002634123038, guid: e84ad5f1323d46c43a241543da0a8ef9, type: 3}
