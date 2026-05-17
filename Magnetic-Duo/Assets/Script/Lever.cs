@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Lever : MonoBehaviour
+public class Lever : MonoBehaviour, IInteractable
 {
      // 켜졌을 때와 꺼졌을 때의 이미지 변수
     [Header("레버 이미지 설정")]
@@ -24,7 +24,7 @@ public class Lever : MonoBehaviour
 
     void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // 외부(캐릭터)에서 매 프레임 힘을 전달할 때 호출됨
@@ -50,6 +50,8 @@ public class Lever : MonoBehaviour
         isMagnetizedThisFrame = false;
     }
 
+    public void Interact() => ActivateLever();
+
     public void ActivateLever()
     {
         Debug.Log("레버 당겨짐");
@@ -61,11 +63,7 @@ public class Lever : MonoBehaviour
         }
 
         if (connectedBelts != null)
-        {
             foreach (ConveyorBelt belt in connectedBelts)
-            {
-                if (belt != null) belt.ToggleGBelt(); // 컨베이어 벨트의 isRunning 상태를 뒤집음
-            }
         }
 
         if (connectedMagneticFields != null)

@@ -10,10 +10,10 @@ public class PlayerInteractor : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, interactRange);
         foreach(Collider2D col in colliders)
         {
-            Lever lever = col.GetComponent<Lever>();
-            if(lever != null)
+            IInteractable interactable = col.GetComponent<IInteractable>();
+            if(interactable != null)
             {
-                lever.ActivateLever();
+                interactable.Interact();
                 break;
             }
         }

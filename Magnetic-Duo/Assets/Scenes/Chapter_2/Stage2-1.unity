@@ -420,7 +420,15 @@ PrefabInstance:
     - target: {fileID: 839735465165126171, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -4454914845596493489, guid: 2097c4af5efae1541bc93716ceed825d, type: 3}
+      objectReference: {fileID: -2069954606663622103, guid: 604d7382f58fdfd4eb3e971e90772584, type: 3}
+    - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+      propertyPath: onSprite
+      value: 
+      objectReference: {fileID: 8020963701470474491, guid: 5030bc2ebcfdf114f91259142bed12cd, type: 3}
+    - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+      propertyPath: offSprite
+      value: 
+      objectReference: {fileID: -2069954606663622103, guid: 604d7382f58fdfd4eb3e971e90772584, type: 3}
     - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: 'connectedBelts.Array.data[0]'
       value: 
@@ -484,11 +492,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4200979638234960469, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.85
+      value: -7.57
       objectReference: {fileID: 0}
     - target: {fileID: 4200979638234960469, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.14
+      value: 2.15
       objectReference: {fileID: 0}
     - target: {fileID: 4200979638234960469, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
       propertyPath: m_LocalPosition.z
@@ -536,7 +544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8940636957947305535, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
       propertyPath: orthographic size
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
