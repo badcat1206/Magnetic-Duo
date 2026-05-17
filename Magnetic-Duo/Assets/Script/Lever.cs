@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class Lever : MonoBehaviour
 {
+     // 켜졌을 때와 꺼졌을 때의 이미지 변수
+    [Header("레버 이미지 설정")]
+    [SerializeField] private Sprite spriteOn;
+    [SerializeField] private Sprite spriteOff;
+
     [Header("자력 상호작용 설정")]
     public Polarity polarity; // N, S 중 선택
     [SerializeField] private float requiredForce = 0.1f;
@@ -13,7 +18,7 @@ public class Lever : MonoBehaviour
     [Header("연결할 장치")]
     [SerializeField] private ConveyorBelt[] connectedBelts;
     [SerializeField] private MagneticField[] connectedMagneticFields;
-
+    
     private SpriteRenderer spriteRenderer;
     private bool isOn = false;
 
@@ -52,7 +57,7 @@ public class Lever : MonoBehaviour
 
         if (spriteRenderer != null)
         {
-            spriteRenderer.color = isOn ? Color.green : Color.white;
+            spriteRenderer.sprite = isOn ? spriteOn : spriteOff;
         }
 
         if (connectedBelts != null)

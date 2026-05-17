@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9180226121987068846}
   - component: {fileID: 839735465165126171}
   - component: {fileID: 1216720418338277655}
-  - component: {fileID: 1667857801645321480}
+  - component: {fileID: 3877727561630619598}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Untagged
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 8229467824904019254}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.53, y: -3.42, z: 30}
-  m_LocalScale: {x: 0.5970638, y: 0.5433428, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 30}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,12 +83,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -4454914845596493489, guid: 2097c4af5efae1541bc93716ceed825d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 56bb9cc1877583144835f659023ef390, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.9692308, y: 1.9692308}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,11 +105,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fec0635b4bf4bf4288f44d99fc379b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lever
+  spriteOn: {fileID: 21300000, guid: 545f0b033f7d4cb4898453af71bc70f3, type: 3}
+  spriteOff: {fileID: 21300000, guid: 56bb9cc1877583144835f659023ef390, type: 3}
+  polarity: 0
+  requiredForce: 0.1
   connectedBelts:
   - {fileID: 0}
   connectedMagneticFields: []
---- !u!70 &1667857801645321480
-CapsuleCollider2D:
+--- !u!61 &3877727561630619598
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -142,6 +146,15 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.99999994, y: 2}
-  m_Direction: 0
+  m_Offset: {x: -0.00047767162, y: 0.759329}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.9692308, y: 1.9692308}
+    newSize: {x: 1.9692308, y: 1.9692308}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.3896012, y: 1.520804}
+  m_EdgeRadius: 0
