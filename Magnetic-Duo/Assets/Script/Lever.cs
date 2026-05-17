@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Lever : MonoBehaviour, IInteractable
 {
-     // 켜졌을 때와 꺼졌을 때의 이미지 변수
+    // 켜졌을 때와 꺼졌을 때의 이미지 변수
     [Header("레버 이미지 설정")]
     [SerializeField] private Sprite spriteOn;
     [SerializeField] private Sprite spriteOff;
@@ -18,7 +18,7 @@ public class Lever : MonoBehaviour, IInteractable
     [Header("연결할 장치")]
     [SerializeField] private ConveyorBelt[] connectedBelts;
     [SerializeField] private MagneticField[] connectedMagneticFields;
-    
+
     private SpriteRenderer spriteRenderer;
     private bool isOn = false;
 
@@ -63,7 +63,11 @@ public class Lever : MonoBehaviour, IInteractable
         }
 
         if (connectedBelts != null)
+        {
             foreach (ConveyorBelt belt in connectedBelts)
+           {
+                if (belt != null) belt.ToggleGBelt(); // 컨베이어 벨트의 isRunning 상태를 뒤집음
+            }
         }
 
         if (connectedMagneticFields != null)

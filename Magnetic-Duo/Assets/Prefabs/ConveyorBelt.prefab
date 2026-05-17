@@ -106,7 +106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33cfc30bcd9d2424f9690b2fe3eed612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConveyorBelt
+  beltMode: 0
   activeSpeed: 3
+  isRunning: 0
+  boxLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!61 &3256539863444480152
 BoxCollider2D:
   m_ObjectHideFlags: 0
