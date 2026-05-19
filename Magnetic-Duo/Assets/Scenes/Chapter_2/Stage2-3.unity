@@ -2372,6 +2372,8 @@ MonoBehaviour:
   button: {fileID: 1817577874}
   targetOffset: {x: 0, y: 9, z: 0}
   moveSpeed: 3
+  shakeDuration: 3
+  shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 0}
 --- !u!114 &1228897080 stripped
 MonoBehaviour:

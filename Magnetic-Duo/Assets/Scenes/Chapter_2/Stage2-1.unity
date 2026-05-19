@@ -1232,6 +1232,8 @@ MonoBehaviour:
   button: {fileID: 1811360135}
   targetOffset: {x: 0, y: 4, z: 0}
   moveSpeed: 3
+  shakeDuration: 1
+  shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 0}
 --- !u!1001 &1276107516
 PrefabInstance:

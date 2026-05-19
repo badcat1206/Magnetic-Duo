@@ -1301,6 +1301,8 @@ MonoBehaviour:
   button: {fileID: 2135782170}
   targetOffset: {x: 0, y: -6, z: 0}
   moveSpeed: 3
+  shakeDuration: 1.5
+  shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 0}
 --- !u!19719996 &930433803
 TilemapCollider2D:
@@ -1802,6 +1804,8 @@ MonoBehaviour:
   button: {fileID: 1121214152}
   targetOffset: {x: 0, y: -4, z: 0}
   moveSpeed: 3
+  shakeDuration: 1.5
+  shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 0}
 --- !u!19719996 &1382825374
 TilemapCollider2D:

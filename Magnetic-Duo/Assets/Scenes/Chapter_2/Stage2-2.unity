@@ -731,7 +731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9180226121987068846, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.637
+      value: 3.08
       objectReference: {fileID: 0}
     - target: {fileID: 9180226121987068846, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5755,6 +5755,8 @@ MonoBehaviour:
   button: {fileID: 764362023}
   targetOffset: {x: 0, y: 4, z: 0}
   moveSpeed: 3
+  shakeDuration: 1.2
+  shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 0}
 --- !u!4 &1973222501 stripped
 Transform:

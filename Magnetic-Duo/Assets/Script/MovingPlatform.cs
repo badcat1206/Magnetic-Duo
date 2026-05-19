@@ -10,12 +10,17 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private Vector3 targetOffset;
     [SerializeField] private float moveSpeed = 3f;
 
+    [Header("화면 흔들림 설정")]
+    [SerializeField] private float shakeDuration = 0.4f;
+    [SerializeField] private float shakeMagnitude = 0.18f;
+
     [Header("체인 설정")]
     [SerializeField] private Tilemap hideChainTilemap;
 
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private Transform chainMaskTransform;
+    private bool wasPressed = false;
 
     private void Start()
     {
@@ -80,7 +85,15 @@ public class MovingPlatform : MonoBehaviour
 
     private void Update()
     {
-        Vector3 destination = button.IsPressed ? targetPosition : startPosition;
+        bool isPressed = button.IsPressed;
+
+        // 플랫폼이 이동 시작하는 순간(내려가거나 복귀할 때)에 흔들림 발생
+        if (isPressed != wasPressed)
+            CameraFollow.Instance?.Shake(shakeDuration, shakeMagnitude);
+
+        wasPressed = isPressed;
+
+        Vector3 destination = isPressed ? targetPosition : startPosition;
         transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
     }
 
