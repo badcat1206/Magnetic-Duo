@@ -152,6 +152,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.10861629
       objectReference: {fileID: 0}
+    - target: {fileID: 1172636059325925108, guid: c7c27e3a8baf4f64598089789314d26e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5011432409718297681, guid: c7c27e3a8baf4f64598089789314d26e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.366
@@ -912,6 +916,10 @@ PrefabInstance:
       propertyPath: mapMinX
       value: -18
       objectReference: {fileID: 0}
+    - target: {fileID: 6354260069739182939, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
+      propertyPath: mapMinY
+      value: -8
+      objectReference: {fileID: 0}
     - target: {fileID: 7189808982723841554, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -1016,11 +1024,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6531024500729282437, guid: deb8da651606e5d49bb0bfe06439a054, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.05
+      value: 24.5
       objectReference: {fileID: 0}
     - target: {fileID: 6531024500729282437, guid: deb8da651606e5d49bb0bfe06439a054, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.06
+      value: -5.15
       objectReference: {fileID: 0}
     - target: {fileID: 6531024500729282437, guid: deb8da651606e5d49bb0bfe06439a054, type: 3}
       propertyPath: m_LocalPosition.z
