@@ -20,10 +20,22 @@ public class Trap : MonoBehaviour
         if(deadPlayer != null)
         {
             deadPlayer.SetLocked(true);
-            // 여기에 죽는 애니메이션 넣기
+
+            Rigidbody2D rb = deadPlayer.GetComponent<Rigidbody2D>();
+            if(rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.bodyType = RigidbodyType2D.Static;
+            }
+
+            PlayerAnimation playerAnim = deadPlayer.GetComponent<PlayerAnimation>();
+            if(playerAnim != null)
+            {
+                playerAnim.TriggerDeath();
+            }
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);

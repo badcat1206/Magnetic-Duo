@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Goal : MonoBehaviour
@@ -13,6 +13,12 @@ public class Goal : MonoBehaviour
         if (collision.CompareTag(targetTag))
         {
             IsReached = true;
+
+            PlayerAnimation playerAnim = collision.GetComponent<PlayerAnimation>();
+            if(playerAnim != null)
+            {
+                playerAnim.SetOnGoal(true);
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -20,6 +26,12 @@ public class Goal : MonoBehaviour
         if (collision.CompareTag(targetTag))
         {
             IsReached = false;
+
+            PlayerAnimation playerAnim = collision.GetComponent<PlayerAnimation>();
+            if(playerAnim != null)
+            {
+                playerAnim.SetOnGoal(false);
+            }
         }
         
     }

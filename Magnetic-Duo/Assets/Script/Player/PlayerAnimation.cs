@@ -56,4 +56,19 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
     
+    public void TriggerDeath()
+    {
+        if(animator != null)
+        {
+            animator.SetTrigger("Die");
+        }
+    }
+
+    public void SetOnGoal(bool isOnGoal)
+    {
+        if(animator != null)
+        {
+            animator.SetBool("OnGoal", isOnGoal);
+        }
+    }
 }
