@@ -10,7 +10,7 @@ public class ConveyorBelt : MonoBehaviour
         ToggleOnOff,
         ReverseDirection
     }
-    
+
     [Header("벨트 설정")]
     [SerializeField] private BeltMode beltMode = BeltMode.ToggleOnOff;
     [SerializeField] private float activeSpeed = 5f;
@@ -22,11 +22,13 @@ public class ConveyorBelt : MonoBehaviour
 
     private SurfaceEffector2D effector;
     private Collider2D beltCollider;
+    private SpriteRenderer spriteRenderer;
 
     void Awake()
     {
         effector = GetComponent<SurfaceEffector2D>();
         beltCollider = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Start()
@@ -52,8 +54,8 @@ public class ConveyorBelt : MonoBehaviour
 
         // 변경된 상태를 실제 컴포넌트에 적용
         UpdateBeltSpeed();
-        
-        if(isRunning)
+
+        if (isRunning)
         {
             GiveNudgeToBoxesOnMe();
         }
@@ -64,10 +66,27 @@ public class ConveyorBelt : MonoBehaviour
         if (isRunning)
         {
             effector.speed = activeSpeed;
+
+            if (spriteRenderer != null)
+            {
+                if (activeSpeed > 0)
+                {
+                    spriteRenderer.color = new Color32(30, 160, 30, 255);   // 오른쪽 연두색
+                }
+                else if (activeSpeed < 0)
+                {
+                    spriteRenderer.color = new Color32(20, 140, 160, 255);   // 왼쪽 청록색(원하는 색으로 변경 가능)
+                }
+            }
         }
         else
         {
             effector.speed = 0f;
+
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.color = Color.gray; // 꺼짐 회색
+            }
         }
     }
 
@@ -85,11 +104,11 @@ public class ConveyorBelt : MonoBehaviour
         foreach (Collider2D obj in touchingObjects)
         {
             // 박스의 중심이 벨트보다 밖에 있을 경우
-            if(obj.bounds.center.x >= beltCollider.bounds.min.x && 
+            if (obj.bounds.center.x >= beltCollider.bounds.min.x &&
                 obj.bounds.center.x <= beltCollider.bounds.max.x)
             {
                 Rigidbody2D boxRb = obj.GetComponent<Rigidbody2D>();
-                if(boxRb != null)
+                if (boxRb != null)
                 {
                     boxRb.linearVelocity = Vector2.zero;
                     float forceDirection = Mathf.Sign(-activeSpeed);
