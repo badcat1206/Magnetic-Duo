@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (rb.bodyType == RigidbodyType2D.Static) return;
+
         bool isOnEffector  = (activeEffectorCount > 0);
         if (currentMoveInput != 0)
         {

@@ -180,6 +180,10 @@ PrefabInstance:
       value: MagneticField  (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: isElectric
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: boxSpawnPoint.x
       value: 24
       objectReference: {fileID: 0}
@@ -1825,6 +1829,10 @@ PrefabInstance:
     - target: {fileID: 2551676847838591793, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: m_Name
       value: 'MagneticField '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: isElectric
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: boxSpawnPoint.x
@@ -4748,6 +4756,10 @@ PrefabInstance:
     - target: {fileID: 2551676847838591793, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: m_Name
       value: MagneticField  (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: isElectric
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: boxSpawnPoint.x

@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Trap : MonoBehaviour
 {
+    [Header("트랩 설정")]
+    [SerializeField] private bool isElectric = false;
+    [Space]
     [Header("상자 리스폰 설정")]
     [Tooltip("체크하면 이 트랩에 닿은 상자가 리스폰됩니다.")]
     [SerializeField] private bool canDestroyBox = true;
@@ -45,7 +48,7 @@ public class Trap : MonoBehaviour
 
     private IEnumerator DieSequence(PlayerInput deadPlayer)
     {
-        Debug.Log("죽음");
+        Debug.Log($"[Trap] DieSequence 시작 / isElectric={isElectric} / deadPlayer={deadPlayer}");
 
         if (deadPlayer != null)
         {
@@ -59,10 +62,15 @@ public class Trap : MonoBehaviour
             }
 
             PlayerAnimation playerAnim = deadPlayer.GetComponent<PlayerAnimation>();
+            Debug.Log($"[Trap] playerAnim={playerAnim}");
             if (playerAnim != null)
             {
-                playerAnim.TriggerDeath();
+                playerAnim.TriggerDeath(isElectric);
             }
+        }
+        else
+        {
+            Debug.LogWarning("[Trap] deadPlayer가 null - PlayerInput 컴포넌트를 찾지 못함");
         }
 
         yield return new WaitForSeconds(2f);

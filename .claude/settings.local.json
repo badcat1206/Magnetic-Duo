@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Read(//c/Users/HwangCU/.claude/**)"
+      "Read(//c/Users/HwangCU/.claude/**)",
+      "Bash(Get-ChildItem -Path \"c:\\\\github\\\\Magnetic-Duo\" -Recurse -Directory)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\github\\\\Magnetic-Duo\\\\Magnetic-Duo\\\\Assets\\\\Scenes\" -Recurse | Select-Object FullName, @{Name='Type'; Expression={if\\($_.PSIsContainer\\) {'Folder'} else {'File'}}} | Format-List)"
     ]
   }
 }

@@ -56,11 +56,17 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
     
-    public void TriggerDeath()
+    public void TriggerDeath(bool isElectric = false)
     {
         if(animator != null)
         {
-            animator.SetTrigger("Die");
+            string trigger = isElectric ? "DieElectric" : "Die";
+            Debug.Log($"[PlayerAnimation] TriggerDeath 호출 / isElectric={isElectric} / trigger={trigger}");
+            animator.SetTrigger(trigger);
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerAnimation] animator가 null");
         }
     }
 
