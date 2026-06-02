@@ -108,10 +108,11 @@ MonoBehaviour:
   spriteOn: {fileID: 21300000, guid: 56bb9cc1877583144835f659023ef390, type: 3}
   spriteOff: {fileID: 21300000, guid: 545f0b033f7d4cb4898453af71bc70f3, type: 3}
   polarity: 0
-  requiredForce: 0.1
+  requiredForce: 8
   connectedBelts:
   - {fileID: 0}
   connectedMagneticFields: []
+  connectedWalls: []
 --- !u!61 &3877727561630619598
 BoxCollider2D:
   m_ObjectHideFlags: 0

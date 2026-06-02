@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MagneticAbility : MonoBehaviour
@@ -12,6 +13,11 @@ public class MagneticAbility : MonoBehaviour
     private bool isActive = false;
     private Rigidbody2D rb;
 
+    // 자성 애니메이션이 생기기 전 임시로 쓸 시각효과
+    [Header("시각 효과")]
+    [Tooltip("머리 위에 띄울 자성 이모티콘 게임 오브젝트를 연결하세요.")]
+    [SerializeField] private GameObject magneticEmoticon;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,17 +29,20 @@ public class MagneticAbility : MonoBehaviour
     {
         isActive = !isActive;
         //Debug.Log(gameObject.name + " Magnetic Power: " + (isActive ? "ON" : "OFF"));
+        if (magneticEmoticon != null) magneticEmoticon.SetActive(isActive);
     }
 
     public void SetMagneticActive(bool active)
     {
         isActive = active;
+        if (magneticEmoticon != null) magneticEmoticon.SetActive(isActive);
     }
 
     public void DeactivateMagnetic()
     {
         isActive = false;
         //Debug.Log(gameObject.name + " Magnetic Power: Forced OFF");
+        if (magneticEmoticon != null) magneticEmoticon.SetActive(false);
     }
 
     void FixedUpdate()
@@ -52,18 +61,17 @@ public class MagneticAbility : MonoBehaviour
         {
             if (col.gameObject == gameObject) continue;
 
+            Vector2 direction = (Vector2)col.transform.position - (Vector2)transform.position;
+            float distance = direction.magnitude;
+            if (distance == 0) continue;
+
+            direction.Normalize();
+            float forceAmount = forceStrength / Mathf.Max(distance, 1.0f);
+
             MagneticObject target = col.GetComponent<MagneticObject>();
             if (target != null)
             {
-                Vector2 direction = (Vector2)target.transform.position - (Vector2)transform.position;
-                float distance = direction.magnitude;
-                if (distance == 0) continue;
-
-                direction.Normalize();
-
                 bool isSamePolarity = (botPolarity == target.polarity);
-                float forceAmount = forceStrength / Mathf.Max(distance, 1.0f);
-
                 Rigidbody2D targetRb = col.GetComponent<Rigidbody2D>();
 
                 if (isSamePolarity)
@@ -90,6 +98,14 @@ public class MagneticAbility : MonoBehaviour
                 }
             }
 
+            Lever tagetLever = col.GetComponent<Lever>();
+            if (tagetLever != null)
+            {
+                if (botPolarity == tagetLever.polarity)
+                {
+                    tagetLever.AddMagneticForce(forceAmount);
+                }
+            }
         }
     }
 

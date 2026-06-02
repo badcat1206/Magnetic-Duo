@@ -9,7 +9,7 @@ public class Lever : MonoBehaviour, IInteractable
 
     [Header("자력 상호작용 설정")]
     public Polarity polarity; // N, S 중 선택
-    [SerializeField] private float requiredForce = 0.1f;
+    [SerializeField] private float requiredForce = 3f;
 
     // 💡 쿨타임 대신, 이번 프레임에 자력을 받았는지 체크하는 변수들
     private bool isMagnetizedThisFrame = false;
