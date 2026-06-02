@@ -7,6 +7,9 @@ public class Trap : MonoBehaviour
 {
     [Header("트랩 설정")]
     [SerializeField] private bool isElectric = false;
+    [Tooltip("적힌 태그의 봇은 닿아도 죽지 않음")]
+    [SerializeField] private string safeBotTag = "";
+
     [Space]
     [Header("상자 리스폰 설정")]
     [Tooltip("체크하면 이 트랩에 닿은 상자가 리스폰됩니다.")]
@@ -15,6 +18,8 @@ public class Trap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(safeBotTag != "" && collision.CompareTag(safeBotTag)) return;
+
         if (collision.CompareTag("NBot") || collision.CompareTag("SBot"))
         {
             PlayerInput deadPlayer = collision.GetComponent<PlayerInput>();

@@ -18,6 +18,7 @@ public class Lever : MonoBehaviour, IInteractable
     [Header("연결할 장치")]
     [SerializeField] private ConveyorBelt[] connectedBelts;
     [SerializeField] private MagneticField[] connectedMagneticFields;
+    [SerializeField] private PolarityWall[] connectedWalls;
 
     private SpriteRenderer spriteRenderer;
     private bool isOn = false;
@@ -75,6 +76,14 @@ public class Lever : MonoBehaviour, IInteractable
             foreach (MagneticField field in connectedMagneticFields)
             {
                 if (field != null) field.ToggleField();
+            }
+        }
+
+        if(connectedWalls != null)
+        {
+            foreach(PolarityWall wall in connectedWalls)
+            {
+                if(wall != null) wall.ToggleWall();
             }
         }
     }
