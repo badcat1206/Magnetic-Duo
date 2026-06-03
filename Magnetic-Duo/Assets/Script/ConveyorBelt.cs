@@ -20,6 +20,11 @@ public class ConveyorBelt : MonoBehaviour
     [Header("필터링 설정")]
     [SerializeField] private LayerMask boxLayer;    // 상자 레이어 선택
 
+    [Header("오디오")]
+    [SerializeField] private AudioClip beltRightClip;
+    [SerializeField] private AudioClip beltLeftClip;
+    private AudioSource audioSource;
+
     private SurfaceEffector2D effector;
     private Collider2D beltCollider;
     private SpriteRenderer spriteRenderer;
@@ -29,6 +34,7 @@ public class ConveyorBelt : MonoBehaviour
         effector = GetComponent<SurfaceEffector2D>();
         beltCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -54,6 +60,14 @@ public class ConveyorBelt : MonoBehaviour
 
         // 변경된 상태를 실제 컴포넌트에 적용
         UpdateBeltSpeed();
+
+        if (isRunning && audioSource != null)
+        {
+            if (activeSpeed > 0 && beltRightClip != null)
+                audioSource.PlayOneShot(beltRightClip);
+            else if (activeSpeed < 0 && beltLeftClip != null)
+                audioSource.PlayOneShot(beltLeftClip);
+        }
 
         if (isRunning)
         {

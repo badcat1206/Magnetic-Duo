@@ -17,6 +17,10 @@ public class MovingPlatform : MonoBehaviour
     [Header("체인 설정")]
     [SerializeField] private Tilemap hideChainTilemap;
 
+    [Header("오디오")]
+    [SerializeField] private AudioClip chainMoveClip;
+    private AudioSource audioSource;
+
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private Transform chainMaskTransform;
@@ -24,6 +28,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         startPosition = transform.position;
         targetPosition = startPosition + targetOffset;
 
@@ -89,12 +94,19 @@ public class MovingPlatform : MonoBehaviour
 
         // 플랫폼이 이동 시작하는 순간(내려가거나 복귀할 때)에 흔들림 발생
         if (isPressed != wasPressed)
+        {
             CameraFollow.Instance?.Shake(shakeDuration, shakeMagnitude);
+            if (audioSource != null && chainMoveClip != null)
+                audioSource.PlayOneShot(chainMoveClip);
+        }
 
         wasPressed = isPressed;
 
         Vector3 destination = isPressed ? targetPosition : startPosition;
         transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
+
+        if (transform.position == destination && audioSource != null && audioSource.isPlaying)
+            audioSource.Stop();
     }
 
     private void LateUpdate()
