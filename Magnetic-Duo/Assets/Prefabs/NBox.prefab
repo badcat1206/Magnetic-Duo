@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2219352766959987201, guid: a989c2f240da0ad459896644be54b3a4, type: 3}
+  m_Sprite: {fileID: 4979136178642593777, guid: 614410813d2450849b1212991651c87e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -141,6 +141,8 @@ MonoBehaviour:
   polarity: 0
   linearDrag: 10
   angularDrag: 5
+  normalSprite: {fileID: 4979136178642593777, guid: 614410813d2450849b1212991651c87e, type: 3}
+  magnetizedSprite: {fileID: 2219352766959987201, guid: a989c2f240da0ad459896644be54b3a4, type: 3}
 --- !u!50 &2374737395421242967
 Rigidbody2D:
   serializedVersion: 5
@@ -202,7 +204,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.003024131, y: 0.0030240417}
+  m_Offset: {x: -0.0002964735, y: -0.00061288476}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -212,5 +214,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.45, y: 1.45}
+  m_Size: {x: 1.5136461, y: 1.5081906}
   m_EdgeRadius: 0

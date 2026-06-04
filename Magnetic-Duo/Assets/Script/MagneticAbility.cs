@@ -95,6 +95,10 @@ public class MagneticAbility : MonoBehaviour
                         }
                         // 플레이어에 가해지는 반작용 힘을 제거하여 끌려가지 않게 함
                     }
+                    else
+                    {
+                        target.AddMagneticForce(0f);
+                    }
                 }
             }
 

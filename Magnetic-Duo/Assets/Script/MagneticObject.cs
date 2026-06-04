@@ -10,13 +10,19 @@ public class MagneticObject : MonoBehaviour
     [SerializeField] private float linearDrag = 10f; // 값이 높을수록 빨리 멈춤
     [SerializeField] private float angularDrag = 5f;  // 회전 멈춤 속도
 
+    [Header("이미지 설정")]
+    [SerializeField] private Sprite normalSprite;
+    [SerializeField] private Sprite magnetizedSprite;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
     private bool isBeingMagnetized = false;
+    private bool wasMagnetizedLastFrame = false;
     private float accumulatedForceX = 0f;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         
         if (rb != null)
         {
@@ -58,6 +64,23 @@ public class MagneticObject : MonoBehaviour
             // rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             // rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
+
+        if(isBeingMagnetized && !wasMagnetizedLastFrame)
+        {
+            if(spriteRenderer != null && magnetizedSprite != null)
+            {
+                spriteRenderer.sprite = magnetizedSprite;
+            }
+        }
+        else if(!isBeingMagnetized && wasMagnetizedLastFrame)
+        {
+             if(spriteRenderer != null && magnetizedSprite != null)
+            {
+                spriteRenderer.sprite = normalSprite;
+            }
+        }
+        
+        wasMagnetizedLastFrame = isBeingMagnetized;
 
         // 초기화
         isBeingMagnetized = false;
