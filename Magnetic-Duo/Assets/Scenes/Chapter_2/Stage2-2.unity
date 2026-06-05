@@ -2189,6 +2189,10 @@ PrefabInstance:
       propertyPath: isRunning
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4053892747200361598, guid: ee5c5e26ee904dc409f41cf2ae5a526f, type: 3}
+      propertyPath: centerCount
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 4739505837721856239, guid: ee5c5e26ee904dc409f41cf2ae5a526f, type: 3}
       propertyPath: m_Name
       value: ConveyorBelt
@@ -2203,7 +2207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5616983706337344157, guid: ee5c5e26ee904dc409f41cf2ae5a526f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.9383
+      value: 7.23
       objectReference: {fileID: 0}
     - target: {fileID: 5616983706337344157, guid: ee5c5e26ee904dc409f41cf2ae5a526f, type: 3}
       propertyPath: m_LocalPosition.y
