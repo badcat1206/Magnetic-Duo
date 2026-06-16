@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConveyorBelt
   beltMode: 0
-  activeSpeed: 1
+  activeSpeed: 2
   isRunning: 0
   leftEdgePrefab: {fileID: 1624461810395023973, guid: be22de42c2d34c247945f80bbea397fe, type: 3}
   centerPrefab: {fileID: 8552359573415409783, guid: 778ba9741d8f1a54292ebd6c0e81388e, type: 3}

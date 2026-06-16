@@ -228,7 +228,9 @@ public class ConveyorBelt : MonoBehaviour
             var rb = col.GetComponent<Rigidbody2D>();
             if (rb == null) continue;
             rb.linearVelocity = Vector2.zero;
-            rb.AddForce(new Vector2(Mathf.Sign(-activeSpeed) * 3f, 0), ForceMode2D.Impulse);
+
+            float nudgeForce = activeSpeed * rb.mass;
+            rb.AddForce(new Vector2(Mathf.Sign(-activeSpeed) * nudgeForce, 0), ForceMode2D.Impulse);
         }
     }
 }
