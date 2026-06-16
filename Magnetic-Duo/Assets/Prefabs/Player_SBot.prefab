@@ -397,7 +397,6 @@ MonoBehaviour:
   range: 3
   forceStrength: 20
   stopDistance: 1.8
-  magneticEmoticon: {fileID: 3744349537428684447}
 --- !u!114 &8289418830826829061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,6 +413,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5446681420428120178}
   movement: {fileID: 7734131150661932789}
   playerInput: {fileID: 4508228185436638244}
+  magnetOverrideController: {fileID: 22100000, guid: 05ba4628deb9f5845a51807cb1c45da3, type: 2}
 --- !u!114 &7196472126775845294
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,6 +20,9 @@ public class Lever : MonoBehaviour, IInteractable
     [SerializeField] private MagneticField[] connectedMagneticFields;
     [SerializeField] private PolarityWall[] connectedWalls;
 
+    [Header("상태를 동기화할 다른 레버들")]
+    [SerializeField] private Lever[] linkedLevers;
+
     private SpriteRenderer spriteRenderer;
     private bool isOn = false;
 
@@ -58,10 +61,7 @@ public class Lever : MonoBehaviour, IInteractable
         Debug.Log("레버 당겨짐");
         isOn = !isOn;
 
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.sprite = isOn ? spriteOn : spriteOff;
-        }
+        UpdateVisual();
 
         if (connectedBelts != null)
         {
@@ -85,6 +85,29 @@ public class Lever : MonoBehaviour, IInteractable
             {
                 if(wall != null) wall.ToggleWall();
             }
+        }
+
+        if(linkedLevers != null)
+        {
+            foreach(Lever lever in linkedLevers)
+            {
+                if(lever != null) lever.SyncState(isOn);
+            }
+        }
+    }
+
+    public void SyncState(bool targetState)
+    {
+        if(isOn == targetState) return;
+        isOn = targetState;
+        UpdateVisual();
+    }
+
+    private void UpdateVisual()
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = isOn ? spriteOn : spriteOff;
         }
     }
 }

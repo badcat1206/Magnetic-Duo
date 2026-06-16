@@ -402,9 +402,17 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+      propertyPath: linkedLevers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: connectedBelts.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+      propertyPath: 'linkedLevers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1857254807}
     - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: 'connectedBelts.Array.data[0]'
       value: 
@@ -1232,9 +1240,17 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+      propertyPath: linkedLevers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: connectedBelts.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+      propertyPath: 'linkedLevers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1766713969}
     - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: 'connectedBelts.Array.data[0]'
       value: 
@@ -1437,9 +1453,17 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+      propertyPath: linkedLevers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: connectedBelts.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+      propertyPath: 'linkedLevers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 784303951}
     - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: 'connectedBelts.Array.data[0]'
       value: 
@@ -1688,6 +1712,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &784303951 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+  m_PrefabInstance: {fileID: 493867906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fec0635b4bf4bf4288f44d99fc379b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lever
 --- !u!1001 &834033657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2936,6 +2971,17 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 8514422975264931344, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
   m_PrefabInstance: {fileID: 2014790586}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1659486200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+  m_PrefabInstance: {fileID: 270595641}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fec0635b4bf4bf4288f44d99fc379b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lever
 --- !u!1001 &1677141789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3021,6 +3067,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee5c5e26ee904dc409f41cf2ae5a526f, type: 3}
+--- !u!114 &1766713969 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+  m_PrefabInstance: {fileID: 649394436}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fec0635b4bf4bf4288f44d99fc379b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lever
 --- !u!1001 &1774761898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3103,9 +3160,17 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+      propertyPath: linkedLevers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: connectedBelts.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+      propertyPath: 'linkedLevers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1659486200}
     - target: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
       propertyPath: 'connectedBelts.Array.data[0]'
       value: 
@@ -3287,6 +3352,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61c788e0ef481fb498d6934bc2f8df4f, type: 3}
+--- !u!114 &1857254807 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1216720418338277655, guid: 8e7f5edba7f9e134892c4cbbec4d1032, type: 3}
+  m_PrefabInstance: {fileID: 1797117838}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fec0635b4bf4bf4288f44d99fc379b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lever
 --- !u!114 &1858059115 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4053892747200361598, guid: ee5c5e26ee904dc409f41cf2ae5a526f, type: 3}
