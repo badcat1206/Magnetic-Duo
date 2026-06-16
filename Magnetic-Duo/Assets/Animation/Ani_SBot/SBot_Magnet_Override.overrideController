@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SBot_Magnet_Override
+  m_Controller: {fileID: 9100000, guid: df6426b1671ff474fa8e0b93dde3c6b1, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 83abecfb5999f40419fe8a0d86c01d8c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 13eb056a90abdf94a88c887789ea988b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 65eeac9ec22b88a458477105249fc0ca, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4778c7dfd909e2f44b20ec512b0de326, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9217624a89fd44342b54bd99b4794a71, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b0ffa444b4d66a3408f6c7a2597dcfde, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: bef24435241917146bcfa96bbe2061d8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 984be805a9b6a10498cc4fd6cc325aaa, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8d54883574b8dc44aaac0a4e64d2a5d8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d11a97775444f2b48b328c3ca515b3e1, type: 2}

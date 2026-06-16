@@ -12,37 +12,41 @@ public class MagneticAbility : MonoBehaviour
 
     private bool isActive = false;
     private Rigidbody2D rb;
-
-    // 자성 애니메이션이 생기기 전 임시로 쓸 시각효과
-    [Header("시각 효과")]
-    [Tooltip("머리 위에 띄울 자성 이모티콘 게임 오브젝트를 연결하세요.")]
-    [SerializeField] private GameObject magneticEmoticon;
+    private PlayerAnimation playerAnim;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerAnim = GetComponent<PlayerAnimation>();
+
+        if(playerAnim == null)
+        {
+            Debug.LogWarning($"[{gameObject.name}] PlayerAnimation 컴포넌트를 찾을 수 없어 자성 시각 효과가 재생되지 않습니다.");
+        }
     }
 
     public bool IsActive => isActive;
 
     public void ToggleMagnetic()
     {
-        isActive = !isActive;
+        SetMagneticActive(!isActive);
         //Debug.Log(gameObject.name + " Magnetic Power: " + (isActive ? "ON" : "OFF"));
-        if (magneticEmoticon != null) magneticEmoticon.SetActive(isActive);
     }
 
     public void SetMagneticActive(bool active)
     {
         isActive = active;
-        if (magneticEmoticon != null) magneticEmoticon.SetActive(isActive);
+
+        if(playerAnim != null)
+        {
+            playerAnim.SetMagneticMode(isActive);
+        }
     }
 
     public void DeactivateMagnetic()
     {
         isActive = false;
         //Debug.Log(gameObject.name + " Magnetic Power: Forced OFF");
-        if (magneticEmoticon != null) magneticEmoticon.SetActive(false);
     }
 
     void FixedUpdate()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
@@ -9,6 +10,9 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
 
     private Rigidbody2D rb;
+    [Header("자성 애니메이션 설정")]
+    [SerializeField] private AnimatorOverrideController magnetOverrideController;
+    private RuntimeAnimatorController baseController;
 
     void Awake()
     {
@@ -30,6 +34,11 @@ public class PlayerAnimation : MonoBehaviour
         }
 
         rb = GetComponent<Rigidbody2D>();
+
+        if(animator != null)
+        {
+            baseController = animator.runtimeAnimatorController;
+        }
     }
 
     void Update()
@@ -75,6 +84,14 @@ public class PlayerAnimation : MonoBehaviour
         if(animator != null)
         {
             animator.SetBool("OnGoal", isOnGoal);
+        }
+    }
+
+    public void SetMagneticMode(bool isActive)
+    {
+        if(animator != null && magnetOverrideController != null)
+        {
+            animator.runtimeAnimatorController = isActive ? magnetOverrideController : baseController;
         }
     }
 }

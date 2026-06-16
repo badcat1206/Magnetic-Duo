@@ -293,7 +293,6 @@ MonoBehaviour:
   range: 3
   forceStrength: 20
   stopDistance: 1.8
-  magneticEmoticon: {fileID: 3713506835637343071}
 --- !u!50 &7759094307264964976
 Rigidbody2D:
   serializedVersion: 5
@@ -383,6 +382,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8507603633561793956}
   movement: {fileID: 5363301895983402185}
   playerInput: {fileID: 3262703911974606442}
+  magnetOverrideController: {fileID: 22100000, guid: 9916e341a43a26e449e433fd68f6f544, type: 2}
 --- !u!114 &7658416833606412404
 MonoBehaviour:
   m_ObjectHideFlags: 0

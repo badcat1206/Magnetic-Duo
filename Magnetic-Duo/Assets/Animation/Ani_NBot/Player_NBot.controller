@@ -255,7 +255,7 @@ AnimatorStateMachine:
     m_Position: {x: -60, y: -580, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2375160794998639871}
-    m_Position: {x: 170, y: -190, z: 0}
+    m_Position: {x: 180, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4454204815721680578}
     m_Position: {x: 180, y: -580, z: 0}
@@ -268,8 +268,8 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -40, y: -380, z: 0}
-  m_EntryPosition: {x: 190, y: 80, z: 0}
-  m_ExitPosition: {x: 1010, y: 190, z: 0}
+  m_EntryPosition: {x: 170, y: -180, z: 0}
+  m_ExitPosition: {x: 1080, y: 30, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -8225890074435102057}
 --- !u!1101 &-2629561796163881847
@@ -452,7 +452,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
   - m_Name: VerticalVelocity
     m_Type: 1
@@ -464,7 +464,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
   - m_Name: OnGoal
     m_Type: 4

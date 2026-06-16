@@ -3741,6 +3741,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8289418830826829061, guid: deb8da651606e5d49bb0bfe06439a054, type: 3}
+      propertyPath: magnetOverrideController
+      value: 
+      objectReference: {fileID: 22100000, guid: 05ba4628deb9f5845a51807cb1c45da3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
