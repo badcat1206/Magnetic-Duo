@@ -78,7 +78,16 @@ public class Trap : MonoBehaviour
             Debug.LogWarning("[Trap] deadPlayer가 null - PlayerInput 컴포넌트를 찾지 못함");
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.0f);
+
+        if(ScreenFader.Instance != null)
+        {
+            yield return StartCoroutine(ScreenFader.Instance.FadeOut());
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+        }
 
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);

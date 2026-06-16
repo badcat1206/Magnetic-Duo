@@ -45,7 +45,7 @@ public class MagneticAbility : MonoBehaviour
 
     public void DeactivateMagnetic()
     {
-        isActive = false;
+        SetMagneticActive(false);
         //Debug.Log(gameObject.name + " Magnetic Power: Forced OFF");
     }
 
