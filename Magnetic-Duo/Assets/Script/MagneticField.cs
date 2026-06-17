@@ -15,6 +15,10 @@ public class MagneticField : MonoBehaviour
    [SerializeField] private AudioClip fieldOffClip;
    private AudioSource audioSource;
 
+   [Header("버튼으로 강제 비활성화 (누르는 동안 OFF)")]
+   [SerializeField] private PressureButton[] disableButtons;
+   private bool buttonForced = false;
+
    private Animator animator;
 
     void Awake()
@@ -27,14 +31,31 @@ public class MagneticField : MonoBehaviour
     }
     void Start()
     {
-        animator.SetBool("IsOn", isOn);
         UpdateFieldState();
+    }
+
+    private void Update()
+    {
+        bool anyPressed = false;
+        if (disableButtons != null)
+            foreach (var b in disableButtons)
+                if (b != null && b.IsPressed) { anyPressed = true; break; }
+
+        if (anyPressed == buttonForced) return;
+        buttonForced = anyPressed;
+        UpdateFieldState();
+
+        if (audioSource != null)
+        {
+            bool active = isOn && !buttonForced;
+            if (active && fieldOnClip != null) audioSource.PlayOneShot(fieldOnClip);
+            else if (!active && fieldOffClip != null) audioSource.PlayOneShot(fieldOffClip);
+        }
     }
 
     public void ToggleField()
     {
         isOn = !isOn;
-        animator.SetBool("IsOn", isOn);
         UpdateFieldState();
 
         if (audioSource != null)
@@ -48,7 +69,9 @@ public class MagneticField : MonoBehaviour
 
     void UpdateFieldState()
     {
-        if(electricEffect != null) electricEffect.SetActive(isOn);
-        if(electricCollider != null) electricCollider.enabled = isOn;
+        bool active = isOn && !buttonForced;
+        animator.SetBool("IsOn", active);
+        if(electricEffect != null) electricEffect.SetActive(active);
+        if(electricCollider != null) electricCollider.enabled = active;
     }
 }

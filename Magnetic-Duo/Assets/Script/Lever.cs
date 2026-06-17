@@ -19,6 +19,7 @@ public class Lever : MonoBehaviour, IInteractable
     [SerializeField] private ConveyorBelt[] connectedBelts;
     [SerializeField] private MagneticField[] connectedMagneticFields;
     [SerializeField] private PolarityWall[] connectedWalls;
+    [SerializeField] private MovingPlatform[] connectedPlatforms;
 
     [Header("상태를 동기화할 다른 레버들")]
     [SerializeField] private Lever[] linkedLevers;
@@ -92,6 +93,14 @@ public class Lever : MonoBehaviour, IInteractable
             foreach(Lever lever in linkedLevers)
             {
                 if(lever != null) lever.SyncState(isOn);
+            }
+        }
+
+        if (connectedPlatforms != null)
+        {
+            foreach (MovingPlatform platform in connectedPlatforms)
+            {
+                if (platform != null) platform.SetLeverActive(isOn);
             }
         }
     }

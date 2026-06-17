@@ -3,19 +3,26 @@ using UnityEngine.Tilemaps;
 
 public class MovingPlatform : MonoBehaviour
 {
-    [Header("연결된 버튼")]
-    [SerializeField] private PressureButton button;
+    [Header("연결된 버튼 (하나라도 눌리면 이동)")]
+    [SerializeField] private PressureButton[] buttons;
 
     [Header("이동 설정")]
     [SerializeField] private Vector3 targetOffset;
     [SerializeField] private float moveSpeed = 3f;
 
+    [Header("추가 하강 설정 (primaryActive 상태에서 추가 이동)")]
+    [SerializeField] private PressureButton[] extraButtons;
+    [SerializeField] private Vector3 extraOffset;
+
     [Header("화면 흔들림 설정")]
     [SerializeField] private float shakeDuration = 0.4f;
     [SerializeField] private float shakeMagnitude = 0.18f;
 
-    [Header("체인 설정")]
+    [Header("체인 설정 (타일맵 방식)")]
     [SerializeField] private Tilemap hideChainTilemap;
+
+    [Header("체인 설정 (스프라이트 방식 - 타일맵 대신 사용)")]
+    [SerializeField] private SpriteRenderer chainSpriteRenderer;
 
     [Header("오디오")]
     [SerializeField] private AudioClip chainMoveClip;
@@ -23,20 +30,73 @@ public class MovingPlatform : MonoBehaviour
 
     private Vector3 startPosition;
     private Vector3 targetPosition;
+    private Vector3 extraTargetPosition;
     private Transform chainMaskTransform;
-    private bool wasPressed = false;
+    private bool isLeverActive = false;
+    private Vector3 previousDestination;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         startPosition = transform.position;
         targetPosition = startPosition + targetOffset;
+        extraTargetPosition = targetPosition + extraOffset;
+        previousDestination = startPosition;
 
         if (hideChainTilemap != null)
         {
             hideChainTilemap.gameObject.SetActive(true);
             InitChain();
         }
+    }
+
+    public void SetLeverActive(bool active)
+    {
+        isLeverActive = active;
+    }
+
+    private bool IsPrimaryActive()
+    {
+        if (isLeverActive) return true;
+        if (buttons != null)
+            foreach (var b in buttons)
+                if (b != null && b.IsPressed) return true;
+        return false;
+    }
+
+    private bool IsExtraActive()
+    {
+        if (extraButtons == null) return false;
+        foreach (var b in extraButtons)
+            if (b != null && b.IsPressed) return true;
+        return false;
+    }
+
+    private void Update()
+    {
+        bool primaryActive = IsPrimaryActive();
+        bool extraActive = IsExtraActive();
+
+        Vector3 destination;
+        if (primaryActive && extraActive)
+            destination = extraTargetPosition;
+        else if (primaryActive)
+            destination = targetPosition;
+        else
+            destination = startPosition;
+
+        if (destination != previousDestination)
+        {
+            CameraFollow.Instance?.Shake(shakeDuration, shakeMagnitude);
+            if (audioSource != null && chainMoveClip != null)
+                audioSource.PlayOneShot(chainMoveClip);
+            previousDestination = destination;
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
+
+        if (transform.position == destination && audioSource != null && audioSource.isPlaying)
+            audioSource.Stop();
     }
 
     private void InitChain()
@@ -64,11 +124,9 @@ public class MovingPlatform : MonoBehaviour
         Vector3Int topCell = new Vector3Int(hideChainTilemap.cellBounds.xMin, maxTileY, 0);
         float chainTopY = hideChainTilemap.GetCellCenterWorld(topCell).y + cellH * 0.5f;
 
-        // TilemapRenderer: 마스크 안쪽만 렌더링
         hideChainTilemap.GetComponent<TilemapRenderer>().maskInteraction =
             SpriteMaskInteraction.VisibleInsideMask;
 
-        // SpriteMask 오브젝트 생성
         var maskObj = new GameObject("ChainMask");
         maskObj.transform.SetParent(hideChainTilemap.transform.parent);
         maskObj.transform.position = new Vector3(centerX, chainTopY, 0f);
@@ -78,46 +136,31 @@ public class MovingPlatform : MonoBehaviour
 
         var mask = maskObj.AddComponent<SpriteMask>();
 
-        // 1×1 흰색 텍스처로 직사각형 마스크 스프라이트 생성
         var tex = new Texture2D(1, 1);
         tex.SetPixel(0, 0, Color.white);
         tex.Apply();
-        // 피벗을 상단 중앙(0.5, 1)으로 → scale.y가 아래쪽으로 성장
         mask.sprite = Sprite.Create(tex, new Rect(0, 0, 1, 1), new Vector2(0.5f, 1f), 1f);
 
         chainMaskTransform = maskObj.transform;
     }
 
-    private void Update()
-    {
-        bool isPressed = button.IsPressed;
-
-        // 플랫폼이 이동 시작하는 순간(내려가거나 복귀할 때)에 흔들림 발생
-        if (isPressed != wasPressed)
-        {
-            CameraFollow.Instance?.Shake(shakeDuration, shakeMagnitude);
-            if (audioSource != null && chainMoveClip != null)
-                audioSource.PlayOneShot(chainMoveClip);
-        }
-
-        wasPressed = isPressed;
-
-        Vector3 destination = isPressed ? targetPosition : startPosition;
-        transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
-
-        if (transform.position == destination && audioSource != null && audioSource.isPlaying)
-            audioSource.Stop();
-    }
-
     private void LateUpdate()
     {
-        if (chainMaskTransform == null) return;
-
         float movedDistance = Mathf.Max(0f, startPosition.y - transform.position.y);
 
-        Vector3 scale = chainMaskTransform.localScale;
-        scale.y = movedDistance;
-        chainMaskTransform.localScale = scale;
+        if (chainMaskTransform != null)
+        {
+            Vector3 scale = chainMaskTransform.localScale;
+            scale.y = movedDistance;
+            chainMaskTransform.localScale = scale;
+        }
+
+        if (chainSpriteRenderer != null)
+        {
+            Vector2 size = chainSpriteRenderer.size;
+            size.y = movedDistance;
+            chainSpriteRenderer.size = size;
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -125,5 +168,12 @@ public class MovingPlatform : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position + targetOffset, transform.localScale);
         Gizmos.DrawLine(transform.position, transform.position + targetOffset);
+
+        if (extraOffset != Vector3.zero)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireCube(transform.position + targetOffset + extraOffset, transform.localScale);
+            Gizmos.DrawLine(transform.position + targetOffset, transform.position + targetOffset + extraOffset);
+        }
     }
 }
