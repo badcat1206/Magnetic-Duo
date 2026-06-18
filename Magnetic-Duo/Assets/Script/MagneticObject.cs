@@ -47,15 +47,29 @@ public class MagneticObject : MonoBehaviour
 
         if (isBeingMagnetized)
         {
-            // X축 잠금을 풀지만, 속도는 자기력으로만 결정함
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            
-            // 자기력(accumulatedForceX)을 바탕으로 목표 X 속도 계산
-            // 이 방식은 플레이어가 부딪혀서 생기는 속도 변화를 매 프레임 덮어써서 무시합니다.
-            float targetVelocityX = accumulatedForceX * 0.5f; 
-            
-            // X축은 자기력으로 제어하고, Y축은 기존 물리(중력 등)를 그대로 유지
-            rb.linearVelocity = new Vector2(targetVelocityX, rb.linearVelocity.y);
+
+            float targetVelocityX = accumulatedForceX * 0.5f;
+            float newVelY = rb.linearVelocity.y;
+
+            // 경사면 감지: 접촉 법선에 X성분이 있으면 경사면
+            ContactPoint2D[] contacts = new ContactPoint2D[4];
+            int contactCount = rb.GetContacts(contacts);
+            for (int i = 0; i < contactCount; i++)
+            {
+                Vector2 n = contacts[i].normal;
+                if (n.y > 0.3f && Mathf.Abs(n.x) > 0.1f)
+                {
+                    // 오르막 방향일 때 경사각에 맞는 Y속도 계산
+                    // slopeVelY = targetVelocityX * tan(경사각) = targetVelocityX * (|n.x| / n.y)
+                    float slopeVelY = -targetVelocityX * (n.x / n.y);
+                    if (slopeVelY > 0f)
+                        newVelY = Mathf.Max(newVelY, slopeVelY);
+                    break;
+                }
+            }
+
+            rb.linearVelocity = new Vector2(targetVelocityX, newVelY);
         }
         else
         {

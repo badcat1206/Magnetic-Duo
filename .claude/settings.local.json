@@ -5,7 +5,13 @@
       "Bash(Get-ChildItem -Path \"c:\\\\github\\\\Magnetic-Duo\" -Recurse -Directory)",
       "Bash(Select-Object -ExpandProperty FullName)",
       "Bash(Sort-Object)",
-      "PowerShell(Get-ChildItem -Path \"c:\\\\github\\\\Magnetic-Duo\\\\Magnetic-Duo\\\\Assets\\\\Scenes\" -Recurse | Select-Object FullName, @{Name='Type'; Expression={if\\($_.PSIsContainer\\) {'Folder'} else {'File'}}} | Format-List)"
+      "PowerShell(Get-ChildItem -Path \"c:\\\\github\\\\Magnetic-Duo\\\\Magnetic-Duo\\\\Assets\\\\Scenes\" -Recurse | Select-Object FullName, @{Name='Type'; Expression={if\\($_.PSIsContainer\\) {'Folder'} else {'File'}}} | Format-List)",
+      "Bash(git checkout *)",
+      "Bash(git add *)",
+      "Bash(git show *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(cd \"c:\\\\github\\\\Magnetic-Duo\" && git show MERGE_HEAD:\"Magnetic-Duo/Assets/Scenes/Chapter_1/Stage1-3.unity\" > /tmp/stage1-3_theirs.unity 2>/dev/null; echo \"exit: $?\" && diff /tmp/stage1-3_ours.unity /tmp/stage1-3_theirs.unity | grep \"^[<>]\" | grep -v \"m_\\\\|fileID\\\\|guid\\\\|type:\\\\|serialized\" | head -60)",
+      "Read(//tmp/**)"
     ]
   }
 }

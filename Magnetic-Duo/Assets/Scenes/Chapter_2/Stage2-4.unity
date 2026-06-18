@@ -1607,6 +1607,22 @@ PrefabInstance:
       propertyPath: isElectric
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: nBoxSpawnPoint.x
+      value: 23.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: nBoxSpawnPoint.y
+      value: 4.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: sBoxSpawnPoint.x
+      value: 23.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: sBoxSpawnPoint.y
+      value: -6.19
+      objectReference: {fileID: 0}
     - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: fieldOnClip
       value: 
@@ -1615,6 +1631,22 @@ PrefabInstance:
       propertyPath: fieldOffClip
       value: 
       objectReference: {fileID: 8300000, guid: 2e5847f6ba79c5e4f92df66f30165388, type: 3}
+    - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: nBoxSpawnPoint.x
+      value: 23.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: nBoxSpawnPoint.y
+      value: 4.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: sBoxSpawnPoint.x
+      value: 23.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: sBoxSpawnPoint.y
+      value: -6.19
+      objectReference: {fileID: 0}
     - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: disableButtons.Array.size
       value: 2
@@ -1809,6 +1841,22 @@ PrefabInstance:
       propertyPath: isElectric
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: nBoxSpawnPoint.x
+      value: 23.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: nBoxSpawnPoint.y
+      value: 4.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: sBoxSpawnPoint.x
+      value: 23.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: sBoxSpawnPoint.y
+      value: -6.19
+      objectReference: {fileID: 0}
     - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: fieldOnClip
       value: 
@@ -1817,6 +1865,22 @@ PrefabInstance:
       propertyPath: fieldOffClip
       value: 
       objectReference: {fileID: 8300000, guid: 2e5847f6ba79c5e4f92df66f30165388, type: 3}
+    - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: nBoxSpawnPoint.x
+      value: 23.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: nBoxSpawnPoint.y
+      value: 4.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: sBoxSpawnPoint.x
+      value: 23.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: sBoxSpawnPoint.y
+      value: -6.19
+      objectReference: {fileID: 0}
     - target: {fileID: 4309153681573422350, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: disableButtons.Array.size
       value: 2
@@ -2082,6 +2146,22 @@ PrefabInstance:
     - target: {fileID: 7338038950170026620, guid: c7c27e3a8baf4f64598089789314d26e, type: 3}
       propertyPath: canDestroyBox
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338038950170026620, guid: c7c27e3a8baf4f64598089789314d26e, type: 3}
+      propertyPath: nBoxSpawnPoint.x
+      value: 23.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338038950170026620, guid: c7c27e3a8baf4f64598089789314d26e, type: 3}
+      propertyPath: nBoxSpawnPoint.y
+      value: 4.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338038950170026620, guid: c7c27e3a8baf4f64598089789314d26e, type: 3}
+      propertyPath: sBoxSpawnPoint.x
+      value: 23.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338038950170026620, guid: c7c27e3a8baf4f64598089789314d26e, type: 3}
+      propertyPath: sBoxSpawnPoint.y
+      value: -6.19
       objectReference: {fileID: 0}
     - target: {fileID: 8213221426129926033, guid: c7c27e3a8baf4f64598089789314d26e, type: 3}
       propertyPath: m_LocalPosition.x

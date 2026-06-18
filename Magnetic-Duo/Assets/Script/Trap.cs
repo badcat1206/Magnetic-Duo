@@ -14,7 +14,8 @@ public class Trap : MonoBehaviour
     [Header("상자 리스폰 설정")]
     [Tooltip("체크하면 이 트랩에 닿은 상자가 리스폰됩니다.")]
     [SerializeField] private bool canDestroyBox = true;
-    [SerializeField] private Vector2 boxSpawnPoint;
+    [SerializeField] private Vector2 nBoxSpawnPoint;
+    [SerializeField] private Vector2 sBoxSpawnPoint;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,18 +26,21 @@ public class Trap : MonoBehaviour
             PlayerInput deadPlayer = collision.GetComponent<PlayerInput>();
             StartCoroutine(DieSequence(deadPlayer));
         }
-        else if (canDestroyBox &&
-            (collision.CompareTag("NBox") || collision.CompareTag("SBox")))
+        else if (canDestroyBox && collision.CompareTag("NBox"))
         {
-            RespawnBox(collision.gameObject);
+            RespawnBox(collision.gameObject, nBoxSpawnPoint);
+        }
+        else if (canDestroyBox && collision.CompareTag("SBox"))
+        {
+            RespawnBox(collision.gameObject, sBoxSpawnPoint);
         }
     }
 
-    private void RespawnBox(GameObject box)
+    private void RespawnBox(GameObject box, Vector2 spawnPoint)
     {
-        if (boxSpawnPoint != null)
+        if (spawnPoint != Vector2.zero)
         {
-            box.transform.position = boxSpawnPoint;
+            box.transform.position = spawnPoint;
 
             Rigidbody2D boxRb = box.GetComponent<Rigidbody2D>();
             if (boxRb != null)
@@ -47,7 +51,7 @@ public class Trap : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("상자 리스폰 위치가 할당되지 않음.");
+            Debug.LogWarning($"[Trap] '{gameObject.name}'의 {box.name} 리스폰 위치가 (0,0)입니다. Inspector에서 좌표를 설정하세요.", gameObject);
         }
     }
 
