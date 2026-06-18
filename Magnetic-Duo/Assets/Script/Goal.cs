@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Goal : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Goal : MonoBehaviour
 
     public bool IsReached { get; private set; }
 
+    private Coroutine reachCoroutine;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -20,8 +23,6 @@ public class Goal : MonoBehaviour
     {
         if (collision.CompareTag(targetTag))
         {
-            IsReached = true;
-
             if (audioSource != null && enterClip != null)
                 audioSource.PlayOneShot(enterClip);
 
@@ -30,12 +31,21 @@ public class Goal : MonoBehaviour
             {
                 playerAnim.SetOnGoal(true);
             }
+
+            if(reachCoroutine != null) StopCoroutine(reachCoroutine);
+            reachCoroutine = StartCoroutine(WaitAndSetReached());
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag(targetTag))
         {
+            if (reachCoroutine != null)
+            {
+                StopCoroutine(reachCoroutine);
+                reachCoroutine = null;
+            }
+
             IsReached = false;
 
             PlayerAnimation playerAnim = collision.GetComponent<PlayerAnimation>();
@@ -44,6 +54,11 @@ public class Goal : MonoBehaviour
                 playerAnim.SetOnGoal(false);
             }
         }
-        
+    }
+
+    private IEnumerator WaitAndSetReached()
+    {
+        yield return new WaitForSeconds(0.5f); // 시간은 입맛에 맞게 조절하세요 (예: 0.3f, 1.0f)
+        IsReached = true;
     }
 }

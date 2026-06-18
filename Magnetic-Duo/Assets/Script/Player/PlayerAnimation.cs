@@ -1,4 +1,5 @@
 using System;
+using NUnit.Framework;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
@@ -13,6 +14,8 @@ public class PlayerAnimation : MonoBehaviour
     [Header("자성 애니메이션 설정")]
     [SerializeField] private AnimatorOverrideController magnetOverrideController;
     private RuntimeAnimatorController baseController;
+
+    private bool isCutscene = false;
 
     void Awake()
     {
@@ -40,6 +43,11 @@ public class PlayerAnimation : MonoBehaviour
             baseController = animator.runtimeAnimatorController;
         }
     }
+    
+    public void SetCutsceneMode(bool state)
+    {
+        isCutscene = state;
+    }
 
     void Update()
     {
@@ -60,7 +68,7 @@ public class PlayerAnimation : MonoBehaviour
 
             if(playerInput != null)
             {
-                animator.SetBool("IsActive", playerInput.enabled);
+                animator.SetBool("IsActive", isCutscene ||playerInput.enabled);
             }
         }
     }
@@ -92,6 +100,14 @@ public class PlayerAnimation : MonoBehaviour
         if(animator != null && magnetOverrideController != null)
         {
             animator.runtimeAnimatorController = isActive ? magnetOverrideController : baseController;
+        }
+    }
+
+    public void SetClearFace(bool isCleared)
+    {
+        if(animator != null)
+        {
+            animator.SetBool("IsCleared", isCleared);
         }
     }
 }
