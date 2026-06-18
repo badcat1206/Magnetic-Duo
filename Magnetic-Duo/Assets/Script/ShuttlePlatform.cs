@@ -7,13 +7,20 @@ using UnityEngine;
 public class ShuttlePlatform : MonoBehaviour
 {
     [Header("발판 설정")]
-    [SerializeField] private float speed = 3f;           // 이동 속도
+    [SerializeField] private float speed = 3f;
     [SerializeField] private float waitTime = 1f;
+
     [Header("위치 지정")]
     [SerializeField] private Vector2 startPoint;
     [SerializeField] private Vector2 endPoint;
+
+    [Header("비주얼 오브젝트 (자성 OFF/ON 이미지)")]
+    [SerializeField] private SpriteRenderer visualOff;
+    [SerializeField] private SpriteRenderer visualOn;
+
     private Vector2 targetPoint;
     private bool isWaiting = false;
+    private bool wasMagneticActive = false;
 
     private MagneticAbility riderAbility;
 
@@ -21,13 +28,22 @@ public class ShuttlePlatform : MonoBehaviour
     {
         transform.position = startPoint;
         targetPoint = endPoint;
+        UpdateVisual(false);
     }
 
     void Update()
     {
+        bool isActive = riderAbility != null && riderAbility.IsActive;
+
+        if (isActive != wasMagneticActive)
+        {
+            wasMagneticActive = isActive;
+            UpdateVisual(isActive);
+        }
+
         if(isWaiting) return;
-        
-        if(riderAbility == null || !riderAbility.IsActive) return;
+
+        if(!isActive) return;
         transform.position = Vector2.MoveTowards(transform.position, targetPoint, speed * Time.deltaTime);
 
         if(Vector2.Distance(transform.position, targetPoint) < 0.1f)
@@ -52,6 +68,12 @@ public class ShuttlePlatform : MonoBehaviour
         }
 
         isWaiting = false;
+    }
+
+    private void UpdateVisual(bool isActive)
+    {
+        if (visualOff != null) visualOff.enabled = !isActive;
+        if (visualOn != null) visualOn.enabled = isActive;
     }
 
     // 플레이어가 발판에 올라오면 자식으로 설정 → 발판과 함께 이동
