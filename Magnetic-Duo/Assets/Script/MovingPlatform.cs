@@ -38,6 +38,9 @@ public class MovingPlatform : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && AudioManager.Instance != null)
+            audioSource.outputAudioMixerGroup = AudioManager.Instance.SfxGroup;
+
         startPosition = transform.position;
         targetPosition = startPosition + targetOffset;
         extraTargetPosition = targetPosition + extraOffset;

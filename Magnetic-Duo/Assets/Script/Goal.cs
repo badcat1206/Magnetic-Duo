@@ -19,6 +19,12 @@ public class Goal : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    private void Start()
+    {
+        if (audioSource != null && AudioManager.Instance != null)
+            audioSource.outputAudioMixerGroup = AudioManager.Instance.SfxGroup;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag(targetTag))

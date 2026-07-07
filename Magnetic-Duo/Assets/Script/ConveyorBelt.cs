@@ -51,6 +51,9 @@ public class ConveyorBelt : MonoBehaviour
 
     void Start()
     {
+        if (audioSource != null && AudioManager.Instance != null)
+            audioSource.outputAudioMixerGroup = AudioManager.Instance.SfxGroup;
+
         if (!LoadFramesFromPrefabs()) return;
         BuildBeltVisuals();
         ApplyBeltState();

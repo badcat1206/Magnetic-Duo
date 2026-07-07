@@ -35,6 +35,9 @@ public class MagneticField : MonoBehaviour
     }
     void Start()
     {
+        if (audioSource != null && AudioManager.Instance != null)
+            audioSource.outputAudioMixerGroup = AudioManager.Instance.SfxGroup;
+
         UpdateFieldState();
     }
 
