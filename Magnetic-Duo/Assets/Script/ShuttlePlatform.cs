@@ -10,6 +10,10 @@ public class ShuttlePlatform : MonoBehaviour
     [SerializeField] private float speed = 3f;
     [SerializeField] private float waitTime = 1f;
 
+    [Header("자성 설정")]
+    [Tooltip("이 극성의 자력만 발판을 작동시킵니다.")]
+    [SerializeField] private Polarity platformPolarity;
+
     [Header("위치 지정")]
     [SerializeField] private Vector2 startPoint;
     [SerializeField] private Vector2 endPoint;
@@ -86,7 +90,7 @@ public class ShuttlePlatform : MonoBehaviour
         }
 
         MagneticAbility magneticAbility = collision.gameObject.GetComponent<MagneticAbility>();
-        if(magneticAbility != null)
+        if(magneticAbility != null && magneticAbility.BotPolarity == platformPolarity)
         {
             riderAbility = magneticAbility;
         }
@@ -95,6 +99,10 @@ public class ShuttlePlatform : MonoBehaviour
     // 플레이어가 발판에서 내려가면 부모 해제
     private void OnCollisionExit2D(Collision2D collision)
     {
+        // 씬 전환/리셋으로 이 발판 자체가 비활성화되는 중이면 재부모설정을 시도하지 않음
+        // (Unity가 "부모가 활성/비활성 처리 중일 때는 SetParent 불가" 에러를 던짐)
+        if (!gameObject.activeInHierarchy) return;
+
         if(collision.gameObject.CompareTag("NBot") || collision.gameObject.CompareTag("SBot") ||
         collision.gameObject.CompareTag("NBox") || collision.gameObject.CompareTag("SBox"))
         {

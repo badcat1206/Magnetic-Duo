@@ -25,6 +25,7 @@ public class MagneticAbility : MonoBehaviour
     }
 
     public bool IsActive => isActive;
+    public Polarity BotPolarity => botPolarity;
 
     public void ToggleMagnetic()
     {
