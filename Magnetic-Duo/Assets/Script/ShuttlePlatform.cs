@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 // 웨이포인트 배열을 순환하며 이동하는 발판
 // 발판 위에 플레이어(NBot/SBot)가 올라오면 자식으로 설정해 함께 이동시킴
@@ -15,13 +17,26 @@ public class ShuttlePlatform : MonoBehaviour
     [SerializeField] private Polarity platformPolarity;
 
     [Header("위치 지정")]
-    [SerializeField] private Vector2 startPoint;
-    [SerializeField] private Vector2 endPoint;
+    [FormerlySerializedAs("startPoint")]
+    [SerializeField] private Vector2 middlePoint;
+
+    [Header("첫 번째 움직임")]
+    [SerializeField] private bool useFirstPoint = true;
+    [FormerlySerializedAs("downPoint")]
+    [SerializeField] private Vector2 firstPoint;
+
+    [Header("두 번째 움직임")]
+    [SerializeField] private bool useSecondPoint = true;
+    [FormerlySerializedAs("endPoint")]
+    [FormerlySerializedAs("upPoint")]
+    [SerializeField] private Vector2 secondPoint;
 
     [Header("비주얼 오브젝트 (자성 OFF/ON 이미지)")]
     [SerializeField] private SpriteRenderer visualOff;
     [SerializeField] private SpriteRenderer visualOn;
 
+    private Vector2[] waypoints;
+    private int targetIndex;
     private Vector2 targetPoint;
     private bool isWaiting = false;
     private bool wasMagneticActive = false;
@@ -30,8 +45,16 @@ public class ShuttlePlatform : MonoBehaviour
 
     void Start()
     {
-        transform.position = startPoint;
-        targetPoint = endPoint;
+        List<Vector2> points = new List<Vector2> { middlePoint };
+
+        if (useFirstPoint) points.Add(firstPoint);
+        if (useSecondPoint) points.Add(secondPoint);
+
+        waypoints = points.ToArray();
+
+        transform.position = middlePoint;
+        targetIndex = waypoints.Length > 1 ? 1 : 0;
+        targetPoint = waypoints[targetIndex];
         UpdateVisual(false);
     }
 
@@ -62,14 +85,8 @@ public class ShuttlePlatform : MonoBehaviour
 
         yield return new WaitForSeconds(waitTime);
 
-       if(targetPoint == endPoint)
-        {
-            targetPoint = startPoint;
-        }
-        else
-        {
-            targetPoint = endPoint;
-        }
+        targetIndex = (targetIndex + 1) % waypoints.Length;
+        targetPoint = waypoints[targetIndex];
 
         isWaiting = false;
     }
