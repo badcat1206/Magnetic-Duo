@@ -10,7 +10,11 @@ public class PolarityWall : MonoBehaviour
 
     [Header("버튼으로 강제 비활성화 (누르는 동안 OFF)")]
     [SerializeField] private PressureButton[] disableButtons;
-    private bool buttonForced = false;
+
+    [Header("레버로 강제 비활성화 (레버가 켜져있는 동안 OFF)")]
+    [SerializeField] private Lever[] disableLevers;
+
+    private bool forced = false;
 
     private Collider2D wallCollider;
     private SpriteRenderer spriteRenderer;
@@ -32,13 +36,18 @@ public class PolarityWall : MonoBehaviour
 
     private void Update()
     {
-        bool anyPressed = false;
+        bool anyForced = false;
+
         if (disableButtons != null)
             foreach (var b in disableButtons)
-                if (b != null && b.IsPressed) { anyPressed = true; break; }
+                if (b != null && b.IsPressed) { anyForced = true; break; }
 
-        if (anyPressed == buttonForced) return;
-        buttonForced = anyPressed;
+        if (!anyForced && disableLevers != null)
+            foreach (var l in disableLevers)
+                if (l != null && l.IsOn) { anyForced = true; break; }
+
+        if (anyForced == forced) return;
+        forced = anyForced;
         UpdateWallState();
     }
 
@@ -50,7 +59,7 @@ public class PolarityWall : MonoBehaviour
 
     private void UpdateWallState()
     {
-        bool active = isOn && !buttonForced;
+        bool active = isOn && !forced;
 
         if(wallCollider != null) wallCollider.enabled = active;
 

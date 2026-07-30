@@ -195,8 +195,8 @@ GameObject:
   - component: {fileID: 209100248528275055}
   - component: {fileID: 854197824074939778}
   - component: {fileID: 3521142037766121722}
-  - component: {fileID: 3262700631713064339}
-  - component: {fileID: 7486776177200333958}
+  - component: {fileID: 8952292542209501387}
+  - component: {fileID: 6239096001219134725}
   m_Layer: 0
   m_Name: razerLineblue_0
   m_TagString: Untagged
@@ -324,7 +324,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.04, y: 1.28}
   m_EdgeRadius: 0
---- !u!114 &3262700631713064339
+--- !u!114 &8952292542209501387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,7 +341,7 @@ MonoBehaviour:
   canDestroyBox: 1
   nBoxSpawnPoint: {x: 0, y: 0}
   sBoxSpawnPoint: {x: 0, y: 0}
---- !u!114 &7486776177200333958
+--- !u!114 &6239096001219134725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -356,3 +356,4 @@ MonoBehaviour:
   isOn: 1
   hideCompletelyWhenOff: 1
   disableButtons: []
+  disableLevers: []

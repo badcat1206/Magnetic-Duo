@@ -26,6 +26,7 @@ public class Lever : MonoBehaviour, IInteractable
 
     private SpriteRenderer spriteRenderer;
     private bool isOn = false;
+    public bool IsOn => isOn;
 
     void Awake()
     {
