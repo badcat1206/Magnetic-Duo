@@ -103,6 +103,9 @@ public class StageManager : MonoBehaviour
 
         if (ScreenFader.Instance != null)
         {
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.FadeOutBgm(ScreenFader.Instance.FadeDuration);
+
             yield return StartCoroutine(ScreenFader.Instance.FadeOut());
         }
 

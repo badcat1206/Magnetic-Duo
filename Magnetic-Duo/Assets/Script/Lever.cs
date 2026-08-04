@@ -9,11 +9,6 @@ public class Lever : MonoBehaviour, IInteractable
 
     [Header("자력 상호작용 설정")]
     public Polarity polarity; // N, S 중 선택
-    [SerializeField] private float requiredForce = 3f;
-
-    // 💡 쿨타임 대신, 이번 프레임에 자력을 받았는지 체크하는 변수들
-    private bool isMagnetizedThisFrame = false;
-    private bool wasMagnetizedLastFrame = false;
 
     [Header("연결할 장치")]
     [SerializeField] private ConveyorBelt[] connectedBelts;
@@ -31,29 +26,6 @@ public class Lever : MonoBehaviour, IInteractable
     void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-    }
-
-    // 외부(캐릭터)에서 매 프레임 힘을 전달할 때 호출됨
-    public void AddMagneticForce(float forceX)
-    {
-        if (Mathf.Abs(forceX) >= requiredForce)
-        {
-            isMagnetizedThisFrame = true; // 자력을 받고 있다고 표시
-        }
-    }
-
-    // 물리 엔진 주기에 맞춰 상태 검사
-    void FixedUpdate()
-    {
-        // 💡 핵심 로직: 이전 프레임에는 자력이 없었는데, 이번 프레임에 새로 들어왔을 때만 '딱 한 번' 작동!
-        if (isMagnetizedThisFrame && !wasMagnetizedLastFrame)
-        {
-            ActivateLever();
-        }
-
-        // 다음 프레임을 위해 상태 업데이트 및 초기화
-        wasMagnetizedLastFrame = isMagnetizedThisFrame;
-        isMagnetizedThisFrame = false;
     }
 
     public void Interact() => ActivateLever();

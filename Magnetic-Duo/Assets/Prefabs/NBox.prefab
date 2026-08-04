@@ -141,6 +141,12 @@ MonoBehaviour:
   polarity: 0
   linearDrag: 10
   angularDrag: 5
+  maxStepHeight: 0.15
+  stepCheckDistance: 0.1
+  stepClimbSpeed: 4
+  stepLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   normalSprite: {fileID: 4979136178642593777, guid: 614410813d2450849b1212991651c87e, type: 3}
   magnetizedSprite: {fileID: 2219352766959987201, guid: a989c2f240da0ad459896644be54b3a4, type: 3}
 --- !u!50 &2374737395421242967
@@ -204,7 +210,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0002964735, y: -0.00061288476}
+  m_Offset: {x: -0.0002964735, y: 0.02}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -214,5 +220,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5136461, y: 1.5081906}
+  m_Size: {x: 1.5136461, y: 1.49}
   m_EdgeRadius: 0

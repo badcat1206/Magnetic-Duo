@@ -14,6 +14,8 @@ public class ScreenFader : MonoBehaviour
    [Header("암전 설정")]
    [SerializeField] private float fadeDuration = 1f;    // 암전에 걸리는 시간
 
+   public float FadeDuration => fadeDuration;
+
     void Awake()
     {
         if(Instance == null) Instance = this;

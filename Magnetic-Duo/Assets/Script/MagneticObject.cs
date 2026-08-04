@@ -10,10 +10,17 @@ public class MagneticObject : MonoBehaviour
     [SerializeField] private float linearDrag = 10f; // 값이 높을수록 빨리 멈춤
     [SerializeField] private float angularDrag = 5f;  // 회전 멈춤 속도
 
+    [Header("작은 단차 자동 통과 설정")]
+    [SerializeField] private float maxStepHeight = 0.15f;
+    [SerializeField] private float stepCheckDistance = 0.1f;
+    [SerializeField] private float stepClimbSpeed = 4f;
+    [SerializeField] private LayerMask stepLayerMask;
+
     [Header("이미지 설정")]
     [SerializeField] private Sprite normalSprite;
     [SerializeField] private Sprite magnetizedSprite;
     private Rigidbody2D rb;
+    private Collider2D boxCollider;
     private SpriteRenderer spriteRenderer;
     private bool isBeingMagnetized = false;
     private bool wasMagnetizedLastFrame = false;
@@ -22,6 +29,7 @@ public class MagneticObject : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         
         if (rb != null)
@@ -69,6 +77,10 @@ public class MagneticObject : MonoBehaviour
                 }
             }
 
+            // 작은 단차 자동 통과: 낮은 위치는 막혀있고 그 위(단차 높이)는 뚫려있으면 밀어 올림
+            if (TryDetectStep(targetVelocityX, out float stepVelY))
+                newVelY = Mathf.Max(newVelY, stepVelY);
+
             rb.linearVelocity = new Vector2(targetVelocityX, newVelY);
         }
         else
@@ -99,5 +111,29 @@ public class MagneticObject : MonoBehaviour
         // 초기화
         isBeingMagnetized = false;
         accumulatedForceX = 0f;
+    }
+
+    // 이동 방향 앞쪽의 낮은 위치는 막혀있고, 단차 높이 지점은 뚫려있으면 넘어갈 수 있는 작은 턱으로 판단
+    private bool TryDetectStep(float targetVelocityX, out float stepVelY)
+    {
+        stepVelY = 0f;
+        if (Mathf.Abs(targetVelocityX) < 0.01f || boxCollider == null) return false;
+
+        Vector2 dir = new Vector2(Mathf.Sign(targetVelocityX), 0f);
+        Bounds bounds = boxCollider.bounds;
+        float castDistance = bounds.extents.x + stepCheckDistance;
+
+        Vector2 lowOrigin = new Vector2(bounds.center.x, bounds.min.y + 0.05f);
+        Vector2 highOrigin = new Vector2(bounds.center.x, bounds.min.y + maxStepHeight);
+
+        bool blockedLow = Physics2D.Raycast(lowOrigin, dir, castDistance, stepLayerMask);
+        bool blockedHigh = Physics2D.Raycast(highOrigin, dir, castDistance, stepLayerMask);
+
+        if (blockedLow && !blockedHigh)
+        {
+            stepVelY = stepClimbSpeed;
+            return true;
+        }
+        return false;
     }
 }

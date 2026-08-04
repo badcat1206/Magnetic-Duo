@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioMixer mixer;
     [SerializeField] private AudioMixerGroup sfxGroup;
+    [SerializeField] private AudioMixerGroup bgmGroup;
 
     public AudioMixerGroup SfxGroup => sfxGroup;
 
@@ -15,6 +17,9 @@ public class AudioManager : MonoBehaviour
     private const string SfxKey = "SFXVolume";
     private const string BgmKey = "BGMVolume";
     private const float MinDb = -80f;
+
+    private AudioSource bgmSource;
+    private Coroutine bgmFadeCoroutine;
 
     private void Awake()
     {
@@ -26,8 +31,46 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        bgmSource = gameObject.AddComponent<AudioSource>();
+        bgmSource.outputAudioMixerGroup = bgmGroup;
+        bgmSource.loop = true;
+        bgmSource.playOnAwake = false;
+
         SetSfxVolume(GetSfxVolume());
         SetBgmVolume(GetBgmVolume());
+    }
+
+    public void PlayBgm(AudioClip clip, float fadeInDuration = 0f)
+    {
+        if (clip == null || bgmSource.clip == clip) return;
+
+        if (bgmFadeCoroutine != null) StopCoroutine(bgmFadeCoroutine);
+
+        bgmSource.clip = clip;
+        bgmSource.volume = fadeInDuration > 0f ? 0f : 1f;
+        bgmSource.Play();
+
+        if (fadeInDuration > 0f)
+            bgmFadeCoroutine = StartCoroutine(FadeBgmVolume(1f, fadeInDuration));
+    }
+
+    public void FadeOutBgm(float duration)
+    {
+        if (bgmFadeCoroutine != null) StopCoroutine(bgmFadeCoroutine);
+        bgmFadeCoroutine = StartCoroutine(FadeBgmVolume(0f, duration));
+    }
+
+    private IEnumerator FadeBgmVolume(float target, float duration)
+    {
+        float start = bgmSource.volume;
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            bgmSource.volume = Mathf.Lerp(start, target, t / duration);
+            yield return null;
+        }
+        bgmSource.volume = target;
     }
 
     public float GetSfxVolume() => PlayerPrefs.GetFloat(SfxKey, DefaultVolume);

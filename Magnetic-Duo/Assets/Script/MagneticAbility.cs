@@ -105,15 +105,6 @@ public class MagneticAbility : MonoBehaviour
                     }
                 }
             }
-
-            Lever tagetLever = col.GetComponent<Lever>();
-            if (tagetLever != null)
-            {
-                if (botPolarity == tagetLever.polarity)
-                {
-                    tagetLever.AddMagneticForce(forceAmount);
-                }
-            }
         }
     }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public enum ButtonType { N, S }
 
@@ -12,6 +13,7 @@ public class PressureButton : MonoBehaviour
     [SerializeField] private Sprite pressedSprite;
 
     private SpriteRenderer spriteRenderer;
+    private readonly HashSet<Collider2D> objectsOnButton = new();
     public bool IsPressed { get; private set; }
 
     private void Awake()
@@ -23,7 +25,8 @@ public class PressureButton : MonoBehaviour
     {
         if (IsValidObject(collision))
         {
-            IsPressed = true;
+            objectsOnButton.Add(collision);
+            IsPressed = objectsOnButton.Count > 0;
             UpdateSprite();
         }
     }
@@ -32,7 +35,8 @@ public class PressureButton : MonoBehaviour
     {
         if (IsValidObject(collision))
         {
-            IsPressed = false;
+            objectsOnButton.Remove(collision);
+            IsPressed = objectsOnButton.Count > 0;
             UpdateSprite();
         }
     }
