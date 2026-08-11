@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +8,14 @@ public class TitleMenuManager : MonoBehaviour
 
     public void OnClickPlay()
     {
-        SceneManager.LoadScene(1);
+        StartCoroutine(FadeOutThenLoad(1));
+    }
+
+    private IEnumerator FadeOutThenLoad(int sceneBuildIndex)
+    {
+        if (ScreenFader.Instance != null)
+            yield return StartCoroutine(ScreenFader.Instance.FadeOut());
+        SceneManager.LoadScene(sceneBuildIndex);
     }
 
     public void OnClickOptions()

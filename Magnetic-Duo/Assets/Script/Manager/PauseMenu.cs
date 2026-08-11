@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class PauseMenu : MonoBehaviour
@@ -26,6 +28,43 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             TogglePause();
+    }
+
+    public void OnClickCancel() => TogglePause();
+
+    public void OnClickRestart()
+    {
+        StartCoroutine(FadeOutThenLoad(SceneManager.GetActiveScene().buildIndex));
+    }
+
+    public void OnClickTitle()
+    {
+        StartCoroutine(FadeOutThenLoad("Title"));
+    }
+
+    public void OnClickExit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    private IEnumerator FadeOutThenLoad(int sceneBuildIndex)
+    {
+        Time.timeScale = 1f;
+        if (ScreenFader.Instance != null)
+            yield return StartCoroutine(ScreenFader.Instance.FadeOut());
+        SceneManager.LoadScene(sceneBuildIndex);
+    }
+
+    private IEnumerator FadeOutThenLoad(string sceneName)
+    {
+        Time.timeScale = 1f;
+        if (ScreenFader.Instance != null)
+            yield return StartCoroutine(ScreenFader.Instance.FadeOut());
+        SceneManager.LoadScene(sceneName);
     }
 
     private void TogglePause()
