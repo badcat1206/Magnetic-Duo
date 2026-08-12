@@ -14,15 +14,24 @@ public class PolarityWall : MonoBehaviour
     [Header("레버로 강제 비활성화 (레버가 켜져있는 동안 OFF)")]
     [SerializeField] private Lever[] disableLevers;
 
+    [Header("오디오")]
+    [Tooltip("켜질 때와 꺼질 때 공통으로 재생할 소리입니다.")]
+    [SerializeField] private AudioClip toggleClip;
+
     private bool forced = false;
 
     private Collider2D wallCollider;
     private SpriteRenderer spriteRenderer;
 
+    private AudioSource audioSource;
+    private bool lastActiveState; 
+    private bool isInitialized = false;
+
     void Awake()
     {
         wallCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
 
         if(wallCollider != null)
         {
@@ -31,7 +40,13 @@ public class PolarityWall : MonoBehaviour
     }
     void Start()
     {
+        if (audioSource != null && AudioManager.Instance != null)
+        {
+            audioSource.outputAudioMixerGroup = AudioManager.Instance.SfxGroup;
+            audioSource.playOnAwake = false;
+        }
         UpdateWallState();
+        isInitialized = true;
     }
 
     private void Update()
@@ -60,6 +75,15 @@ public class PolarityWall : MonoBehaviour
     private void UpdateWallState()
     {
         bool active = isOn && !forced;
+
+        if (isInitialized && active != lastActiveState)
+        {
+            if (audioSource != null && toggleClip != null) 
+            {
+                audioSource.PlayOneShot(toggleClip);
+            }
+        }
+        lastActiveState = active;
 
         if(wallCollider != null) wallCollider.enabled = active;
 

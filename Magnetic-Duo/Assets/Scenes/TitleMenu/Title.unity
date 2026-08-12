@@ -399,6 +399,51 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2367792908806891350, guid: ebec0dffa23eb8f4db0939e1fc4e275f, type: 3}
   m_PrefabInstance: {fileID: 4464157289222983935}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &451869800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 451869802}
+  - component: {fileID: 451869801}
+  m_Layer: 0
+  m_Name: Bgm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &451869801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451869800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ac52a3fd218c84188894f6a06afccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageBgm
+  bgmClip: {fileID: 8300000, guid: c8cd41d118e466f47ac8ae2717c4a163, type: 3}
+--- !u!4 &451869802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451869800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.4975, y: -0.39717, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &840645178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,3 +1755,4 @@ SceneRoots:
   - {fileID: 1403656076}
   - {fileID: 573895258568262175}
   - {fileID: 1523205451}
+  - {fileID: 451869802}
