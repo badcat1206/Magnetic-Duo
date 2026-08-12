@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     [Header("패널 연결")]
     [SerializeField] private RectTransform panel;
+    [SerializeField] private GameObject optionsPanel;
 
     [Header("슬라이드 연출 설정")]
     [SerializeField] private float slideDuration = 0.4f;
@@ -27,7 +28,16 @@ public class PauseMenu : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            TogglePause();
+           {
+            if (optionsPanel != null && optionsPanel.activeSelf)
+            {
+                optionsPanel.GetComponent<OptionsPanel>().OnClickCancel(); 
+            }
+            else
+            {
+                TogglePause(); 
+            }
+        }
     }
 
     public void OnClickCancel() => TogglePause();
@@ -92,5 +102,11 @@ public class PauseMenu : MonoBehaviour
                     Time.timeScale = 1f;
                 });
         }
+    }
+
+    public void OnClickOptions()
+    {
+        if (optionsPanel != null)
+            optionsPanel.SetActive(true);
     }
 }

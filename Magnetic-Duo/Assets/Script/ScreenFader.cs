@@ -33,6 +33,10 @@ public class ScreenFader : MonoBehaviour
     public IEnumerator FadeOut()
     {
         if(fadeImage == null) yield break;
+        
+        Color color = fadeImage.color;
+        color.a = 0f;
+        fadeImage.color = color;
 
         fadeImage.gameObject.SetActive(true);
         yield return fadeImage.DOFade(1f, fadeDuration).WaitForCompletion();

@@ -513,6 +513,10 @@ PrefabInstance:
       propertyPath: fadeDuration
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7079902004220265032, guid: 7140fd1e47716c64cae696b36df0e106, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8285172460800411071, guid: 7140fd1e47716c64cae696b36df0e106, type: 3}
       propertyPath: m_Name
       value: ScreenFader
