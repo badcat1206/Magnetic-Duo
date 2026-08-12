@@ -2573,7 +2573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 510307863382762432, guid: d61a55b43f032b84aab61106a468dbee, type: 3}
       propertyPath: middlePoint.y
-      value: -11.78
+      value: -11.9
       objectReference: {fileID: 0}
     - target: {fileID: 510307863382762432, guid: d61a55b43f032b84aab61106a468dbee, type: 3}
       propertyPath: secondPoint.x

@@ -43,6 +43,8 @@ public class ShuttlePlatform : MonoBehaviour
 
     private MagneticAbility riderAbility;
 
+    private int matchingBoxCount = 0;
+
     void Start()
     {
         List<Vector2> points = new List<Vector2> { middlePoint };
@@ -60,7 +62,7 @@ public class ShuttlePlatform : MonoBehaviour
 
     void Update()
     {
-        bool isActive = riderAbility != null && riderAbility.IsActive;
+        bool isActive = (riderAbility != null && riderAbility.IsActive) || (matchingBoxCount > 0);
 
         if (isActive != wasMagneticActive)
         {
@@ -97,6 +99,16 @@ public class ShuttlePlatform : MonoBehaviour
         if (visualOn != null) visualOn.enabled = isActive;
     }
 
+    // 현재 오브젝트가 조건에 맞는 상자인지 검사하는 함수
+    private bool IsMatchingBox(GameObject obj)
+    {
+        // Polarity가 N일 때는 NBox, S일 때는 SBox인지 확인합니다.
+        if (platformPolarity.ToString() == "N" && obj.CompareTag("NBox")) return true;
+        if (platformPolarity.ToString() == "S" && obj.CompareTag("SBox")) return true;
+        
+        return false;
+    }
+
     // 플레이어가 발판에 올라오면 자식으로 설정 → 발판과 함께 이동
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -110,6 +122,11 @@ public class ShuttlePlatform : MonoBehaviour
         if(magneticAbility != null && magneticAbility.BotPolarity == platformPolarity)
         {
             riderAbility = magneticAbility;
+        }
+
+        if (IsMatchingBox(collision.gameObject))
+        {
+            matchingBoxCount++;
         }
     }
 
@@ -129,6 +146,12 @@ public class ShuttlePlatform : MonoBehaviour
         if (riderAbility != null && collision.gameObject == riderAbility.gameObject)
         {
             riderAbility = null; 
+        }
+        
+        if (IsMatchingBox(collision.gameObject))
+        {
+            matchingBoxCount--;
+            if (matchingBoxCount < 0) matchingBoxCount = 0; // 혹시 모를 버그 방지용 안전장치
         }
     }
 }
