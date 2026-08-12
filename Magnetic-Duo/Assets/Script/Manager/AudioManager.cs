@@ -42,13 +42,16 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBgm(AudioClip clip, float fadeInDuration = 0f)
     {
-        if (clip == null || bgmSource.clip == clip) return;
+        if (clip == null) return;
 
         if (bgmFadeCoroutine != null) StopCoroutine(bgmFadeCoroutine);
 
-        bgmSource.clip = clip;
-        bgmSource.volume = fadeInDuration > 0f ? 0f : 1f;
-        bgmSource.Play();
+        if (bgmSource.clip != clip || !bgmSource.isPlaying)
+        {
+            bgmSource.clip = clip;
+            bgmSource.volume = fadeInDuration > 0f ? 0f : 1f;
+            bgmSource.Play();
+        }
 
         if (fadeInDuration > 0f)
             bgmFadeCoroutine = StartCoroutine(FadeBgmVolume(1f, fadeInDuration));

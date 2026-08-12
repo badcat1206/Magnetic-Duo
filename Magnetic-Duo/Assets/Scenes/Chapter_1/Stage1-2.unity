@@ -1185,6 +1185,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3341072291909139173, guid: c6f85b65f69b7a44bb36b4fc7da97b2d, type: 3}
+      propertyPath: bgmClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 910071a4b5a65784fba0a2a9b699994a, type: 3}
     - target: {fileID: 5522746985706433363, guid: c6f85b65f69b7a44bb36b4fc7da97b2d, type: 3}
       propertyPath: nBotGoal
       value: 
@@ -1197,6 +1201,10 @@ PrefabInstance:
       propertyPath: startWalkTime
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8187984306215475715, guid: c6f85b65f69b7a44bb36b4fc7da97b2d, type: 3}
+      propertyPath: bgmClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 910071a4b5a65784fba0a2a9b699994a, type: 3}
     - target: {fileID: 8740778714803108000, guid: c6f85b65f69b7a44bb36b4fc7da97b2d, type: 3}
       propertyPath: m_Name
       value: StageManger
@@ -1244,29 +1252,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8740778714803108000, guid: c6f85b65f69b7a44bb36b4fc7da97b2d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 678840269}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6f85b65f69b7a44bb36b4fc7da97b2d, type: 3}
---- !u!1 &678840268 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8740778714803108000, guid: c6f85b65f69b7a44bb36b4fc7da97b2d, type: 3}
-  m_PrefabInstance: {fileID: 678840267}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &678840269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678840268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ac52a3fd218c84188894f6a06afccc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StageBgm
-  bgmClip: {fileID: 8300000, guid: 45c407e4285ae5b4ea3869cc3adcc3ca, type: 3}
 --- !u!1001 &707915885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2488,6 +2475,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 961b6e36cf3c27d41bbb48801d8730c1, type: 3}
+--- !u!1001 &1787639946
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3494286742660659863, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494286742660659863, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 540
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494286742660659863, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494286742660659863, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494286742660659863, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494286742660659863, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494286742660659863, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494286742660659863, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494286742660659863, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494286742660659863, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224043754295342781, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
+      propertyPath: m_Name
+      value: EventSystem
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6532f8e9d3b85564db1325ab56a33ee9, type: 3}
 --- !u!1001 &1838829615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4197,6 +4241,10 @@ PrefabInstance:
       propertyPath: bgmClip
       value: 
       objectReference: {fileID: 8300000, guid: 45c407e4285ae5b4ea3869cc3adcc3ca, type: 3}
+    - target: {fileID: 5568837479861685425, guid: 819a63d476af11e488991cc7e856f8e5, type: 3}
+      propertyPath: bgmClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 910071a4b5a65784fba0a2a9b699994a, type: 3}
     - target: {fileID: 8534478017087362210, guid: 819a63d476af11e488991cc7e856f8e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.35093
@@ -4334,3 +4382,4 @@ SceneRoots:
   - {fileID: 1426869878}
   - {fileID: 1605648200939558055}
   - {fileID: 1631324478}
+  - {fileID: 1787639946}

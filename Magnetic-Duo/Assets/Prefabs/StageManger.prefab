@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8964364029214867246}
   - component: {fileID: 5522746985706433363}
+  - component: {fileID: 8187984306215475715}
   m_Layer: 0
   m_Name: StageManger
   m_TagString: Untagged
@@ -46,3 +47,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
   nBotGoal: {fileID: 0}
   sBotGoal: {fileID: 0}
+  startWalkTime: 1
+--- !u!114 &8187984306215475715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740778714803108000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ac52a3fd218c84188894f6a06afccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StageBgm
+  bgmClip: {fileID: 0}

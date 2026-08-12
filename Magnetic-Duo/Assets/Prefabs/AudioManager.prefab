@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   mixer: {fileID: 24100000, guid: c33ea485b39c4b24ab94b5b4602c653e, type: 2}
   sfxGroup: {fileID: -124419656020986398, guid: c33ea485b39c4b24ab94b5b4602c653e, type: 2}
-  bgmGroup: {fileID: 0}
+  bgmGroup: {fileID: 1295850085440383510, guid: c33ea485b39c4b24ab94b5b4602c653e, type: 2}
