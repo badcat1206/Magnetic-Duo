@@ -11,7 +11,15 @@ public class StageManager : MonoBehaviour
     [Header("시작 연출 설정")]
     [SerializeField] private float startWalkTime = 1f;
 
-    private bool isClearing = false;
+    // Ctrl+0 ~ Ctrl+9 = Stage1-1 ~ Stage3-3 순서
+    private static readonly string[] stageScenes =
+    {
+        "Stage1-1", "Stage1-2", "Stage1-3",
+        "Stage2-1", "Stage2-2", "Stage2-3", "Stage2-4",
+        "Stage3-1", "Stage3-2", "Stage3-3",
+    };
+
+    private bool isTransitioning = false;
     private void Start()
     {
         StartCoroutine(StartSequence());
@@ -57,17 +65,53 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
-        if (isClearing) return;
+        if (isTransitioning) return;
 
         if (nBotGoal.IsReached && sBotGoal.IsReached)
         {
             ClearStage();
+            return;
         }
+
+        HandleStageSelectShortcut();
+    }
+
+    private void HandleStageSelectShortcut()
+    {
+        if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl)) return;
+
+        for (int i = 0; i < stageScenes.Length; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha0 + i))
+            {
+                GoToStage(stageScenes[i]);
+                break;
+            }
+        }
+    }
+
+    private void GoToStage(string sceneName)
+    {
+        isTransitioning = true;
+        StartCoroutine(StageTransitionSequence(sceneName));
+    }
+
+    private IEnumerator StageTransitionSequence(string sceneName)
+    {
+        if (ScreenFader.Instance != null)
+        {
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.FadeOutBgm(ScreenFader.Instance.FadeDuration);
+
+            yield return StartCoroutine(ScreenFader.Instance.FadeOut());
+        }
+
+        SceneManager.LoadScene(sceneName);
     }
 
     private void ClearStage()
     {
-        isClearing = true;
+        isTransitioning = true;
         Debug.Log("Stage Cleared - 연출 시작");
 
         StartCoroutine(ClearSequence());
