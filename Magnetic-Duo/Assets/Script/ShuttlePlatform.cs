@@ -35,8 +35,13 @@ public class ShuttlePlatform : MonoBehaviour
     [SerializeField] private SpriteRenderer visualOff;
     [SerializeField] private SpriteRenderer visualOn;
 
+    [Header("경로 이동 설정")]
+    [Tooltip("체크하면 마지막 지점에서 처음으로 바로 돌아가지 않고, 거쳐온 지점을 순서대로 되짚어 돌아갑니다.")]
+    [SerializeField] private bool retraceReversePath = false;
+
     private Vector2[] waypoints;
     private int targetIndex;
+    private int direction = 1;
     private Vector2 targetPoint;
     private bool isWaiting = false;
     private bool wasMagneticActive = false;
@@ -87,7 +92,16 @@ public class ShuttlePlatform : MonoBehaviour
 
         yield return new WaitForSeconds(waitTime);
 
-        targetIndex = (targetIndex + 1) % waypoints.Length;
+        if (retraceReversePath)
+        {
+            if (targetIndex + direction < 0 || targetIndex + direction >= waypoints.Length)
+                direction = -direction;
+            targetIndex += direction;
+        }
+        else
+        {
+            targetIndex = (targetIndex + 1) % waypoints.Length;
+        }
         targetPoint = waypoints[targetIndex];
 
         isWaiting = false;
