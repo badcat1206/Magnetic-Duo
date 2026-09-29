@@ -15,6 +15,8 @@ public class Lever : MonoBehaviour, IInteractable
     [SerializeField] private MagneticField[] connectedMagneticFields;
     [SerializeField] private PolarityWall[] connectedWalls;
     [SerializeField] private MovingPlatform[] connectedPlatforms;
+    [SerializeField] private MagnetPad[] connectedMagnetPads;
+    [SerializeField] private JumpPlatform[] connectedJumpPlatforms;
 
     [Header("상태를 동기화할 다른 레버들")]
     [SerializeField] private Lever[] linkedLevers;
@@ -74,6 +76,22 @@ public class Lever : MonoBehaviour, IInteractable
             foreach (MovingPlatform platform in connectedPlatforms)
             {
                 if (platform != null) platform.SetLeverActive(isOn);
+            }
+        }
+
+        if (connectedMagnetPads != null)
+        {
+            foreach (MagnetPad pad in connectedMagnetPads)
+            {
+                if (pad != null) pad.TogglePad();
+            }
+        }
+
+        if (connectedJumpPlatforms != null)
+        {
+            foreach (JumpPlatform jumpPlatform in connectedJumpPlatforms)
+            {
+                if (jumpPlatform != null) jumpPlatform.TogglePlatform();
             }
         }
     }
