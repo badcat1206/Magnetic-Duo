@@ -8,6 +8,9 @@ public class MagnetPad : MonoBehaviour
     [SerializeField] private Polarity padPolarity;
     [SerializeField] private bool startActive = true;
 
+    [Header("버튼 (누르는 동안 현재 상태의 반대로 작동)")]
+    [SerializeField] private PressureButton[] buttons;
+
     [Header("끌어당김 설정")]
     [SerializeField] private float pullRange = 4f;
     [SerializeField] private float pullSpeed = 6f;
@@ -22,7 +25,8 @@ public class MagnetPad : MonoBehaviour
     private AudioSource audioSource;
 
     private SpriteRenderer spriteRenderer;
-    private bool isActive;
+    private bool leverState; // 시작 상태 + 레버로 바뀌는 기본 상태
+    private bool isActive;   // 버튼까지 반영한 실제 상태
 
     // 끌어당기는 중인 상자와 원래 중력값
     private readonly Dictionary<Rigidbody2D, float> heldBoxes = new();
@@ -31,7 +35,8 @@ public class MagnetPad : MonoBehaviour
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
-        isActive = startActive;
+        leverState = startActive;
+        isActive = leverState;
         UpdateVisual();
     }
 
@@ -43,7 +48,29 @@ public class MagnetPad : MonoBehaviour
 
     public void TogglePad()
     {
-        isActive = !isActive;
+        leverState = !leverState;
+        RefreshState();
+    }
+
+    private void Update()
+    {
+        RefreshState();
+    }
+
+    private bool IsAnyButtonPressed()
+    {
+        if (buttons == null) return false;
+        foreach (var b in buttons)
+            if (b != null && b.IsPressed) return true;
+        return false;
+    }
+
+    private void RefreshState()
+    {
+        bool target = leverState != IsAnyButtonPressed();
+        if (target == isActive) return;
+
+        isActive = target;
         if (!isActive) ReleaseAll();
         UpdateVisual();
 

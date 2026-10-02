@@ -75,7 +75,7 @@ public class Lever : MonoBehaviour, IInteractable
         {
             foreach (MovingPlatform platform in connectedPlatforms)
             {
-                if (platform != null) platform.SetLeverActive(isOn);
+                if (platform != null) platform.SetLeverActive(this, isOn);
             }
         }
 

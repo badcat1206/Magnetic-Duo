@@ -1,8 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class MovingPlatform : MonoBehaviour
 {
+    [System.Serializable]
+    private class LeverTarget
+    {
+        public Lever lever;
+        public Vector3 offset;
+    }
+
+    [System.Serializable]
+    private class ButtonTarget
+    {
+        public PressureButton button;
+        public Vector3 pressOffset;
+        public Vector3 releaseOffset;
+    }
+
     [Header("연결된 버튼 (하나라도 눌리면 이동)")]
     [SerializeField] private PressureButton[] buttons;
 
@@ -13,6 +29,12 @@ public class MovingPlatform : MonoBehaviour
     [Header("추가 하강 설정 (primaryActive 상태에서 추가 이동)")]
     [SerializeField] private PressureButton[] extraButtons;
     [SerializeField] private Vector3 extraOffset;
+
+    [Header("레버별 이동 설정 (시작 위치 기준, 마지막에 켠 레버 우선)")]
+    [SerializeField] private LeverTarget[] leverTargets;
+
+    [Header("버튼별 이동 설정 (밟으면 Press, 떼면 Release 위치로. 시작 위치 기준)")]
+    [SerializeField] private ButtonTarget[] buttonTargets;
 
     [Header("화면 흔들림 설정")]
     [SerializeField] private float shakeDuration = 0.4f;
@@ -32,7 +54,12 @@ public class MovingPlatform : MonoBehaviour
     private Vector3 targetPosition;
     private Vector3 extraTargetPosition;
     private Transform chainMaskTransform;
-    private bool isLeverActive = false;
+    private readonly List<Lever> activeLevers = new(); // 켠 순서대로
+    private readonly Dictionary<PressureButton, bool> buttonWasPressed = new();
+
+    // 레버별/버튼별 설정으로 마지막에 정해진 목적지
+    private bool hasCommand;
+    private Vector3 commandedDestination;
     private Vector3 previousDestination;
 
     private void Start()
@@ -53,14 +80,55 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    public void SetLeverActive(bool active)
+    public void SetLeverActive(Lever lever, bool active)
     {
-        isLeverActive = active;
+        activeLevers.Remove(lever);
+        if (active) activeLevers.Add(lever);
+        hasCommand = TryGetLeverDestination(out commandedDestination);
+    }
+
+    // 버튼별 설정: 밟거나 떼는 순간에 목적지를 정함
+    private void CheckButtonTargets()
+    {
+        if (buttonTargets == null) return;
+
+        foreach (var target in buttonTargets)
+        {
+            if (target.button == null) continue;
+
+            bool pressed = target.button.IsPressed;
+            buttonWasPressed.TryGetValue(target.button, out bool wasPressed);
+            if (pressed == wasPressed) continue;
+
+            buttonWasPressed[target.button] = pressed;
+            commandedDestination = startPosition + (pressed ? target.pressOffset : target.releaseOffset);
+            hasCommand = true;
+        }
+    }
+
+    // 켜진 레버 중 마지막에 켠 레버의 목표 위치 (레버별 설정이 없으면 false)
+    private bool TryGetLeverDestination(out Vector3 destination)
+    {
+        destination = startPosition;
+        if (leverTargets == null) return false;
+
+        for (int i = activeLevers.Count - 1; i >= 0; i--)
+        {
+            foreach (var target in leverTargets)
+            {
+                if (target.lever == activeLevers[i])
+                {
+                    destination = startPosition + target.offset;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private bool IsPrimaryActive()
     {
-        if (isLeverActive) return true;
+        if (activeLevers.Count > 0) return true;
         if (buttons != null)
             foreach (var b in buttons)
                 if (b != null && b.IsPressed) return true;
@@ -80,8 +148,12 @@ public class MovingPlatform : MonoBehaviour
         bool primaryActive = IsPrimaryActive();
         bool extraActive = IsExtraActive();
 
+        CheckButtonTargets();
+
         Vector3 destination;
-        if (primaryActive && extraActive)
+        if (hasCommand)
+            destination = commandedDestination;
+        else if (primaryActive && extraActive)
             destination = extraTargetPosition;
         else if (primaryActive)
             destination = targetPosition;
