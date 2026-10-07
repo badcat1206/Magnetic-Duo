@@ -27,8 +27,8 @@ public class JumpPlatform : MonoBehaviour
     // 발판 위에 올라와 있는 같은 극성의 대상
     private readonly HashSet<Rigidbody2D> riders = new();
 
-    // 상승 중인 대상과 원래 중력값 (꼭대기에 도달하면 복구)
-    private readonly Dictionary<Rigidbody2D, float> rising = new();
+    // 상승 중인 대상과 원래 중력/저항값 (꼭대기에 도달하면 복구)
+    private readonly Dictionary<Rigidbody2D, (float gravity, float damping)> rising = new();
 
     private void Awake()
     {
@@ -96,7 +96,10 @@ public class JumpPlatform : MonoBehaviour
     private void Launch(Rigidbody2D rb)
     {
         if (!rising.ContainsKey(rb))
-            rising[rb] = rb.gravityScale;
+            rising[rb] = (rb.gravityScale, rb.linearDamping);
+
+        // 상자는 미끄러짐 방지용 저항이 있어 상승 중에는 꺼야 봇과 같은 높이로 올라감
+        rb.linearDamping = 0f;
 
         float gravity = 2f * jumpHeight / (riseTime * riseTime);
         rb.gravityScale = gravity / Mathf.Abs(Physics2D.gravity.y);
@@ -119,7 +122,11 @@ public class JumpPlatform : MonoBehaviour
 
         foreach (var rb in reachedTop)
         {
-            if (rb != null) rb.gravityScale = rising[rb];
+            if (rb != null)
+            {
+                rb.gravityScale = rising[rb].gravity;
+                rb.linearDamping = rising[rb].damping;
+            }
             rising.Remove(rb);
         }
     }

@@ -14,7 +14,7 @@ public class MovingPlatform : MonoBehaviour
     [System.Serializable]
     private class ButtonTarget
     {
-        public PressureButton button;
+        public PressureButton[] buttons; // 하나라도 밟히면 Press, 전부 떼면 Release
         public Vector3 pressOffset;
         public Vector3 releaseOffset;
     }
@@ -55,7 +55,7 @@ public class MovingPlatform : MonoBehaviour
     private Vector3 extraTargetPosition;
     private Transform chainMaskTransform;
     private readonly List<Lever> activeLevers = new(); // 켠 순서대로
-    private readonly Dictionary<PressureButton, bool> buttonWasPressed = new();
+    private readonly Dictionary<ButtonTarget, bool> buttonWasPressed = new();
 
     // 레버별/버튼별 설정으로 마지막에 정해진 목적지
     private bool hasCommand;
@@ -94,13 +94,16 @@ public class MovingPlatform : MonoBehaviour
 
         foreach (var target in buttonTargets)
         {
-            if (target.button == null) continue;
+            if (target.buttons == null) continue;
 
-            bool pressed = target.button.IsPressed;
-            buttonWasPressed.TryGetValue(target.button, out bool wasPressed);
+            bool pressed = false;
+            foreach (var b in target.buttons)
+                if (b != null && b.IsPressed) { pressed = true; break; }
+
+            buttonWasPressed.TryGetValue(target, out bool wasPressed);
             if (pressed == wasPressed) continue;
 
-            buttonWasPressed[target.button] = pressed;
+            buttonWasPressed[target] = pressed;
             commandedDestination = startPosition + (pressed ? target.pressOffset : target.releaseOffset);
             hasCommand = true;
         }
