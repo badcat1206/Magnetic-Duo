@@ -897,6 +897,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SBox (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 568021824493412618, guid: 757cdd7f2dc6dae48b48ad5e245dc3d5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 5988109359289844576, guid: 757cdd7f2dc6dae48b48ad5e245dc3d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.93
