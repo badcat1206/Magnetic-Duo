@@ -11,6 +11,9 @@ public class MagnetPad : MonoBehaviour
     [Header("버튼 (누르는 동안 현재 상태의 반대로 작동)")]
     [SerializeField] private PressureButton[] buttons;
 
+    [Header("레버 (켜져 있는 동안 현재 상태의 반대로 작동)")]
+    [SerializeField] private Lever[] levers;
+
     [Header("끌어당김 설정")]
     [SerializeField] private float pullRange = 4f;
     [SerializeField] private float pullSpeed = 6f;
@@ -65,9 +68,18 @@ public class MagnetPad : MonoBehaviour
         return false;
     }
 
+    private bool IsAnyLeverOn()
+    {
+        if (levers == null) return false;
+        foreach (var l in levers)
+            if (l != null && l.IsOn) return true;
+        return false;
+    }
+
     private void RefreshState()
     {
-        bool target = leverState != IsAnyButtonPressed();
+        bool isInverted = IsAnyButtonPressed() || IsAnyLeverOn();
+        bool target = leverState != isInverted;
         if (target == isActive) return;
 
         isActive = target;
