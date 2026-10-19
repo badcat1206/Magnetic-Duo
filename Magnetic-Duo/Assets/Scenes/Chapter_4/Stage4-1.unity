@@ -1038,7 +1038,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: f973a07157eb03b4cb3c6becfb878045, type: 3}
     - target: {fileID: 6430630913250451534, guid: f85398bda23b6f34794138ca2e97ffc5, type: 3}
       propertyPath: jumpHeight
-      value: 80
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6430630913250451534, guid: f85398bda23b6f34794138ca2e97ffc5, type: 3}
       propertyPath: jumpVelocity
@@ -5337,6 +5337,8 @@ MonoBehaviour:
   moveSpeed: 3
   extraButtons: []
   extraOffset: {x: 0, y: 0, z: 0}
+  leverTargets: []
+  buttonTargets: []
   shakeDuration: 2.8
   shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 376516090}
@@ -5868,6 +5870,8 @@ MonoBehaviour:
   moveSpeed: 3
   extraButtons: []
   extraOffset: {x: 0, y: 0, z: 0}
+  leverTargets: []
+  buttonTargets: []
   shakeDuration: 0.7
   shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 0}
