@@ -12,10 +12,17 @@ public class Trap : MonoBehaviour
 
     [Space]
     [Header("상자 리스폰 설정")]
-    [Tooltip("체크하면 이 트랩에 닿은 상자가 리스폰됩니다.")]
-    [SerializeField] private bool canDestroyBox = true;
-    [SerializeField] private Vector2 nBoxSpawnPoint;
-    [SerializeField] private Vector2 sBoxSpawnPoint;
+    [Tooltip("체크하면 이 트랩에 닿은 NBox가 리스폰됩니다. 리스폰 위치는 상자의 RespawnableBox에서 설정합니다.")]
+    [SerializeField] private bool respawnNBox = false;
+    [Tooltip("체크하면 이 트랩에 닿은 SBox가 리스폰됩니다. 리스폰 위치는 상자의 RespawnableBox에서 설정합니다.")]
+    [SerializeField] private bool respawnSBox = false;
+
+    // ---- 마이그레이션 전용 (TrapRespawnMigration 실행 후 삭제 예정) ----
+    // 예전 씬 데이터를 읽기 위해 남겨둔 필드. 런타임 로직에서는 사용하지 않음.
+    [SerializeField, HideInInspector] private bool canDestroyBox = true;
+    [SerializeField, HideInInspector] private Vector2 nBoxSpawnPoint;
+    [SerializeField, HideInInspector] private Vector2 sBoxSpawnPoint;
+    // -------------------------------------------------------------------
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,32 +33,14 @@ public class Trap : MonoBehaviour
             PlayerInput deadPlayer = collision.GetComponent<PlayerInput>();
             StartCoroutine(DieSequence(deadPlayer));
         }
-        else if (canDestroyBox && collision.CompareTag("NBox"))
+        else if (collision.TryGetComponent(out RespawnableBox box))
         {
-            RespawnBox(collision.gameObject, nBoxSpawnPoint);
-        }
-        else if (canDestroyBox && collision.CompareTag("SBox"))
-        {
-            RespawnBox(collision.gameObject, sBoxSpawnPoint);
-        }
-    }
-
-    private void RespawnBox(GameObject box, Vector2 spawnPoint)
-    {
-        if (spawnPoint != Vector2.zero)
-        {
-            box.transform.position = spawnPoint;
-
-            Rigidbody2D boxRb = box.GetComponent<Rigidbody2D>();
-            if (boxRb != null)
+            bool shouldRespawn = (respawnNBox && collision.CompareTag("NBox"))
+                              || (respawnSBox && collision.CompareTag("SBox"));
+            if (shouldRespawn)
             {
-                boxRb.linearVelocity = Vector2.zero;
-                boxRb.angularVelocity = 0f;
+                box.Respawn();
             }
-        }
-        else
-        {
-            Debug.LogWarning($"[Trap] '{gameObject.name}'의 {box.name} 리스폰 위치가 (0,0)입니다. Inspector에서 좌표를 설정하세요.", gameObject);
         }
     }
 

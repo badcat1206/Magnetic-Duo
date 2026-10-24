@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6631742532819670160}
   - component: {fileID: 2708939921764379973}
   - component: {fileID: 272394786416348449}
+  - component: {fileID: 8812345670012345672}
   m_Layer: 7
   m_Name: SBox
   m_TagString: SBox
@@ -222,3 +223,16 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &8812345670012345672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128341796790224795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3e1a9d5b2f4e6a8d0c1b3a5e7f9d21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RespawnableBox
+  respawnPoint: {fileID: 0}
