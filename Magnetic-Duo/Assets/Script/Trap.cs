@@ -17,16 +17,6 @@ public class Trap : MonoBehaviour
     [Tooltip("체크하면 이 트랩에 닿은 SBox가 리스폰됩니다. 리스폰 위치는 상자의 RespawnableBox에서 설정합니다.")]
     [SerializeField] private bool respawnSBox = false;
 
-    // ---- 마이그레이션 전용 (TrapRespawnMigration 실행 후 삭제 예정) ----
-    // 예전 씬 데이터를 읽기 위해 남겨둔 필드. 런타임 로직에서는 사용하지 않음.
-    // 에디터 도구가 SerializedObject로 읽으므로 코드상 미사용 경고(CS0414)는 무시.
-#pragma warning disable 0414
-    [SerializeField, HideInInspector] private bool canDestroyBox = true;
-#pragma warning restore 0414
-    [SerializeField, HideInInspector] private Vector2 nBoxSpawnPoint;
-    [SerializeField, HideInInspector] private Vector2 sBoxSpawnPoint;
-    // -------------------------------------------------------------------
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(safeBotTag != "" && collision.CompareTag(safeBotTag)) return;
