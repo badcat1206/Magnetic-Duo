@@ -12,15 +12,28 @@ public class OptionsPanel : MonoBehaviour
 
     private void Awake()
     {
-        sfxSlider.onValueChanged.AddListener(OnSfxSliderChanged);
-        bgmSlider.onValueChanged.AddListener(OnBgmSliderChanged);
+        if (sfxSlider != null)
+            sfxSlider.onValueChanged.AddListener(OnSfxSliderChanged);
+        if (bgmSlider != null)
+            bgmSlider.onValueChanged.AddListener(OnBgmSliderChanged);
     }
 
     // 패널이 열릴 때 현재 설정을 스냅샷으로 저장
     private void OnEnable()
     {
-        sfxSlider.SetValueWithoutNotify(AudioManager.Instance.GetSfxVolume());
-        bgmSlider.SetValueWithoutNotify(AudioManager.Instance.GetBgmVolume());
+        float sfx = AudioManager.Instance != null
+            ? AudioManager.Instance.GetSfxVolume()
+            : PlayerPrefs.GetFloat("SFXVolume", AudioManager.DefaultVolume);
+
+        float bgm = AudioManager.Instance != null
+            ? AudioManager.Instance.GetBgmVolume()
+            : PlayerPrefs.GetFloat("BGMVolume", AudioManager.DefaultVolume);
+
+        if (sfxSlider != null)
+            sfxSlider.SetValueWithoutNotify(sfx);
+        if (bgmSlider != null)
+            bgmSlider.SetValueWithoutNotify(bgm);
+
         SaveSnapshot();
     }
 
@@ -38,31 +51,50 @@ public class OptionsPanel : MonoBehaviour
 
     public void OnClickReset()
     {
-        sfxSlider.value = AudioManager.DefaultVolume;
-        bgmSlider.value = AudioManager.DefaultVolume;
+        if (sfxSlider != null)
+            sfxSlider.value = AudioManager.DefaultVolume;
+        if (bgmSlider != null)
+            bgmSlider.value = AudioManager.DefaultVolume;
     }
 
     private void OnSfxSliderChanged(float value)
     {
-        AudioManager.Instance.SetSfxVolume(value);
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.SetSfxVolume(value);
+        else
+            PlayerPrefs.SetFloat("SFXVolume", value);
     }
 
     private void OnBgmSliderChanged(float value)
     {
-        AudioManager.Instance.SetBgmVolume(value);
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.SetBgmVolume(value);
+        else
+            PlayerPrefs.SetFloat("BGMVolume", value);
     }
 
     private void SaveSnapshot()
     {
-        sfxSnapshot = sfxSlider.value;
-        bgmSnapshot = bgmSlider.value;
+        sfxSnapshot = sfxSlider != null ? sfxSlider.value : AudioManager.DefaultVolume;
+        bgmSnapshot = bgmSlider != null ? bgmSlider.value : AudioManager.DefaultVolume;
     }
 
     private void RestoreSnapshot()
     {
-        AudioManager.Instance.SetSfxVolume(sfxSnapshot);
-        AudioManager.Instance.SetBgmVolume(bgmSnapshot);
-        sfxSlider.SetValueWithoutNotify(sfxSnapshot);
-        bgmSlider.SetValueWithoutNotify(bgmSnapshot);
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.SetSfxVolume(sfxSnapshot);
+            AudioManager.Instance.SetBgmVolume(bgmSnapshot);
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("SFXVolume", sfxSnapshot);
+            PlayerPrefs.SetFloat("BGMVolume", bgmSnapshot);
+        }
+
+        if (sfxSlider != null)
+            sfxSlider.SetValueWithoutNotify(sfxSnapshot);
+        if (bgmSlider != null)
+            bgmSlider.SetValueWithoutNotify(bgmSnapshot);
     }
 }

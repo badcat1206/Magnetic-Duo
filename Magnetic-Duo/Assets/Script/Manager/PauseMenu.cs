@@ -23,6 +23,8 @@ public class PauseMenu : MonoBehaviour
         hiddenPosition = shownPosition - new Vector2(0f, panel.rect.height + 40f);
         panel.anchoredPosition = hiddenPosition;
         panel.gameObject.SetActive(false);
+        if (optionsPanel != null)
+            optionsPanel.SetActive(false);
     }
 
     private void Update()

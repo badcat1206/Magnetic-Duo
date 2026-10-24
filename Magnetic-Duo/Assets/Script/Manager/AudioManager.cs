@@ -4,7 +4,19 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance { get; private set; }
+    private static AudioManager _instance;
+    public static AudioManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindFirstObjectByType<AudioManager>();
+            }
+            return _instance;
+        }
+        private set => _instance = value;
+    }
 
     [SerializeField] private AudioMixer mixer;
     [SerializeField] private AudioMixerGroup sfxGroup;
@@ -23,12 +35,12 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        Instance = this;
+        _instance = this;
         DontDestroyOnLoad(gameObject);
 
         bgmSource = gameObject.AddComponent<AudioSource>();
@@ -81,13 +93,15 @@ public class AudioManager : MonoBehaviour
 
     public void SetSfxVolume(float linear01)
     {
-        mixer.SetFloat(SfxKey, LinearToDb(linear01));
+        if (mixer != null)
+            mixer.SetFloat(SfxKey, LinearToDb(linear01));
         PlayerPrefs.SetFloat(SfxKey, linear01);
     }
 
     public void SetBgmVolume(float linear01)
     {
-        mixer.SetFloat(BgmKey, LinearToDb(linear01));
+        if (mixer != null)
+            mixer.SetFloat(BgmKey, LinearToDb(linear01));
         PlayerPrefs.SetFloat(BgmKey, linear01);
     }
 

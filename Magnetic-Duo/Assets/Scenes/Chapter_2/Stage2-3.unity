@@ -188,6 +188,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: respawnNBox
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: boxSpawnPoint.x
       value: 24
       objectReference: {fileID: 0}
@@ -2104,6 +2108,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: respawnNBox
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: boxSpawnPoint.x
       value: 24
       objectReference: {fileID: 0}
@@ -2746,6 +2754,8 @@ MonoBehaviour:
   moveSpeed: 3
   extraButtons: []
   extraOffset: {x: 0, y: 0, z: 0}
+  leverTargets: []
+  buttonTargets: []
   shakeDuration: 3
   shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 0}
@@ -5783,6 +5793,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: isElectric
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: respawnNBox
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}

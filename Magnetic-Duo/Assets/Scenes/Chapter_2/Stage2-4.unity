@@ -1637,6 +1637,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: respawnNBox
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: respawnSBox
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: nBoxSpawnPoint.x
       value: 23.63
       objectReference: {fileID: 0}
@@ -1868,6 +1876,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
       propertyPath: isElectric
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: respawnNBox
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
+      propertyPath: respawnSBox
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514632130062299545, guid: 4d078757489088c4e99d7ba2340bccf8, type: 3}
@@ -2890,6 +2906,8 @@ MonoBehaviour:
   moveSpeed: 3
   extraButtons: []
   extraOffset: {x: 0, y: 0, z: 0}
+  leverTargets: []
+  buttonTargets: []
   shakeDuration: 1.2
   shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 711774676}
@@ -3517,7 +3535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5988109359289844576, guid: 757cdd7f2dc6dae48b48ad5e245dc3d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.19
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 5988109359289844576, guid: 757cdd7f2dc6dae48b48ad5e245dc3d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6585,6 +6603,8 @@ MonoBehaviour:
   extraButtons:
   - {fileID: 1653084685}
   extraOffset: {x: 0, y: -6.71, z: 0}
+  leverTargets: []
+  buttonTargets: []
   shakeDuration: 1.2
   shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 0}
