@@ -356,7 +356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4053892747200361598, guid: ee5c5e26ee904dc409f41cf2ae5a526f, type: 3}
       propertyPath: activeSpeed
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4053892747200361598, guid: ee5c5e26ee904dc409f41cf2ae5a526f, type: 3}
       propertyPath: centerCount
@@ -3209,7 +3209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4053892747200361598, guid: ee5c5e26ee904dc409f41cf2ae5a526f, type: 3}
       propertyPath: activeSpeed
-      value: -4
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4053892747200361598, guid: ee5c5e26ee904dc409f41cf2ae5a526f, type: 3}
       propertyPath: centerCount
