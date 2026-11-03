@@ -976,7 +976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 272394786416348449, guid: 757cdd7f2dc6dae48b48ad5e245dc3d5, type: 3}
       propertyPath: m_Size.y
-      value: 1.49
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: 272394786416348449, guid: 757cdd7f2dc6dae48b48ad5e245dc3d5, type: 3}
       propertyPath: m_Offset.y
@@ -1337,6 +1337,8 @@ MonoBehaviour:
   moveSpeed: 3
   extraButtons: []
   extraOffset: {x: 0, y: 0, z: 0}
+  leverTargets: []
+  buttonTargets: []
   shakeDuration: 1.5
   shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 0}
@@ -1938,6 +1940,8 @@ MonoBehaviour:
   moveSpeed: 3
   extraButtons: []
   extraOffset: {x: 0, y: 0, z: 0}
+  leverTargets: []
+  buttonTargets: []
   shakeDuration: 1.5
   shakeMagnitude: 0.05
   hideChainTilemap: {fileID: 0}
@@ -2258,7 +2262,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 171428607909368920, guid: 6fd5180aef283b14e82b28d2807d040b, type: 3}
       propertyPath: m_Size.y
-      value: 1.49
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: 171428607909368920, guid: 6fd5180aef283b14e82b28d2807d040b, type: 3}
       propertyPath: m_Offset.y
