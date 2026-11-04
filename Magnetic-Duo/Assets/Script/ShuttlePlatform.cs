@@ -50,6 +50,12 @@ public class ShuttlePlatform : MonoBehaviour
 
     private int matchingBoxCount = 0;
 
+    // 이동 전 충돌 검사용 (다른 발판/봇/상자를 뚫지 않도록)
+    private const float CastSkin = 0.02f;
+    private readonly RaycastHit2D[] castHits = new RaycastHit2D[16];
+    private ContactFilter2D castFilter;
+    private Collider2D[] platformColliders;
+
     void Start()
     {
         List<Vector2> points = new List<Vector2> { middlePoint };
@@ -63,6 +69,9 @@ public class ShuttlePlatform : MonoBehaviour
         targetIndex = waypoints.Length > 1 ? 1 : 0;
         targetPoint = waypoints[targetIndex];
         UpdateVisual(false);
+
+        platformColliders = GetComponents<Collider2D>();
+        castFilter = new ContactFilter2D { useTriggers = false };
     }
 
     void Update()
@@ -78,7 +87,13 @@ public class ShuttlePlatform : MonoBehaviour
         if(isWaiting) return;
 
         if(!isActive) return;
-        transform.position = Vector2.MoveTowards(transform.position, targetPoint, speed * Time.deltaTime);
+
+        Vector2 current = transform.position;
+        Vector2 next = Vector2.MoveTowards(current, targetPoint, speed * Time.deltaTime);
+
+        // 앞이 막혀 있으면 이번 프레임은 제자리 (이동 중 상태는 유지 → 비켜나면 이어서 이동)
+        if (IsBlocked(next - current)) return;
+        transform.position = next;
 
         if(Vector2.Distance(transform.position, targetPoint) < 0.1f)
         {
@@ -105,6 +120,59 @@ public class ShuttlePlatform : MonoBehaviour
         targetPoint = waypoints[targetIndex];
 
         isWaiting = false;
+    }
+
+    // 발판 자신과 위에 탄 봇/상자 중 하나라도 이동 방향으로 다른 발판/봇/상자에 닿으면 막힘 (바닥/벽은 무시)
+    private bool IsBlocked(Vector2 delta)
+    {
+        if (delta == Vector2.zero) return false;
+
+        foreach (var col in platformColliders)
+            if (IsColliderBlocked(col, delta)) return true;
+
+        foreach (Transform child in transform)
+        {
+            if (!IsRiderTag(child.gameObject)) continue;
+            foreach (var col in child.GetComponents<Collider2D>())
+                if (IsColliderBlocked(col, delta)) return true;
+        }
+        return false;
+    }
+
+    private bool IsColliderBlocked(Collider2D col, Vector2 delta)
+    {
+        if (col == null || !col.enabled || col.isTrigger) return false;
+
+        // 살짝 줄인 크기로 검사 → 옆면에 맞닿아 있기만 한 물체는 막힘으로 보지 않음
+        Bounds b = col.bounds;
+        Vector2 size = new Vector2(Mathf.Max(b.size.x - CastSkin * 2f, 0.01f), Mathf.Max(b.size.y - CastSkin * 2f, 0.01f));
+        int count = Physics2D.BoxCast(b.center, size, 0f, delta.normalized, castFilter, castHits, delta.magnitude + CastSkin);
+
+        for (int i = 0; i < count; i++)
+        {
+            Collider2D other = castHits[i].collider;
+
+            // 자기 자신이나 자기 위에 탄 봇/상자는 제외
+            if (other.GetComponentInParent<ShuttlePlatform>() == this) continue;
+            if (!IsBlockingObject(other)) continue;
+
+            // 이동 방향 앞쪽에 있는 물체만 막힘 (이미 겹쳐 있는 뒤쪽 물체에서는 빠져나갈 수 있게)
+            if (Vector2.Dot((Vector2)(other.bounds.center - b.center), delta) > 0f) return true;
+        }
+        return false;
+    }
+
+    private bool IsBlockingObject(Collider2D other)
+    {
+        if (other.GetComponentInParent<ShuttlePlatform>() != null) return true; // 다른 발판 또는 다른 발판에 탄 물체
+
+        GameObject obj = other.attachedRigidbody != null ? other.attachedRigidbody.gameObject : other.gameObject;
+        return IsRiderTag(obj);
+    }
+
+    private static bool IsRiderTag(GameObject obj)
+    {
+        return obj.CompareTag("NBot") || obj.CompareTag("SBot") || obj.CompareTag("NBox") || obj.CompareTag("SBox");
     }
 
     private void UpdateVisual(bool isActive)
