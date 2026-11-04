@@ -200,7 +200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &192149622
 SpriteRenderer:
   serializedVersion: 2
@@ -3823,13 +3823,21 @@ PrefabInstance:
       value: 38.67
       objectReference: {fileID: 0}
     - target: {fileID: 2087001185602952738, guid: 18af3af40ce754849955c4a527c0579d, type: 3}
-      propertyPath: disableButtons.Array.size
+      propertyPath: disableLevers.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2087001185602952738, guid: 18af3af40ce754849955c4a527c0579d, type: 3}
+      propertyPath: disableButtons.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087001185602952738, guid: 18af3af40ce754849955c4a527c0579d, type: 3}
+      propertyPath: 'disableLevers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2015341242}
+    - target: {fileID: 2087001185602952738, guid: 18af3af40ce754849955c4a527c0579d, type: 3}
       propertyPath: 'disableButtons.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2088941396}
     - target: {fileID: 2987053120490034757, guid: 18af3af40ce754849955c4a527c0579d, type: 3}
       propertyPath: m_LocalScale.y
       value: 30.293285
