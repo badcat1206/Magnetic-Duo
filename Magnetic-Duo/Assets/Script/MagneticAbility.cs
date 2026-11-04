@@ -9,14 +9,20 @@ public class MagneticAbility : MonoBehaviour
 
     [SerializeField] private float stopDistance = 1.8f; // 당길 때 플레이어에게 다가올 거리
 
+    // 끌어당긴 상자가 벌어진 간격만큼 빨라지는 정도, 최대 속도(봇 이동속도 대비 배수)
+    private const float PullFollowGain = 15f;
+    private const float PullMaxSpeedRatio = 2f;
+
     private bool isActive = false;
     private Rigidbody2D rb;
     private PlayerAnimation playerAnim;
+    private PlayerMovement movement;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<PlayerAnimation>();
+        movement = GetComponent<PlayerMovement>();
 
         if(playerAnim == null)
         {
@@ -89,20 +95,20 @@ public class MagneticAbility : MonoBehaviour
                 }
                 else
                 {
-                    // stopDistance 보다 멀때만 당김
-                    if (distance > stopDistance)
-                    {
-                        if (targetRb != null)
-                        {
-                            target.AddMagneticForce(-direction.x * forceAmount); // X축 힘 전달
-                            targetRb.AddForce(Vector2.up * -direction.y * forceAmount); // Y축은 물리 법칙 적용
-                        }
-                        // 플레이어에 가해지는 반작용 힘을 제거하여 끌려가지 않게 함
-                    }
-                    else
-                    {
-                        target.AddMagneticForce(0f);
-                    }
+                    // 가로 간격이 stopDistance보다 벌어진 만큼 빨라짐 → 봇이 계속 걸어가도 같은 속도로 뒤따라옴
+                    // (상자의 저항/바닥 마찰로 깎이는 속도도 간격 차이로 보정됨)
+                    float dx = transform.position.x - col.transform.position.x;
+                    float gap = Mathf.Abs(dx) - stopDistance;
+                    float pullVelocity = gap > 0f
+                        ? Mathf.Sign(dx) * Mathf.Min(gap * PullFollowGain, movement.MoveSpeed * PullMaxSpeedRatio)
+                        : 0f;
+
+                    target.AddMagneticForce(pullVelocity * 2f); // MagneticObject는 전달값의 절반을 속도로 사용
+
+                    // stopDistance 보다 멀때만 Y축으로 당김 (Y축은 물리 법칙 적용)
+                    if (distance > stopDistance && targetRb != null)
+                        targetRb.AddForce(Vector2.up * -direction.y * forceAmount);
+                    // 플레이어에 가해지는 반작용 힘을 제거하여 끌려가지 않게 함
                 }
             }
         }

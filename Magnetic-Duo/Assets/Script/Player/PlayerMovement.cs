@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;     
     private float currentMoveInput = 0f; // 현재 입력 저장
     public float CurrentMoveInput => currentMoveInput;
+    public float MoveSpeed => moveSpeed;
     public bool IsGrounded { get; private set; }    // 바닥 감지 여부
 
     private int activeEffectorCount = 0;

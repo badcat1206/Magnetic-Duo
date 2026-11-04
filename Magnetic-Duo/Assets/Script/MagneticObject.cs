@@ -2,6 +2,8 @@ using UnityEngine;
 
 public enum Polarity { N, S }
 
+// MagnetPad·MagneticAbility보다 항상 나중에 실행 → 봇의 자력이 패드가 설정한 속도를 덮어씀 (에디터/빌드 동작 통일)
+[DefaultExecutionOrder(100)]
 public class MagneticObject : MonoBehaviour
 {
     public Polarity polarity;
