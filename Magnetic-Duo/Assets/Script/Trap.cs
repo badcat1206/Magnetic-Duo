@@ -19,6 +19,17 @@ public class Trap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        HandleContact(collision);
+    }
+
+    // Is Trigger를 끈 트랩(상자가 위로 지나다닐 수 있는 가시)은 부딪힘으로 판정
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        HandleContact(collision.collider);
+    }
+
+    private void HandleContact(Collider2D collision)
+    {
         if(safeBotTag != "" && collision.CompareTag(safeBotTag)) return;
 
         if (collision.CompareTag("NBot") || collision.CompareTag("SBot"))

@@ -1147,7 +1147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7734131150661932789, guid: deb8da651606e5d49bb0bfe06439a054, type: 3}
       propertyPath: groundCheckRadius
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8182699402886553913, guid: deb8da651606e5d49bb0bfe06439a054, type: 3}
       propertyPath: m_Name
@@ -1231,17 +1231,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5011432409718297681, guid: c7c27e3a8baf4f64598089789314d26e, type: 3}
   m_PrefabInstance: {fileID: 382133193}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &764362023 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1432694499844617299, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-  m_PrefabInstance: {fileID: 1083618031}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56cc6a31c2f512844ab352a0492e28b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PressureButton
 --- !u!1 &777615864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,6 +1411,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79dd879c289954442910aad77c0239a2, type: 3}
+--- !u!1001 &857293877
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 30.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474574336801455290, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+      propertyPath: m_Name
+      value: SButton
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+--- !u!114 &857293878 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1432694499844617299, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
+  m_PrefabInstance: {fileID: 857293877}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cc6a31c2f512844ab352a0492e28b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PressureButton
 --- !u!1001 &859633446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1848,63 +1905,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7c27e3a8baf4f64598089789314d26e, type: 3}
---- !u!1001 &1083618031
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 30.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -6.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1707703030602378504, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474574336801455290, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
-      propertyPath: m_Name
-      value: SButton
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e8dae7c007f10ad4d98f0a01a5f152c1, type: 3}
 --- !u!1 &1088057720
 GameObject:
   m_ObjectHideFlags: 0
@@ -6480,7 +6480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovingPlatform
   buttons:
-  - {fileID: 764362023}
+  - {fileID: 857293878}
   targetOffset: {x: 0, y: 4, z: 0}
   moveSpeed: 3
   extraButtons: []
@@ -6804,7 +6804,6 @@ SceneRoots:
   - {fileID: 1774761898}
   - {fileID: 777615866}
   - {fileID: 1599176116}
-  - {fileID: 1083618031}
   - {fileID: 995208975}
   - {fileID: 859633446}
   - {fileID: 905780894}
@@ -6813,3 +6812,4 @@ SceneRoots:
   - {fileID: 1928740337}
   - {fileID: 1199852993}
   - {fileID: 687883281}
+  - {fileID: 857293877}
