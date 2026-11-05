@@ -5056,7 +5056,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1229811976}
   - component: {fileID: 1229811975}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: backgroundS5_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

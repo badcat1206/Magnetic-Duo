@@ -13,6 +13,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float mapMinY = -20f;
     [SerializeField] private float mapMaxY = 20f;
 
+    public Rect MapBounds => Rect.MinMaxRect(mapMinX, mapMinY, mapMaxX, mapMaxY);
+
     private float halfCamWidth;
     private float halfCamHeight;
     private float fixedZ;

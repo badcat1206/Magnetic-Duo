@@ -3166,7 +3166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1574284337}
   - component: {fileID: 1574284336}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: backgroundS2_v3_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

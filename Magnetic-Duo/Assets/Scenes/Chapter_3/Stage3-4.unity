@@ -907,6 +907,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3815204977411650218, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
+      propertyPath: borderColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815204977411650218, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
+      propertyPath: backgroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4200979638234960469, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.62
@@ -3142,7 +3150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1574284337}
   - component: {fileID: 1574284336}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: backgroundS2_v3_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

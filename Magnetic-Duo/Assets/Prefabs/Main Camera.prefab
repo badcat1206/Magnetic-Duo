@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4988278284795820067}
   - component: {fileID: 2760866130996772749}
   - component: {fileID: 6354260069739182939}
+  - component: {fileID: 3815204977411650218}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -155,3 +156,21 @@ MonoBehaviour:
   mapMaxX: 49
   mapMinY: -10
   mapMaxY: 8
+--- !u!114 &3815204977411650218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7189808982723841554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12491735f138418991052f21777d31fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapView
+  maxWidth: 0.8
+  maxHeight: 0.7
+  margin: 0.01
+  backgroundColor: {r: 0.06, g: 0.08, b: 0.14, a: 0.8784314}
+  borderColor: {r: 0.55, g: 0.75, b: 1, a: 0.8784314}
+  borderPixels: 4

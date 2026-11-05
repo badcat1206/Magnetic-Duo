@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1913421432806439315}
   - component: {fileID: 8507603633561793956}
   - component: {fileID: 38629578357971846}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spr_NBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6541051726843841930}
   - component: {fileID: 4629545837598489818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Magnet_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
