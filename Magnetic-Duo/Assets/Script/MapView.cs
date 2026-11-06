@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// M키를 누르고 있는 동안 화면 오른쪽 위에 전체 맵을 보여줌 (봇과 배경 그림은 표시하지 않음)
+// M키로 화면 오른쪽 위의 전체 맵을 열고 닫음 (봇과 배경 그림은 표시하지 않음)
+// 맵이 열려 있는 동안 봇 조작(이동·점프·Q·E·Tab)만 막고 나머지는 그대로 진행, ESC를 누르면 맵만 닫힘 (PauseMenu에서 처리)
 // 맵 범위는 같은 오브젝트의 CameraFollow 맵 경계를 사용
 // 맵 카메라 → 렌더 텍스처 → UI 이미지로 띄워서 배경색의 투명도(A)가 적용됨
 [RequireComponent(typeof(Camera), typeof(CameraFollow))]
@@ -24,6 +25,14 @@ public class MapView : MonoBehaviour
     private RawImage mapImage;
     private readonly Image[] borders = new Image[4];
     private Rect mapBounds;
+
+    public static MapView Instance { get; private set; }
+    public bool IsOpen { get; private set; }
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -63,10 +72,48 @@ public class MapView : MonoBehaviour
 
     void Update()
     {
-        bool show = Input.GetKey(KeyCode.M);
-        if (show) FitToScreen();
-        mapCamera.enabled = show;
-        mapCanvas.SetActive(show);
+        // 맵이 열린 동안 봇이 죽으면 맵을 닫고 사망 연출 진행
+        if (IsOpen && IsAnyBotDead()) Close();
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (IsOpen) Close();
+            else if (Time.timeScale > 0f && !IsAnyBotDead()) Open(); // 일시정지 창이 떠 있거나 사망 연출 중이면 열지 않음
+        }
+
+        if (IsOpen) FitToScreen();
+    }
+
+    private bool IsAnyBotDead()
+    {
+        CharacterManager characters = CharacterManager.Instance;
+        return characters != null && (characters.NBotInput.IsDead || characters.SBotInput.IsDead);
+    }
+
+    private void Open()
+    {
+        IsOpen = true;
+        SetBotsFrozen(true);
+        FitToScreen();
+        mapCamera.enabled = true;
+        mapCanvas.SetActive(true);
+    }
+
+    public void Close()
+    {
+        IsOpen = false;
+        SetBotsFrozen(false);
+        mapCamera.enabled = false;
+        mapCanvas.SetActive(false);
+    }
+
+    // 두 봇 모두 그 자리에 정지 (공중에서도 멈춤, 자성 등 나머지는 그대로 작동)
+    private void SetBotsFrozen(bool frozen)
+    {
+        CharacterManager characters = CharacterManager.Instance;
+        if (characters == null) return;
+        characters.NBotInput.GetComponent<PlayerMovement>().SetFrozen(frozen);
+        characters.SBotInput.GetComponent<PlayerMovement>().SetFrozen(frozen);
     }
 
     // 맵 비율에 맞춰 오른쪽 위 창 크기를 계산 (창 크기가 바뀌거나 인스펙터 값을 바꿔도 바로 반영)

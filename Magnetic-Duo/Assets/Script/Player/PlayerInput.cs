@@ -9,7 +9,8 @@ public class PlayerInput : MonoBehaviour
 
     private bool isLocked = false;
 
-    
+    public bool IsDead { get; set; }    // 사망 연출 중 (이때는 맵을 열 수 없음)
+
 
     void Awake()
     {
@@ -22,6 +23,14 @@ public class PlayerInput : MonoBehaviour
     void Update()
     {
         if(isLocked) return;
+        if(Time.timeScale == 0f) return;    // ESC 일시정지 중에는 입력 무시
+
+        // 맵이 열려 있으면 조작만 막고 제자리에 세움 (자성·발판·컨베이어 등은 그대로 작동)
+        if(MapView.Instance != null && MapView.Instance.IsOpen)
+        {
+            movement.Move(0);
+            return;
+        }
         
         // 이동 입력 처리
         float moveInput = Input.GetAxisRaw("Horizontal");

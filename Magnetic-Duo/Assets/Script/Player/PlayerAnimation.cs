@@ -53,6 +53,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         if(animator != null && spriteRenderer != null && movement != null && rb != null)
         {
+            animator.speed = movement.IsFrozen ? 0f : 1f;    // 맵이 열려 있는 동안 애니메이션도 정지
+
             animator.SetFloat("Speed", Mathf.Abs(movement.CurrentMoveInput));
             animator.SetBool("IsGrounded", movement.IsGrounded);
             animator.SetFloat("VerticalVelocity", rb.linearVelocity.y);

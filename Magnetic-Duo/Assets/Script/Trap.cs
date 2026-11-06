@@ -55,6 +55,7 @@ public class Trap : MonoBehaviour
         if (deadPlayer != null)
         {
             deadPlayer.SetLocked(true);
+            deadPlayer.IsDead = true;
 
             Rigidbody2D rb = deadPlayer.GetComponent<Rigidbody2D>();
             if (rb != null)

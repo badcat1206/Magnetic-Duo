@@ -31,7 +31,11 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
            {
-            if (optionsPanel != null && optionsPanel.activeSelf)
+            if (MapView.Instance != null && MapView.Instance.IsOpen)
+            {
+                MapView.Instance.Close(); // 맵이 열려 있으면 맵만 닫음
+            }
+            else if (optionsPanel != null && optionsPanel.activeSelf)
             {
                 optionsPanel.GetComponent<OptionsPanel>().OnClickCancel(); 
             }

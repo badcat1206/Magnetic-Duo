@@ -38,6 +38,9 @@ public class CharacterManager : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0f) return;    // ESC 일시정지 중에는 캐릭터 교체 막음
+        if (MapView.Instance != null && MapView.Instance.IsOpen) return;    // 맵이 열려 있는 동안에도 막음
+
         if (Input.GetKeyDown(KeyCode.Tab)){
             SwapCharacter();
         }

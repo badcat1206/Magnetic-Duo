@@ -16,6 +16,16 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded { get; private set; }    // 바닥 감지 여부
 
     private int activeEffectorCount = 0;
+
+    // 맵이 열려 있는 동안 정지 (공중에서도 멈춤, 체인 발판 위면 발판에 붙어 함께 이동)
+    public bool IsFrozen { get; private set; }
+    private const float FrozenMass = 1000f;    // 상자에 밀리지 않도록 (발판은 그대로 밀어 올림)
+    private Vector2 velocityBeforeFreeze;
+    private float massBeforeFreeze;
+    private Transform parentBeforeFreeze;
+    private MovingPlatform attachedPlatform;
+    private readonly Collider2D[] groundHits = new Collider2D[8];
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,6 +47,25 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         if (rb.bodyType == RigidbodyType2D.Static) return;
+
+        if (IsFrozen)
+        {
+            if (activeEffectorCount > 0)
+            {
+                // 컨베이어 위에서는 평소 가만히 서 있을 때처럼 벨트 방향으로 실려 감
+                rb.mass = massBeforeFreeze;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                return;
+            }
+
+            // 가로는 고정, 세로는 중력만 상쇄 → 공중에서도 멈추고 올라오는 발판에는 밀려 올라감
+            rb.mass = FrozenMass;
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            rb.linearVelocity = Vector2.zero;
+            rb.AddForce(-Physics2D.gravity * rb.gravityScale * rb.mass);
+            AttachToPlatformBelow();
+            return;
+        }
 
         bool isOnEffector  = (activeEffectorCount > 0);
         if (currentMoveInput != 0)
@@ -68,6 +97,53 @@ public class PlayerMovement : MonoBehaviour
     public void StopMovement()
     {
         currentMoveInput = 0f;
+    }
+
+    // 맵 열기/닫기 시 정지·해제 (해제하면 멈추기 직전 속도로 이어서 움직임)
+    public void SetFrozen(bool frozen)
+    {
+        if (IsFrozen == frozen) return;
+        IsFrozen = frozen;
+
+        if (frozen)
+        {
+            velocityBeforeFreeze = rb.linearVelocity;
+            massBeforeFreeze = rb.mass;
+            rb.mass = FrozenMass;
+            rb.linearVelocity = Vector2.zero;
+            AttachToPlatformBelow();
+            return;
+        }
+
+        // 정지 중에 붙인 체인 발판에서 떼어냄 (그사이 다른 발판이 부모를 바꿨다면 건드리지 않음)
+        if (attachedPlatform != null && transform.parent == attachedPlatform.transform)
+            transform.SetParent(parentBeforeFreeze);
+        attachedPlatform = null;
+
+        rb.mass = massBeforeFreeze;
+        if (rb.bodyType == RigidbodyType2D.Dynamic)
+            rb.linearVelocity = velocityBeforeFreeze;
+    }
+
+    // 발 아래의 체인 발판(MovingPlatform)에 붙여서 발판이 움직이는 대로 함께 이동
+    // 점프 판정과 같은 바닥 감지 범위로 찾음 → 발판이 내려가는 중이라 살짝 떠 있어도 붙음
+    // (셔틀 발판은 원래 봇을 자식으로 태우므로 따로 처리하지 않음)
+    private void AttachToPlatformBelow()
+    {
+        if (attachedPlatform != null) return;
+
+        ContactFilter2D filter = new ContactFilter2D { useLayerMask = true, layerMask = groundLayer };
+        int count = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, filter, groundHits);
+        for (int i = 0; i < count; i++)
+        {
+            MovingPlatform platform = groundHits[i].GetComponentInParent<MovingPlatform>();
+            if (platform == null) continue;
+
+            attachedPlatform = platform;
+            parentBeforeFreeze = transform.parent;
+            transform.SetParent(platform.transform);
+            return;
+        }
     }
 
     // 점프 
