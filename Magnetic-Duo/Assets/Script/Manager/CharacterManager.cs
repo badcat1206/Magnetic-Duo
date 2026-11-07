@@ -33,6 +33,7 @@ public class CharacterManager : MonoBehaviour
     {
         nBotInput.enabled = isNBotActive;
         sBotInput.enabled = !isNBotActive;
+        UpdateDrawOrder();
         OnCharacterSwapped?.Invoke(isNBotActive);
     }
 
@@ -57,7 +58,28 @@ public class CharacterManager : MonoBehaviour
         else
             nBotInput.GetComponent<PlayerMovement>().StopMovement();
 
+        UpdateDrawOrder();
         OnCharacterSwapped?.Invoke(isNBotActive);
+    }
+
+    // 두 봇이 겹칠 때 조작 중인 봇이 앞에 그려지도록 스프라이트(몸체·자석 아이콘)의 z만 살짝 앞으로 당김
+    // Order in Layer는 그대로 2 → 레이저(3)·상자(1) 등 다른 오브젝트와의 앞뒤 순서는 변하지 않음
+    private const float FrontZ = -0.01f;
+
+    private void UpdateDrawOrder()
+    {
+        SetSpriteZ(nBotInput, isNBotActive ? FrontZ : 0f);
+        SetSpriteZ(sBotInput, isNBotActive ? 0f : FrontZ);
+    }
+
+    private static void SetSpriteZ(PlayerInput bot, float z)
+    {
+        foreach (SpriteRenderer sr in bot.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            Vector3 pos = sr.transform.localPosition;
+            pos.z = z;
+            sr.transform.localPosition = pos;
+        }
     }
 
     public PlayerInput NBotInput => nBotInput;
