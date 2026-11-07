@@ -17,18 +17,20 @@ public class PlayerMovement : MonoBehaviour
 
     private int activeEffectorCount = 0;
 
-    // 맵이 열려 있는 동안 정지 (공중에서도 멈춤, 체인 발판 위면 발판에 붙어 함께 이동)
+    // 맵이 열려 있는 동안 정지 (공중에서도 멈춤, 밟고 있는 발판·상자가 움직이면 함께 이동)
     public bool IsFrozen { get; private set; }
-    private const float FrozenMass = 1000f;    // 상자에 밀리지 않도록 (발판은 그대로 밀어 올림)
+    private const float FrozenMass = 1000f;    // 공중·고정된 바닥에서 상자에 밀리지 않도록
     private Vector2 velocityBeforeFreeze;
     private float massBeforeFreeze;
-    private Transform parentBeforeFreeze;
-    private MovingPlatform attachedPlatform;
+    private Transform followTarget;    // 정지 중에 따라 움직일, 발 바로 아래의 발판·상자·봇
+    private Vector2 followOffset;
+    private Collider2D bodyCollider;
     private readonly Collider2D[] groundHits = new Collider2D[8];
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        bodyCollider = GetComponent<Collider2D>();
 
         if (rb != null)
         {
@@ -58,12 +60,22 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
 
-            // 가로는 고정, 세로는 중력만 상쇄 → 공중에서도 멈추고 올라오는 발판에는 밀려 올라감
-            rb.mass = FrozenMass;
+            // 가로는 고정, 세로는 중력만 상쇄 → 공중에서도 그 자리에 멈춤
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             rb.linearVelocity = Vector2.zero;
+
+            // 밟고 있는 발판·상자가 움직이면 간격을 유지한 채 같이 이동 (공중에 남거나 아래 상자를 누르지 않도록)
+            if (followTarget == null) FindFollowTarget();
+            if (followTarget != null)
+            {
+                Vector2 target = (Vector2)followTarget.position + followOffset;
+                if ((target - rb.position).sqrMagnitude > 1f) followTarget = null;    // 리스폰 등으로 순간이동하면 따라가지 않음
+                else rb.position = target;
+            }
+
+            // 따라가는 중에는 원래 질량 (무거우면 아래 상자를 발판 속으로 눌러버림)
+            rb.mass = followTarget != null ? massBeforeFreeze : FrozenMass;
             rb.AddForce(-Physics2D.gravity * rb.gravityScale * rb.mass);
-            AttachToPlatformBelow();
             return;
         }
 
@@ -109,39 +121,41 @@ public class PlayerMovement : MonoBehaviour
         {
             velocityBeforeFreeze = rb.linearVelocity;
             massBeforeFreeze = rb.mass;
-            rb.mass = FrozenMass;
             rb.linearVelocity = Vector2.zero;
-            AttachToPlatformBelow();
+            FindFollowTarget();
             return;
         }
 
-        // 정지 중에 붙인 체인 발판에서 떼어냄 (그사이 다른 발판이 부모를 바꿨다면 건드리지 않음)
-        if (attachedPlatform != null && transform.parent == attachedPlatform.transform)
-            transform.SetParent(parentBeforeFreeze);
-        attachedPlatform = null;
-
+        followTarget = null;
         rb.mass = massBeforeFreeze;
         if (rb.bodyType == RigidbodyType2D.Dynamic)
             rb.linearVelocity = velocityBeforeFreeze;
     }
 
-    // 발 아래의 체인 발판(MovingPlatform)에 붙여서 발판이 움직이는 대로 함께 이동
-    // 점프 판정과 같은 바닥 감지 범위로 찾음 → 발판이 내려가는 중이라 살짝 떠 있어도 붙음
-    // (셔틀 발판은 원래 봇을 자식으로 태우므로 따로 처리하지 않음)
-    private void AttachToPlatformBelow()
+    // 발 바로 아래의 움직일 수 있는 것(체인 발판·자성 발판·상자·다른 봇)을 따라갈 대상으로 정함
+    // 점프 판정과 같은 바닥 감지 범위로 찾음 → 내려가는 발판처럼 살짝 떠 있어도 찾음
+    private void FindFollowTarget()
     {
-        if (attachedPlatform != null) return;
-
+        Vector2 feet = groundCheck.position;
+        float halfWidth = bodyCollider.bounds.extents.x * 0.9f;
         ContactFilter2D filter = new ContactFilter2D { useLayerMask = true, layerMask = groundLayer };
-        int count = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, filter, groundHits);
+        int count = Physics2D.OverlapCircle(feet, groundCheckRadius, filter, groundHits);
+
         for (int i = 0; i < count; i++)
         {
-            MovingPlatform platform = groundHits[i].GetComponentInParent<MovingPlatform>();
-            if (platform == null) continue;
+            Collider2D hit = groundHits[i];
 
-            attachedPlatform = platform;
-            parentBeforeFreeze = transform.parent;
-            transform.SetParent(platform.transform);
+            // 발 바로 아래만 (옆에 붙어 있는 상자 등은 제외)
+            Vector2 closest = hit.ClosestPoint(feet);
+            if (closest.y > feet.y + 0.05f || Mathf.Abs(closest.x - feet.x) > halfWidth) continue;
+
+            // 고정된 바닥은 따라갈 필요 없음
+            bool canMove = hit.GetComponentInParent<MovingPlatform>() != null
+                        || (hit.attachedRigidbody != null && hit.attachedRigidbody.bodyType != RigidbodyType2D.Static);
+            if (!canMove) continue;
+
+            followTarget = hit.transform;
+            followOffset = rb.position - (Vector2)followTarget.position;
             return;
         }
     }

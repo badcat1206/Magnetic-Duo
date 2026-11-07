@@ -62,6 +62,11 @@ public class MovingPlatform : MonoBehaviour
     private Vector3 commandedDestination;
     private Vector3 previousDestination;
 
+    // 실제 이동은 물리 프레임에서 → 올라탄 상자·봇을 함께 옮겨 떨림 없이 이동
+    private Vector3 currentDestination;
+    private Collider2D[] platformColliders;
+    private readonly HashSet<Rigidbody2D> riders = new();
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -72,6 +77,8 @@ public class MovingPlatform : MonoBehaviour
         targetPosition = startPosition + targetOffset;
         extraTargetPosition = targetPosition + extraOffset;
         previousDestination = startPosition;
+        currentDestination = startPosition;
+        platformColliders = GetComponentsInChildren<Collider2D>();
 
         if (hideChainTilemap != null)
         {
@@ -171,10 +178,21 @@ public class MovingPlatform : MonoBehaviour
             previousDestination = destination;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
+        currentDestination = destination;
 
         if (transform.position == destination && audioSource != null && audioSource.isPlaying)
             audioSource.Stop();
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 current = transform.position;
+        Vector3 next = Vector3.MoveTowards(current, currentDestination, moveSpeed * Time.deltaTime);
+        if (next == current) return;
+
+        PlatformRiders.Collect(platformColliders, riders);
+        transform.position = next;
+        PlatformRiders.Carry(riders, next - current);
     }
 
     private void InitChain()

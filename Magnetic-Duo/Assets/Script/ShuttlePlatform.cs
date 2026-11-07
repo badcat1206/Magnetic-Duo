@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 // 웨이포인트 배열을 순환하며 이동하는 발판
-// 발판 위에 플레이어(NBot/SBot)가 올라오면 자식으로 설정해 함께 이동시킴
+// 발판 위에 올라탄 상자·봇(쌓인 것 포함)은 물리 프레임마다 발판과 같은 거리만큼 함께 옮김 (PlatformRiders)
 public class ShuttlePlatform : MonoBehaviour
 {
     [Header("발판 설정")]
@@ -55,6 +55,7 @@ public class ShuttlePlatform : MonoBehaviour
     private readonly RaycastHit2D[] castHits = new RaycastHit2D[16];
     private ContactFilter2D castFilter;
     private Collider2D[] platformColliders;
+    private readonly HashSet<Rigidbody2D> riders = new HashSet<Rigidbody2D>();
 
     void Start()
     {
@@ -74,7 +75,7 @@ public class ShuttlePlatform : MonoBehaviour
         castFilter = new ContactFilter2D { useTriggers = false };
     }
 
-    void Update()
+    void FixedUpdate()
     {
         bool isActive = (riderAbility != null && riderAbility.IsActive) || (matchingBoxCount > 0);
 
@@ -91,9 +92,12 @@ public class ShuttlePlatform : MonoBehaviour
         Vector2 current = transform.position;
         Vector2 next = Vector2.MoveTowards(current, targetPoint, speed * Time.deltaTime);
 
+        PlatformRiders.Collect(platformColliders, riders);
+
         // 앞이 막혀 있으면 이번 프레임은 제자리 (이동 중 상태는 유지 → 비켜나면 이어서 이동)
         if (IsBlocked(next - current)) return;
         transform.position = next;
+        PlatformRiders.Carry(riders, next - current);
 
         if(Vector2.Distance(transform.position, targetPoint) < 0.1f)
         {
@@ -130,10 +134,10 @@ public class ShuttlePlatform : MonoBehaviour
         foreach (var col in platformColliders)
             if (IsColliderBlocked(col, delta)) return true;
 
-        foreach (Transform child in transform)
+        foreach (Rigidbody2D rider in riders)
         {
-            if (!IsRiderTag(child.gameObject)) continue;
-            foreach (var col in child.GetComponents<Collider2D>())
+            if (!IsRiderTag(rider.gameObject)) continue;
+            foreach (var col in rider.GetComponents<Collider2D>())
                 if (IsColliderBlocked(col, delta)) return true;
         }
         return false;
@@ -154,6 +158,7 @@ public class ShuttlePlatform : MonoBehaviour
 
             // 자기 자신이나 자기 위에 탄 봇/상자는 제외
             if (other.GetComponentInParent<ShuttlePlatform>() == this) continue;
+            if (other.attachedRigidbody != null && riders.Contains(other.attachedRigidbody)) continue;
             if (!IsBlockingObject(other)) continue;
 
             // 이동 방향 앞쪽에 있는 물체만 막힘 (이미 겹쳐 있는 뒤쪽 물체에서는 빠져나갈 수 있게)
@@ -164,7 +169,7 @@ public class ShuttlePlatform : MonoBehaviour
 
     private bool IsBlockingObject(Collider2D other)
     {
-        if (other.GetComponentInParent<ShuttlePlatform>() != null) return true; // 다른 발판 또는 다른 발판에 탄 물체
+        if (other.GetComponentInParent<ShuttlePlatform>() != null) return true; // 다른 발판
 
         GameObject obj = other.attachedRigidbody != null ? other.attachedRigidbody.gameObject : other.gameObject;
         return IsRiderTag(obj);
@@ -191,15 +196,9 @@ public class ShuttlePlatform : MonoBehaviour
         return false;
     }
 
-    // 플레이어가 발판에 올라오면 자식으로 설정 → 발판과 함께 이동
+    // 발판에 닿은 봇/상자의 극성 확인 → 같은 극성이면 발판 작동
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("NBot") || collision.gameObject.CompareTag("SBot") ||
-        collision.gameObject.CompareTag("NBox") || collision.gameObject.CompareTag("SBox"))
-        {
-            collision.gameObject.transform.SetParent(transform);
-        }
-
         MagneticAbility magneticAbility = collision.gameObject.GetComponent<MagneticAbility>();
         if(magneticAbility != null && magneticAbility.BotPolarity == platformPolarity)
         {
@@ -212,19 +211,9 @@ public class ShuttlePlatform : MonoBehaviour
         }
     }
 
-    // 플레이어가 발판에서 내려가면 부모 해제
+    // 발판에서 떨어진 봇/상자는 작동 조건에서 제외
     private void OnCollisionExit2D(Collision2D collision)
     {
-        // 씬 전환/리셋으로 이 발판 자체가 비활성화되는 중이면 재부모설정을 시도하지 않음
-        // (Unity가 "부모가 활성/비활성 처리 중일 때는 SetParent 불가" 에러를 던짐)
-        if (!gameObject.activeInHierarchy) return;
-
-        if(collision.gameObject.CompareTag("NBot") || collision.gameObject.CompareTag("SBot") ||
-        collision.gameObject.CompareTag("NBox") || collision.gameObject.CompareTag("SBox"))
-        {
-            collision.gameObject.transform.SetParent(null);
-        }
-
         if (riderAbility != null && collision.gameObject == riderAbility.gameObject)
         {
             riderAbility = null; 

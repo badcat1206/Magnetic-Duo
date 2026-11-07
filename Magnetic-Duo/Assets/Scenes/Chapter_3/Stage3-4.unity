@@ -909,11 +909,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3815204977411650218, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
       propertyPath: borderColor.a
-      value: 1
+      value: 0.8784314
       objectReference: {fileID: 0}
     - target: {fileID: 3815204977411650218, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
       propertyPath: backgroundColor.a
-      value: 1
+      value: 0.8784314
       objectReference: {fileID: 0}
     - target: {fileID: 4200979638234960469, guid: e8be7c6c3ebf8f441906787c6f888275, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3822,6 +3822,10 @@ PrefabInstance:
       propertyPath: 'disableButtons.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1401712054812713222, guid: 18af3af40ce754849955c4a527c0579d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1839258721106548661, guid: 18af3af40ce754849955c4a527c0579d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -3913,6 +3917,14 @@ PrefabInstance:
     - target: {fileID: 3988283812740288025, guid: 18af3af40ce754849955c4a527c0579d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5663913297172375465, guid: 18af3af40ce754849955c4a527c0579d, type: 3}
+      propertyPath: respawnSBox
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190628293830977394, guid: 18af3af40ce754849955c4a527c0579d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6493930798025929835, guid: 18af3af40ce754849955c4a527c0579d, type: 3}
       propertyPath: m_Name
